@@ -11,6 +11,7 @@ setup(
     maintainer='Jan Eike Suchard',
     maintainer_email='jan-eike.suchard@magenta.de',
     description='Wrapper for the DESTATIS GENESIS database',
+    install_requires=['pydantic', 'aiohttp'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Intended Audience ::  Education",
