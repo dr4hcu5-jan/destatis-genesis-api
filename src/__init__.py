@@ -4,7 +4,7 @@ import logging
 from pydantic import SecretStr
 
 import tools
-from enums import GENESISLanguage, GENESISCategory, GENESISJobType
+from enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria
 from responses import *
 
 # Create a logger for the whole module
@@ -281,17 +281,28 @@ class GENESISWrapper:
         async def jobs(
                 self,
                 selector: constr(min_length=1, max_length=50),
-                searchcriterion: str,
-                sortcirterion: str,
+                search_by: GENESISJobCriteria,
+                sort_by: GENESISJobCriteria,
                 job_type: GENESISJobType = GENESISJobType.ALL,
                 results: int = 100
-        ):
+        ) -> Catalogue.JobResponse:
+            """Get a list of jobs which were created
+            
+            :param selector: Filter for the jobs to be displayed. (1-50 characters, stars (*)
+                allowed for wildcarding)
+            :param search_by:
+            :param sort_by:
+            :param job_type:
+            :param results:
+            :return:
+            """
             _params = self.__base_parameter | {
                 'selection': selector,
-                'searchcriterion': searchcriterion,
-                'sortcriterion': sortcirterion,
-                'type': job_type.value
+                'searchcriterion': search_by.value,
+                'sortcriterion': sort_by.value,
+                'type': job_type.value,
+                'area': 'all'
             }
             _url = self.__service + '/jobs'
-            return await tools.get_raw_json_response(_url, _params)
+            return await tools.get_parsed_response(_url, _params, Catalogue.JobResponse)
         

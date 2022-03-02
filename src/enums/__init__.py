@@ -25,3 +25,19 @@ class GENESISJobType(str, Enum):
     The different types of jobs that are available on the GENESIS database
     """
     ALL = 'all'
+    IMPORT = 'Import'
+    EXPORT = 'Export'
+    VALUE_RETRIEVAL = 'Werteabruf'
+    CALCULATE_SUM_CUBES = 'Summenquader berechnen'
+    CLEANUP_DATA_CUBES = 'Datenquader bereinigen'
+    
+
+class GENESISJobCriteria(str, Enum):
+    """
+    Criteria for searching and sorting jobs
+    """
+    
+    CODE = 'Code'
+    STATUS = 'Status'
+    TYPE = 'Auftragstyp'
+    TIME = 'Zeitpunkt'
