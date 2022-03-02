@@ -1,8 +1,14 @@
 """A collection of tools which are used and needed multiple times in this project"""
 import asyncio
 import time
+from typing import TypeVar
 
-from .. import MODULE_LOGGER
+import aiohttp
+
+from exceptions import GENESISPermissionError, GENESISInternalServerError
+from responses import *
+
+ResponseType = TypeVar('ResponseType')
 
 
 async def is_host_available(
@@ -32,3 +38,41 @@ async def is_host_available(
             await asyncio.sleep(5)
     return False
 
+
+async def get_raw_json_response(
+        path: str,
+        parameters: Optional[dict],
+) -> dict:
+    """Request a resource from the GENESIS API from the specified path
+
+    :param path: The path that shall be queried
+    :param parameters: The optional parameters for this request
+    :param r: The PydanticModel into which the response is parsed
+    :return:
+    """
+    async with aiohttp.ClientSession() as http_session:
+        _url = 'https://www-genesis.destatis.de/genesisWS/rest/2020' + path
+        async with http_session.get(_url, params=parameters) as response:
+            # Check if the response is a 200 response
+            if response.status == 200:
+                data = await response.json()
+                return data
+            elif response.status == 401:
+                raise GENESISPermissionError
+            elif response.status == 500:
+                raise GENESISInternalServerError
+
+
+async def get_parsed_response(
+        path: str,
+        parameters: Optional[dict],
+        r: ResponseType
+) -> type(ResponseType):
+    """Request a resource from the GENESIS API from the specified path
+    
+    :param path: The path that shall be queried
+    :param parameters: The optional parameters for this request
+    :param r: The PydanticModel into which the response is parsed
+    :return:
+    """
+    return r.parse_obj(await get_raw_json_response(path, parameters))
