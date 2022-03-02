@@ -17,3 +17,11 @@ class GENESISCategory(str, Enum):
     DATA_CUBES = 'cubes'
     VARIABLES = 'variables'
     TIME_SERIES = 'time_series'
+    ALL = 'all'
+    
+
+class GENESISJobType(str, Enum):
+    """
+    The different types of jobs that are available on the GENESIS database
+    """
+    ALL = 'all'

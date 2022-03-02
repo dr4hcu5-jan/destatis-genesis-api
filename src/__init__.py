@@ -1,14 +1,14 @@
 """Wrapper for the JSON API of the DESTATIS GENESIS database"""
 import logging
 
-import aiohttp
 from pydantic import SecretStr
 
-from enums import GENESISLanguage, GENESISCategory
+import tools
+from enums import GENESISLanguage, GENESISCategory, GENESISJobType
 from responses import *
 
 # Create a logger for the whole module
-MODULE_LOGGER = logging.getLogger('DESTATIS-API')
+MODULE_LOGGER = logging.getLogger('GENESIS-API')
 """The logger which is used in this module"""
 
 
@@ -21,15 +21,17 @@ class GENESISWrapper:
             self,
             username: str,
             password: str,
-            language: GENESISLanguage = GENESISLanguage.ENGLISH
+            language: GENESISLanguage = GENESISLanguage.GERMAN
     ):
         """Create a new GENESIS database wrapper
 
-        :param username: The username which was assigned during the creation of an account (length: 10 characters)
+        :param username: The username which was assigned during the creation of an account(
+            length: 10 characters)
         :type username: str
         :param password: The password for the username (length: 10-20 characters)
         :type password: SecretStr
-        :param language: The language which should be used in the response bodies, defaults to English
+        :param language: The language which should be used in the response bodies, defaults to
+            German
         :type language: GENESISLanguage
         """
         # Check if the username consists of 10 characters
@@ -38,28 +40,258 @@ class GENESISWrapper:
         # Check if the password's length is between 10 and 20 characters
         if not (10 <= len(password) <= 20):
             raise ValueError("The password is not between 10 and 20 characters long")
-        # Since all values passed the check save the username and password to the wrapper, but keep them private
+        # Since all values passed the check save the username and password to the wrapper,
+        # but keep them private
         self.__username = username
         self.__password = SecretStr(password)
         self.__language = language
-        self.__base_url = 'https://www-genesis.destatis.de/genesisWS/rest/2020'
+        self.__base_parameter = {
+            'username': self.__username,
+            'password': self.__password.get_secret_value(),
+            'language': self.__language.value
+        }
+        self.hello_world: GENESISWrapper.HelloWorld = self.HelloWorld(username, password, language)
+        """Methods in the `Hello World` part of the official API documentation"""
+        self.find: GENESISWrapper.Find = self.Find(username, password, language)
+        """Methods in the `Find` part of the official API documentation"""
+        self.catalogue: GENESISWrapper.Catalogue = self.Catalogue(username, password, language)
+        """Methods in the `Catalogue` part of the official API documentation"""
+    
+    class HelloWorld:
+        """All methods from the HelloWorld section of the API documentation"""
 
-    async def whoami(self) -> GENESISWhoAmIResponse:
-        """Execute the whoami method of the GENESIS API"""
-        async with aiohttp.ClientSession() as http_session:
-            _url = self.__base_url + '/helloworld/whoami'
-            async with http_session.get(_url) as response:
-                data = await response.json()
-                return GENESISWhoAmIResponse.parse_obj(data)
+        def __init__(
+                self,
+                username: str,
+                password: str,
+                language: GENESISLanguage = GENESISLanguage.GERMAN
+        ):
+            """Create a new HelloWorld method wrapper
 
-    async def login_check(self) -> GENESISLoginCheckResponse:
-        async with aiohttp.ClientSession() as http_session:
-            _url = self.__base_url + '/helloworld/logincheck'
-            _body = {
+            :param username: The username which was assigned during the creation of an account (
+            length: 10 characters)
+            :type username: str
+            :param password: The password for the username (length: 10-20 characters)
+            :type password: SecretStr
+            :param language: The language which should be used in the response bodies, defaults to
+            German
+            :type language: GENESISLanguage
+            """
+            # Check if the username consists of 10 characters
+            if len(username) != 10:
+                raise ValueError("The username is not 10 characters long.")
+            # Check if the password's length is between 10 and 20 characters
+            if not (10 <= len(password) <= 20):
+                raise ValueError("The password is not between 10 and 20 characters long")
+            # Since all values passed the check save the username and password to the wrapper,
+            # but keep them private
+            self.__username = username
+            self.__password = SecretStr(password)
+            self.__language = language
+            self.__base_parameter = {
                 'username': self.__username,
                 'password': self.__password.get_secret_value(),
                 'language': self.__language.value
             }
-            async with http_session.get(_url, params=_body) as response:
-                data = await response.text()
-                return GENESISLoginCheckResponse.parse_raw(data)
+        
+        @staticmethod
+        async def who_am_i() -> HelloWorld.WhoAmIResponse:
+            """Get information about the client data transmitted to the GENESIS database
+            
+            :return: A Response containing the IP Address and the User-Agent for the request that
+            has
+                been executed
+            :rtype: WhoAmIResponse
+            """
+            return await tools.get_parsed_response('/helloworld/whoami', None,
+                                                   HelloWorld.WhoAmIResponse)
+    
+        async def login_check(self) -> HelloWorld.LoginCheckResponse:
+            """Check the login data which were supplied during the creation of the wrapper
+            
+            :return: The response from the server containing the success or failure of the reqeust
+            :rtype: LoginCheckResponse
+            """
+            return await tools.get_parsed_response(
+                '/helloworld/logincheck',
+                self.__base_parameter,
+                HelloWorld.LoginCheckResponse
+            )
+    
+    class Find:
+    
+        def __init__(
+                self,
+                username: str,
+                password: str,
+                language: GENESISLanguage = GENESISLanguage.GERMAN
+        ):
+            """Create a new Find section method wrapper
+
+            :param username: The username which was assigned during the creation of an account (
+            length: 10 characters)
+            :type username: str
+            :param password: The password for the username (length: 10-20 characters)
+            :type password: SecretStr
+            :param language: The language which should be used in the response bodies, defaults to
+            German
+            :type language: GENESISLanguage
+            """
+            # Check if the username consists of 10 characters
+            if len(username) != 10:
+                raise ValueError("The username is not 10 characters long.")
+            # Check if the password's length is between 10 and 20 characters
+            if not (10 <= len(password) <= 20):
+                raise ValueError("The password is not between 10 and 20 characters long")
+            # Since all values passed the check save the username and password to the wrapper,
+            # but keep them private
+            self.__username = username
+            self.__password = SecretStr(password)
+            self.__language = language
+            self.__base_parameter = {
+                'username': self.__username,
+                'password': self.__password.get_secret_value(),
+                'language': self.__language.value
+            }
+    
+        async def find(
+                self,
+                search_term: str,
+                category: GENESISCategory = GENESISCategory.ALL,
+                results_per_category: int = 100
+        ) -> Find.FindResult:
+            """Get a list of objects in the specified category which match the search term
+            
+            :param search_term: Term for which the search is executed
+            :param category: The category in which the search is executed
+            :param results_per_category: Number of results per category
+            :return: A response containing the results of the search
+            """
+            _params = self.__base_parameter | {
+                'term':       search_term,
+                'category':   category.value,
+                'pagelength': str(results_per_category)
+            }
+            return await tools.get_parsed_response('/find/find', _params, Find.FindResult)
+    
+    class Catalogue:
+    
+        def __init__(
+                self,
+                username: str,
+                password: str,
+                language: GENESISLanguage = GENESISLanguage.GERMAN
+        ):
+            """Create a new Find section method wrapper
+
+            :param username: The username which was assigned during the creation of an account (
+            length: 10 characters)
+            :type username: str
+            :param password: The password for the username (length: 10-20 characters)
+            :type password: SecretStr
+            :param language: The language which should be used in the response bodies, defaults to
+            German
+            :type language: GENESISLanguage
+            """
+            # Check if the username consists of 10 characters
+            if len(username) != 10:
+                raise ValueError("The username is not 10 characters long.")
+            # Check if the password's length is between 10 and 20 characters
+            if not (10 <= len(password) <= 20):
+                raise ValueError("The password is not between 10 and 20 characters long")
+            # Since all values passed the check save the username and password to the wrapper,
+            # but keep them private
+            self.__username = username
+            self.__password = SecretStr(password)
+            self.__language = language
+            self.__service = '/catalogue'
+            self.__base_parameter = {
+                'username': self.__username,
+                'password': self.__password.get_secret_value(),
+                'language': self.__language.value
+            }
+            
+        async def cubes(
+                self,
+                selection: str,
+                results: int = 100
+        ) -> Catalogue.CubeResponse:
+            """Get a list of data cubes matching the selector (PREMIUM ACCOUNTS ONLY)
+            
+            :param selection: The code of the data cube. You may use a star (*) to allow wild
+            carding
+            :param results: The maximum items which are received from the database
+            :return: A list of information about the found data cubes
+            """
+            _parameters = self.__base_parameter | {
+                'selection': selection,
+                'pagelength': str(results)
+            }
+            _url = self.__service + '/cubes'
+            return await tools.get_parsed_response(_url, _parameters, Catalogue.CubeResponse)
+        
+        async def cubes_to_statistic(
+                self,
+                statistic_name: constr(min_length=1, max_length=6),
+                cube_code: constr(min_length=1, max_length=10),
+                results: int = 100
+        ) -> Catalogue.CubeResponse:
+            """Get a list of data cubes of a statistic matching the selector (PREMIUM ACCOUNTS ONLY)
+            
+            :param statistic_name: The name of the statistic that shall be used
+            :param cube_code: The code of the data cube in this statistic, star based wild-carding
+                is allowed
+            :param results: The number of maximum results that should be pulled
+            :return: A list of information about the data cubes
+            """
+            _parameters = self.__base_parameter | {
+                'name': statistic_name,
+                'selection':  cube_code,
+                'pagelength': str(results)
+            }
+            _url = self.__service + '/cubes2statistic'
+            return await tools.get_parsed_response(_url, _parameters, Catalogue.CubeResponse)
+    
+        async def cubes_to_variable(
+                self,
+                variable_name: constr(min_length=1, max_length=6),
+                cube_code: constr(min_length=1, max_length=10),
+                results: int = 100
+        ) -> Catalogue.CubeResponse:
+            """Get a list of data cubes related to the specified variable
+            
+            :param variable_name: The name of the variable, (max. 6 character)
+            :param cube_code: The code of a cube which is related to the variable, stars (*) may be
+                used for wild carding
+            :param results: Number of results which are retrieved
+            :return: A list of the data cubes which are related to the variable
+            """
+            _parameters = self.__base_parameter | {
+                'name': variable_name,
+                'selection': cube_code,
+                'pagelength': results
+            }
+            _url = self.__service + '/cubes2variable'
+            return await tools.get_parsed_response(
+                _url,
+                _parameters,
+                Catalogue.CubeResponse
+            )
+        
+        async def jobs(
+                self,
+                selector: constr(min_length=1, max_length=50),
+                searchcriterion: str,
+                sortcirterion: str,
+                job_type: GENESISJobType = GENESISJobType.ALL,
+                results: int = 100
+        ):
+            _params = self.__base_parameter | {
+                'selection': selector,
+                'searchcriterion': searchcriterion,
+                'sortcriterion': sortcirterion,
+                'type': job_type.value
+            }
+            _url = self.__service + '/jobs'
+            return await tools.get_raw_json_response(_url, _params)
+        
