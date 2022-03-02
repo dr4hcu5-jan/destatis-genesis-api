@@ -11,7 +11,7 @@ from enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCr
 from responses import *
 
 # Create a logger for the whole module
-MODULE_LOGGER = logging.getLogger('GENESIS-API')
+logger = logging.getLogger('DESTATIS-GENESIS')
 """The logger which is used in this module"""
 
 
@@ -347,7 +347,7 @@ class GENESISWrapper:
                 'selection': '' if selector is None else selector,
                 'type': GENESISObjectType.ALL.value if object_type is None else object_type.value,
                 'date': updated_after.strftime('%d.%m.%Y') if updated_after is not None else None,
-                'pagelength': int(results)
+                'pagelength': results
             }
             _url = self.__service + '/modifieddata'
             return await tools.get_parsed_response(_url, _param, Catalogue.ModifiedDataResponse)

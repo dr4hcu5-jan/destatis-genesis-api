@@ -1,5 +1,6 @@
 """A collection of tools which are used and needed multiple times in this project"""
 import asyncio
+import logging
 import time
 from typing import TypeVar, Union, Type
 
@@ -8,7 +9,8 @@ from pydantic import ValidationError
 
 from exceptions import GENESISPermissionError, GENESISInternalServerError
 from responses import *
-from .. import MODULE_LOGGER
+
+logger = logging.getLogger('DESTATIS-GENESIS')
 
 ResponseType = Type[
     Union[
@@ -88,6 +90,6 @@ async def get_parsed_response(
     try:
         return r.parse_obj(await get_raw_json_response(path, parameters))
     except ValidationError as error:
-        MODULE_LOGGER.error('Error during parsing the response received from the database. '
+        logger.error('Error during parsing the response received from the database. '
                             'Printing response into terminal...')
         print(await get_raw_json_response(path, parameters))
