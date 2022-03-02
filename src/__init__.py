@@ -323,6 +323,8 @@ class GENESISWrapper:
         ) -> Catalogue.ModifiedDataResponse:
             """Get a list of modified objects
             
+            DUE TO AN ERROR IN THE DATABASE THE `results` PARAMETER IS BEING IGNORED
+            
             :param selector: Filter for the objects to be displayed. (1-15 characters, stars (*)
                 allowed for wildcarding)
             :type selector: str
