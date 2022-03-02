@@ -1,7 +1,7 @@
 from datetime import datetime, date, time
 from typing import Optional
 
-from pydantic import BaseModel as PydanticBaseModel
+from pydantic import BaseModel as PydanticBaseModel, root_validator
 from pydantic import Field, constr, validator, Extra
 
 
@@ -89,7 +89,7 @@ class CubeInformation(ObjectInformation):
     Boolean indicator if this data cube has extra information present
     """
     
-    @validator('last_update', pre=True)
+    @validator('last_update', pre=True, allow_reuse=True)
     def convert_string_to_unix_timestamp(cls, v):
         """Convert the input string into a UNIX timestamp
         
@@ -97,8 +97,7 @@ class CubeInformation(ObjectInformation):
         :return:
         """
         input_format = '%d.%m.%Y %H:%M:%Sh'
-        _datetime = datetime.datetime.strptime(v, input_format)
-        type(_datetime.timestamp())
+        _datetime = datetime.strptime(v, input_format)
         return _datetime.timestamp()
 
 
@@ -200,7 +199,7 @@ class JobInformation(ObjectInformation):
     Information about a Job present in the GENESIS database
     """
     
-    date: date = Field(
+    job_date: date = Field(
         default=...,
         alias='Date'
     )
@@ -210,7 +209,7 @@ class JobInformation(ObjectInformation):
     Due to missing documentation for the GENESIS API no further information is present at the moment
     """
     
-    time: time = Field(
+    job_time: time = Field(
         default=...,
         alias='Time'
     )
@@ -230,7 +229,7 @@ class JobInformation(ObjectInformation):
     The state of the job
     """
     
-    @validator('date', pre=True)
+    @validator('job_date', pre=True, allow_reuse=True)
     def convert_date_string_to_date(cls, v) -> date:
         """Convert the date to a datetime object
         
@@ -240,7 +239,7 @@ class JobInformation(ObjectInformation):
         day, month, year = v.split('.')
         return date(year, month, day)
     
-    @validator('time', pre=True)
+    @validator('job_time', pre=True, allow_reuse=True)
     def convert_time_string_to_time(cls, v) -> time:
         """Convert the time string to a time object
         
@@ -250,4 +249,34 @@ class JobInformation(ObjectInformation):
         hour, minute, second = v.split(':')
         return time(hour, minute, second)
     
+
+class ModifiedDataInformation(ObjectInformation):
+    """Information about a modified dataset"""
     
+    type: str = Field(
+        default=...,
+        alias='Type'
+    )
+    """The type of dataset that has been modified"""
+    
+    change_date: date = Field(
+        default=...,
+        alias='Date'
+    )
+    """The date of the change"""
+    
+    added: str = Field(
+        default=...,
+        alias='Added'
+    )
+    """Information about what has been added"""
+
+    @validator('change_date', pre=True, allow_reuse=True)
+    def convert_date_string_to_date(cls, v) -> date:
+        """Convert the date to a datetime object
+
+        :param v: The date string
+        :return: A date object
+        """
+        day, month, year = v.split('.')
+        return date(int(year), int(month), int(day))

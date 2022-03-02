@@ -1,14 +1,21 @@
 """A collection of tools which are used and needed multiple times in this project"""
 import asyncio
 import time
-from typing import TypeVar
+from typing import TypeVar, Union, Type
 
 import aiohttp
+from pydantic import ValidationError
 
 from exceptions import GENESISPermissionError, GENESISInternalServerError
 from responses import *
+from .. import MODULE_LOGGER
 
-ResponseType = TypeVar('ResponseType')
+ResponseType = Type[
+    Union[
+        HelloWorld.WhoAmIResponse, HelloWorld.LoginCheckResponse,
+        Catalogue.CubeResponse, Catalogue.JobResponse, Catalogue.ModifiedDataResponse
+    ]
+]
 
 
 async def is_host_available(
@@ -47,15 +54,18 @@ async def get_raw_json_response(
 
     :param path: The path that shall be queried
     :param parameters: The optional parameters for this request
-    :param r: The PydanticModel into which the response is parsed
     :return:
     """
+    for key, value in dict(parameters).items():
+        if value is None:
+            del parameters[key]
     async with aiohttp.ClientSession() as http_session:
         _url = 'https://www-genesis.destatis.de/genesisWS/rest/2020' + path
         async with http_session.get(_url, params=parameters) as response:
             # Check if the response is a 200 response
             if response.status == 200:
                 data = await response.json()
+                print(await response.text())
                 return data
             elif response.status == 401:
                 raise GENESISPermissionError
@@ -75,4 +85,9 @@ async def get_parsed_response(
     :param r: The PydanticModel into which the response is parsed
     :return:
     """
-    return r.parse_obj(await get_raw_json_response(path, parameters))
+    try:
+        return r.parse_obj(await get_raw_json_response(path, parameters))
+    except ValidationError as error:
+        MODULE_LOGGER.error('Error during parsing the response received from the database. '
+                            'Printing response into terminal...')
+        print(await get_raw_json_response(path, parameters))

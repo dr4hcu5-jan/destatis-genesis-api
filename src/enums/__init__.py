@@ -41,3 +41,14 @@ class GENESISJobCriteria(str, Enum):
     STATUS = 'Status'
     TYPE = 'Auftragstyp'
     TIME = 'Zeitpunkt'
+
+
+class GENESISObjectType(str, Enum):
+    """
+    Types of objects that are available in the database
+    """
+    ALL = 'Alle'
+    TABLE = 'Tabellen'
+    STATISTIC = 'Statistiken'
+    STATISTIC_UPDATE = 'StatistikUpdates'
+    

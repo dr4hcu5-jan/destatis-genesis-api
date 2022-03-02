@@ -1,10 +1,13 @@
 """Wrapper for the JSON API of the DESTATIS GENESIS database"""
+import datetime
 import logging
+from datetime import timedelta
 
 from pydantic import SecretStr
 
 import tools
-from enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria
+from enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
+    GENESISObjectType
 from responses import *
 
 # Create a logger for the whole module
@@ -280,7 +283,7 @@ class GENESISWrapper:
         
         async def jobs(
                 self,
-                selector: constr(min_length=1, max_length=50),
+                selector: str,
                 search_by: GENESISJobCriteria,
                 sort_by: GENESISJobCriteria,
                 job_type: GENESISJobType = GENESISJobType.ALL,
@@ -290,12 +293,17 @@ class GENESISWrapper:
             
             :param selector: Filter for the jobs to be displayed. (1-50 characters, stars (*)
                 allowed for wildcarding)
-            :param search_by:
-            :param sort_by:
-            :param job_type:
-            :param results:
+            :param search_by: The criteria on which the selector is applied to
+            :param sort_by: The criteria by which the result shall be listed
+            :param job_type: The type of job which is to be returned
+            :param results: The number of results that shall be returned
             :return:
             """
+            if not (1 <= len(selector) <= 50):
+                raise ValueError('The length of the selector needs to be between 1 and 50 ('
+                                 'inclusive)')
+            if None in [search_by, sort_by]:
+                raise ValueError('All parameter without a default value need to be set')
             _params = self.__base_parameter | {
                 'selection': selector,
                 'searchcriterion': search_by.value,
@@ -306,3 +314,41 @@ class GENESISWrapper:
             _url = self.__service + '/jobs'
             return await tools.get_parsed_response(_url, _params, Catalogue.JobResponse)
         
+        async def modified_data(
+                self,
+                selector: Optional[str] = None,
+                object_type: GENESISObjectType = GENESISObjectType.ALL,
+                updated_after: Optional[date] = None,
+                results: int = 100
+        ) -> Catalogue.ModifiedDataResponse:
+            """Get a list of modified objects
+            
+            :param selector: Filter for the objects to be displayed. (1-15 characters, stars (*)
+                allowed for wildcarding)
+            :type selector: str
+            :param object_type: The type of object that shall be returned
+            :type object_type: GENESISObjectType
+            :param updated_after: The date after which the objects needed to be changed to be
+                returned, defaults to one week (7 days)
+            :type updated_after: date
+            :param results: The number of results that should be returned
+            """
+            # Check the parameters for consistency
+            if (selector is not None) and (not (1 <= len(selector) <= 15)):
+                raise ValueError("The selector's length needs to be between 1 and 15 (inclusive)")
+            if (updated_after is not None) and not (updated_after < date.today()):
+                print(updated_after)
+                print(date.today())
+                raise ValueError("The specified date may not be today or in the future")
+            if not (0 < results <= 2500):
+                raise ValueError('The number of results need to be between 1 and 2500')
+            # Build the query parameters
+            _param = self.__base_parameter | {
+                'selection': '' if selector is None else selector,
+                'type': GENESISObjectType.ALL.value if object_type is None else object_type.value,
+                'date': updated_after.strftime('%d.%m.%Y') if updated_after is not None else None,
+                'pagelength': int(results)
+            }
+            _url = self.__service + '/modifieddata'
+            return await tools.get_parsed_response(_url, _param, Catalogue.ModifiedDataResponse)
+            

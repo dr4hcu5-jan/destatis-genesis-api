@@ -3,6 +3,7 @@ from typing import Optional
 
 from models import *
 from .internals import *
+from pydantic import validator
 
 
 class BaseResponse(BaseModel):
@@ -123,4 +124,22 @@ class Catalogue:
             default=None,
             alias='List'
         )
+        
+    class ModifiedDataResponse(BaseResponse):
+        """A response for getting a list of changes made to the database entries"""
+        
+        changed_objects: Optional[list[Optional[ModifiedDataInformation]]] = Field(
+            default=None,
+            alias='List'
+        )
+        
+        @validator('changed_objects', pre=True)
+        def remove_none_values_from_list(cls, value: list) -> list[ModifiedDataInformation]:
+            """Removed the None entries from the list
+            
+            :param value: The list of data
+            :return:
+            """
+            return [v for v in value if v]
+            
         
