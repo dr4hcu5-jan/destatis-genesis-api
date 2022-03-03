@@ -122,6 +122,7 @@ class GENESISWrapper:
             )
     
     class Find:
+        """Methods for searching for objects"""
     
         def __init__(
                 self,
@@ -178,6 +179,7 @@ class GENESISWrapper:
             return await tools.get_parsed_response('/find/find', _params, Find.FindResult)
     
     class Catalogue:
+        """Methods for listing objects"""
     
         def __init__(
                 self,

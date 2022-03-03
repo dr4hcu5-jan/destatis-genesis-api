@@ -15,6 +15,7 @@ logger = logging.getLogger('DESTATIS-GENESIS')
 ResponseType = Type[
     Union[
         HelloWorld.WhoAmIResponse, HelloWorld.LoginCheckResponse,
+        Find.FindResult,
         Catalogue.CubeResponse, Catalogue.JobResponse, Catalogue.ModifiedDataResponse
     ]
 ]
