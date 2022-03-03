@@ -1,8 +1,8 @@
 """A package containing all 2nd and lower level response models"""
 from pydantic import Field, Extra
 
-from enums import GENESISLanguage
-from models import BaseModel
+from ...enums import GENESISLanguage
+from ...models import BaseModel
 
 
 class ServiceIdent(BaseModel):

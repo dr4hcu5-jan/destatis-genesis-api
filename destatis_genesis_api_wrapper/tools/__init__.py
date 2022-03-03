@@ -7,8 +7,8 @@ from typing import TypeVar, Union, Type
 import aiohttp
 from pydantic import ValidationError
 
-from exceptions import GENESISPermissionError, GENESISInternalServerError
-from responses import *
+from ..exceptions import GENESISPermissionError, GENESISInternalServerError
+from ..responses import *
 
 logger = logging.getLogger('DESTATIS-GENESIS')
 

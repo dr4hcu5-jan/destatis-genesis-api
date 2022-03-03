@@ -1,9 +1,7 @@
 """Responses which are received from the GENESIS database"""
-from typing import Optional
 
-from models import *
 from .internals import *
-from pydantic import validator
+from ..models import *
 
 
 class BaseResponse(BaseModel):

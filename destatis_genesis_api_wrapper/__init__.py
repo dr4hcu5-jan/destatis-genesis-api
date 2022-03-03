@@ -1,14 +1,12 @@
 """Wrapper for the JSON API of the DESTATIS GENESIS database"""
-import datetime
 import logging
-from datetime import timedelta
 
 from pydantic import SecretStr
 
-import tools
-from enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
+from . import tools
+from .enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
     GENESISObjectType
-from responses import *
+from .responses import *
 
 # Create a logger for the whole module
 logger = logging.getLogger('DESTATIS-GENESIS')
