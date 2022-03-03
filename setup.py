@@ -1,9 +1,9 @@
 from setuptools import setup
 
 setup(
-    name='src',
+    name='destatis_genesis_api_wrapper',
     version='0.0.1',
-    package_dir={"": "src"},
+    package_dir={"": "destatis_genesis_api_wrapper"},
     url='https://github.com/j-suchard/destatis-genesis-api',
     license='BSD-3-Clause',
     author='Jan Eike Suchard',
