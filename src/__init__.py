@@ -15,7 +15,7 @@ logger = logging.getLogger('DESTATIS-GENESIS')
 """The logger which is used in this module"""
 
 
-class GENESISWrapper:
+class AsyncGENESISWrapper:
     """
     An asynchronous Wrapper for the GENESIS API
     """
@@ -53,14 +53,14 @@ class GENESISWrapper:
             'password': self.__password.get_secret_value(),
             'language': self.__language.value
         }
-        self.hello_world: GENESISWrapper.HelloWorld = self.HelloWorld(username, password, language)
+        self.HelloWorld: AsyncGENESISWrapper.__HelloWorld = self.__HelloWorld(username, password, language)
         """Methods in the `Hello World` part of the official API documentation"""
-        self.find: GENESISWrapper.Find = self.Find(username, password, language)
+        self.Find: AsyncGENESISWrapper.__Find = self.__Find(username, password, language)
         """Methods in the `Find` part of the official API documentation"""
-        self.catalogue: GENESISWrapper.Catalogue = self.Catalogue(username, password, language)
+        self.Catalogue: AsyncGENESISWrapper.__Catalogue = self.__Catalogue(username, password, language)
         """Methods in the `Catalogue` part of the official API documentation"""
     
-    class HelloWorld:
+    class __HelloWorld:
         """All methods from the HelloWorld section of the API documentation"""
 
         def __init__(
@@ -121,7 +121,7 @@ class GENESISWrapper:
                 HelloWorld.LoginCheckResponse
             )
     
-    class Find:
+    class __Find:
         """Methods for searching for objects"""
     
         def __init__(
@@ -178,7 +178,7 @@ class GENESISWrapper:
             }
             return await tools.get_parsed_response('/find/find', _params, Find.FindResult)
     
-    class Catalogue:
+    class __Catalogue:
         """Methods for listing objects"""
     
         def __init__(
@@ -341,8 +341,6 @@ class GENESISWrapper:
             if (selector is not None) and (not (1 <= len(selector) <= 15)):
                 raise ValueError("The selector's length needs to be between 1 and 15 (inclusive)")
             if (updated_after is not None) and not (updated_after < date.today()):
-                print(updated_after)
-                print(date.today())
                 raise ValueError("The specified date may not be today or in the future")
             if not (0 < results <= 2500):
                 raise ValueError('The number of results need to be between 1 and 2500')
