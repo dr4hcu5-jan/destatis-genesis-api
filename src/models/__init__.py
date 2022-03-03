@@ -280,3 +280,8 @@ class ModifiedDataInformation(ObjectInformation):
         """
         day, month, year = v.split('.')
         return date(int(year), int(month), int(day))
+    
+
+class QualitySignInformation(ObjectInformation):
+    """Information about a quality sign"""
+    pass

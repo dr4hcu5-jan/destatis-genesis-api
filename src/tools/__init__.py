@@ -16,7 +16,8 @@ ResponseType = Type[
     Union[
         HelloWorld.WhoAmIResponse, HelloWorld.LoginCheckResponse,
         Find.FindResult,
-        Catalogue.CubeResponse, Catalogue.JobResponse, Catalogue.ModifiedDataResponse
+        Catalogue.CubeResponse, Catalogue.JobResponse, Catalogue.ModifiedDataResponse,
+        Catalogue.QualitySignsResponse
     ]
 ]
 
@@ -36,8 +37,10 @@ async def is_host_available(
     _end_time = time.time() + timeout
     while time.time() < timeout:
         try:
-            # Try to open a connection to the specified host and port and wait a maximum time of five seconds
-            _s_reader, _s_writer = await asyncio.wait_for(asyncio.open_connection(host, port), timeout=5)
+            # Try to open a connection to the specified host and port and wait a maximum time of
+            # five seconds
+            _s_reader, _s_writer = await asyncio.wait_for(asyncio.open_connection(host, port),
+                                                          timeout=5)
             # Close the stream writer again
             _s_writer.close()
             # Wait until the writer is closed
@@ -91,5 +94,5 @@ async def get_parsed_response(
         return r.parse_obj(await get_raw_json_response(path, parameters))
     except ValidationError as error:
         logger.error('Error during parsing the response received from the database. '
-                            'Printing response into terminal...')
+                     'Printing response into terminal...')
         print(await get_raw_json_response(path, parameters))

@@ -141,5 +141,14 @@ class Catalogue:
             :return:
             """
             return [v for v in value if v]
-            
+    
+    class QualitySignsResponse(BaseResponse):
+        """
+        A response containing the currently active quality signs
+        """
         
+        quality_signs: Optional[list[QualitySignInformation]] = Field(
+            default=None,
+            alias='List'
+        )
+       

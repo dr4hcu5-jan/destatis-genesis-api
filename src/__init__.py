@@ -17,7 +17,7 @@ logger = logging.getLogger('DESTATIS-GENESIS')
 
 class GENESISWrapper:
     """
-    The wrapper for the API access
+    An asynchronous Wrapper for the GENESIS API
     """
 
     def __init__(
@@ -355,4 +355,11 @@ class GENESISWrapper:
             }
             _url = self.__service + '/modifieddata'
             return await tools.get_parsed_response(_url, _param, Catalogue.ModifiedDataResponse)
+        
+        async def quality_signs(self) -> Catalogue.QualitySignsResponse:
+            """Get a list of the quality signs used in the GENESIS database"""
+            _url = self.__service + '/qualitysigns'
+            return await tools.get_parsed_response(
+                _url, self.__base_parameter, Catalogue.QualitySignsResponse
+            )
             
