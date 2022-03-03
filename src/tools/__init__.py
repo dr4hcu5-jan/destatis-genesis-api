@@ -68,7 +68,6 @@ async def get_raw_json_response(
             # Check if the response is a 200 response
             if response.status == 200:
                 data = await response.json()
-                print(await response.text())
                 return data
             elif response.status == 401:
                 raise GENESISPermissionError
