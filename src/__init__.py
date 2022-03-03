@@ -360,4 +360,27 @@ class AsyncGENESISWrapper:
             return await tools.get_parsed_response(
                 _url, self.__base_parameter, Catalogue.QualitySignsResponse
             )
+        
+        async def results(
+                self,
+                selector: str = None,
+                result_count: int = 100
+        ) -> Catalogue.ResultTableResponse:
+            """Get a list of result tables
             
+            :param selector: Filter for the result tables code, (1-15 characters, stars(*) allowed)
+            :type selector: str
+            :param result_count: The number of results which should be returned
+            :return: A List of information about the result tables
+            """
+            if (selector is not None) and (not (1 <= len(selector) <= 15)):
+                raise ValueError("The selector's length needs to be between 1 and 15")
+            _param = self.__base_parameter | {
+                'selection': '' if selector is None else selector,
+                'area': 'all',
+                'pagelength': result_count
+            }
+            _url = self.__service + '/results'
+            return await tools.get_parsed_response(
+                _url, _param, Catalogue.ResultTableResponse
+            )

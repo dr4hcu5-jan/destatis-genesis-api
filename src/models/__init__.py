@@ -285,3 +285,13 @@ class ModifiedDataInformation(ObjectInformation):
 class QualitySignInformation(ObjectInformation):
     """Information about a quality sign"""
     pass
+
+
+class ResultTableInformation(ObjectInformation):
+    """Information about a result table"""
+    
+    values: int = Field(
+        default=...,
+        alias='Values'
+    )
+    """Number of values associated with the table"""

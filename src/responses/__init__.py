@@ -151,4 +151,13 @@ class Catalogue:
             default=None,
             alias='List'
         )
-       
+    
+    class ResultTableResponse(BaseResponse):
+        """
+        A response containing information about the requested result tables
+        """
+        
+        result_tables: Optional[list[ResultTableInformation]] = Field(
+            default=...,
+            alias='List'
+        )
