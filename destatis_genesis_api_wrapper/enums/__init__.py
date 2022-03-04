@@ -60,4 +60,16 @@ class GENESISStatisticCriteria(str, Enum):
     
     CODE = 'Code'
     CONTENT = 'Inhalt'
+    
+
+class GENESISArea(str, Enum):
+    """
+    Locations of objects
+    """
+    
+    USER = 'Benutzer'
+    GROUP = 'Gruppe'
+    OFFICE = 'Amt'
+    PUBLIC = 'Öffentlich'
+    ALL = 'Alle'
 

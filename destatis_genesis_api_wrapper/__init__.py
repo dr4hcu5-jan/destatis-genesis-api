@@ -5,7 +5,7 @@ from pydantic import SecretStr
 
 from . import tools
 from .enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
-    GENESISObjectType, GENESISStatisticCriteria
+    GENESISObjectType, GENESISStatisticCriteria, GENESISArea
 from .responses import *
 
 # Create a logger for the whole module
@@ -217,17 +217,20 @@ class AsyncGENESISWrapper:
         async def cubes(
                 self,
                 selection: str,
+                object_area: GENESISArea = GENESISArea.ALL,
                 results: int = 100
         ) -> Catalogue.CubeResponse:
             """Get a list of data cubes matching the selector (PREMIUM ACCOUNTS ONLY)
             
             :param selection: The code of the data cube. You may use a star (*) to allow wild
             carding
+            :param object_area: The location of the object
             :param results: The maximum items which are received from the database
             :return: A list of information about the found data cubes
             """
             _parameters = self.__base_parameter | {
                 'selection': selection,
+                'area': object_area.value,
                 'pagelength': str(results)
             }
             _url = self._service_url + '/cubes'
@@ -237,6 +240,7 @@ class AsyncGENESISWrapper:
                 self,
                 statistic_name: constr(min_length=1, max_length=6),
                 cube_code: constr(min_length=1, max_length=10),
+                object_area: GENESISArea = GENESISArea.ALL,
                 results: int = 100
         ) -> Catalogue.CubeResponse:
             """Get a list of data cubes of a statistic matching the selector (PREMIUM ACCOUNTS ONLY)
@@ -244,12 +248,14 @@ class AsyncGENESISWrapper:
             :param statistic_name: The name of the statistic that shall be used
             :param cube_code: The code of the data cube in this statistic, star based wild-carding
                 is allowed
+            :param object_area: The area in which the object is stored
             :param results: The number of maximum results that should be pulled
             :return: A list of information about the data cubes
             """
             _parameters = self.__base_parameter | {
                 'name': statistic_name,
                 'selection':  cube_code,
+                'area': object_area.value,
                 'pagelength': str(results)
             }
             _url = self._service_url + '/cubes2statistic'
@@ -259,6 +265,7 @@ class AsyncGENESISWrapper:
                 self,
                 variable_name: constr(min_length=1, max_length=6),
                 cube_code: constr(min_length=1, max_length=10),
+                object_area: GENESISArea = GENESISArea.ALL,
                 results: int = 100
         ) -> Catalogue.CubeResponse:
             """Get a list of data cubes related to the specified variable
@@ -266,12 +273,14 @@ class AsyncGENESISWrapper:
             :param variable_name: The name of the variable, (max. 6 character)
             :param cube_code: The code of a cube which is related to the variable, stars (*) may be
                 used for wild carding
+            :param object_area: The area in which the object is stored
             :param results: Number of results which are retrieved
             :return: A list of the data cubes which are related to the variable
             """
             _parameters = self.__base_parameter | {
                 'name': variable_name,
                 'selection': cube_code,
+                'area': object_area.value,
                 'pagelength': results
             }
             _url = self._service_url + '/cubes2variable'
@@ -309,7 +318,6 @@ class AsyncGENESISWrapper:
                 'searchcriterion': search_by.value,
                 'sortcriterion': sort_by.value,
                 'type': job_type.value,
-                'area': 'all'
             }
             _url = self._service_url + '/jobs'
             return await tools.get_parsed_response(_url, _params, Catalogue.JobResponse)
@@ -362,10 +370,12 @@ class AsyncGENESISWrapper:
         async def results(
                 self,
                 selector: str = None,
-                result_count: int = 100
+                result_count: int = 100,
+                search_area: GENESISArea = GENESISArea.ALL
         ) -> Catalogue.ResultTableResponse:
             """Get a list of result tables
             
+            :param search_area: The area in which the objects are saved
             :param selector: Filter for the result tables code, (1-15 characters, stars(*) allowed)
             :type selector: str
             :param result_count: The number of results which should be returned
@@ -375,7 +385,7 @@ class AsyncGENESISWrapper:
                 raise ValueError("The selector's length needs to be between 1 and 15")
             _param = self.__base_parameter | {
                 'selection': '' if selector is None else selector,
-                'area': 'all',
+                'area': search_area.value,
                 'pagelength': result_count
             }
             _url = self._service_url + '/results'
@@ -423,6 +433,7 @@ class AsyncGENESISWrapper:
                 statistic_selector: str = None,
                 search_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
                 sort_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
+                object_area: GENESISArea = GENESISArea.ALL,
                 result_count: int = 100
         ):
             """Get a list of statistics which are referenced by the selected variable
@@ -438,6 +449,8 @@ class AsyncGENESISWrapper:
             :param sort_by: The field by which the results are to be sorted, [optional, defaults
                 to `GENESISStatisticCriteria.CODE`]
             :type sort_by: GENESISStatisticCriteria
+            :param object_area: The area in which the object is stored
+            :type object_area: GENESISArea
             :param result_count: The number of results which are returned by the request
             :type result_count: int
             :return: The response returned by the server
@@ -454,7 +467,8 @@ class AsyncGENESISWrapper:
                 'selection': '' if statistic_selector is None else statistic_selector,
                 'searchcriterion': search_by.value,
                 'sortcriterion': sort_by.value,
-                'pagelength': result_count
+                'pagelength': result_count,
+                'area': object_area.value
             }
             _url = self._service_url + '/statistics2variable'
             return await tools.get_parsed_response(
