@@ -658,3 +658,39 @@ class AsyncGENESISWrapper:
             return await tools.get_parsed_response(
                 url, param, Catalogue.TimeseriesResponse
             )
+        
+        async def timeseries2variable(
+                self,
+                variable_name: str,
+                timeseries_selector: Optional[str] = None,
+                object_location: GENESISArea = GENESISArea.ALL,
+                result_count: int = 100
+        ) -> Catalogue.TimeseriesResponse:
+            """Get a list of timeseries which are related to the specified variable
+            
+            :param variable_name: The code of the variable [required]
+            :param timeseries_selector: A filter for the returned timeseries [optional, wildcards
+                allowed]
+            :param object_location: The storage location in which the search shall be executed [
+                optional, defaults to ``GENESISArea.ALL``]
+            :param result_count: The number of results that shall be returned
+            :return: A parsed response containing the list of timeseries, if any were found
+            """
+            if variable_name is None:
+                raise ValueError('The variable_name is a required parameter')
+            if not (1 <= len(variable_name) <= 15):
+                raise ValueError('The length of the variable name may not exceed 15 characters')
+            if timeseries_selector is not None and not (1 <= len(timeseries_selector) <= 15):
+                raise ValueError("If a timeseries_selector is supplied its length may not exceed "
+                                 "15 characters")
+            # Build the query parameters
+            _query_parameter = self.__base_parameter | {
+                'name': variable_name,
+                'selection': '' if timeseries_selector is None else timeseries_selector,
+                'area': object_location.value,
+                'pagelength': result_count
+            }
+            _url = self._service_url + '/timeseries2variable'
+            return await tools.get_parsed_response(
+                _url, _query_parameter, Catalogue.TimeseriesResponse
+            )
