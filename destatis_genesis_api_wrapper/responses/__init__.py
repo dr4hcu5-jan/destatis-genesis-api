@@ -159,3 +159,15 @@ class Catalogue:
             default=...,
             alias='List'
         )
+
+    class StatisticsResponse(BaseResponse):
+        """
+        A response containing the statistics matching the request made
+        """
+        
+        statistics: Optional[list[StatisticInformation]] = Field(
+            default=None,
+            alias='List'
+        )
+        """Information about the found statistics"""
+    

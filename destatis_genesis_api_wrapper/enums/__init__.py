@@ -51,4 +51,13 @@ class GENESISObjectType(str, Enum):
     TABLE = 'Tabellen'
     STATISTIC = 'Statistiken'
     STATISTIC_UPDATE = 'StatistikUpdates'
+
+
+class GENESISStatisticCriteria(str, Enum):
+    """
+    Criteria for searching and sorting jobs
+    """
     
+    CODE = 'Code'
+    CONTENT = 'Inhalt'
+

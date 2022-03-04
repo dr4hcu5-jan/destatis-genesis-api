@@ -5,7 +5,7 @@ from pydantic import SecretStr
 
 from . import tools
 from .enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
-    GENESISObjectType
+    GENESISObjectType, GENESISStatisticCriteria
 from .responses import *
 
 # Create a logger for the whole module
@@ -207,7 +207,7 @@ class AsyncGENESISWrapper:
             self.__username = username
             self.__password = SecretStr(password)
             self.__language = language
-            self.__service = '/catalogue'
+            self._service_url = '/catalogue'
             self.__base_parameter = {
                 'username': self.__username,
                 'password': self.__password.get_secret_value(),
@@ -230,7 +230,7 @@ class AsyncGENESISWrapper:
                 'selection': selection,
                 'pagelength': str(results)
             }
-            _url = self.__service + '/cubes'
+            _url = self._service_url + '/cubes'
             return await tools.get_parsed_response(_url, _parameters, Catalogue.CubeResponse)
         
         async def cubes_to_statistic(
@@ -252,7 +252,7 @@ class AsyncGENESISWrapper:
                 'selection':  cube_code,
                 'pagelength': str(results)
             }
-            _url = self.__service + '/cubes2statistic'
+            _url = self._service_url + '/cubes2statistic'
             return await tools.get_parsed_response(_url, _parameters, Catalogue.CubeResponse)
     
         async def cubes_to_variable(
@@ -274,7 +274,7 @@ class AsyncGENESISWrapper:
                 'selection': cube_code,
                 'pagelength': results
             }
-            _url = self.__service + '/cubes2variable'
+            _url = self._service_url + '/cubes2variable'
             return await tools.get_parsed_response(
                 _url,
                 _parameters,
@@ -311,7 +311,7 @@ class AsyncGENESISWrapper:
                 'type': job_type.value,
                 'area': 'all'
             }
-            _url = self.__service + '/jobs'
+            _url = self._service_url + '/jobs'
             return await tools.get_parsed_response(_url, _params, Catalogue.JobResponse)
         
         async def modified_data(
@@ -349,12 +349,12 @@ class AsyncGENESISWrapper:
                 'date': updated_after.strftime('%d.%m.%Y') if updated_after is not None else None,
                 'pagelength': results
             }
-            _url = self.__service + '/modifieddata'
+            _url = self._service_url + '/modifieddata'
             return await tools.get_parsed_response(_url, _param, Catalogue.ModifiedDataResponse)
         
         async def quality_signs(self) -> Catalogue.QualitySignsResponse:
             """Get a list of the quality signs used in the GENESIS database"""
-            _url = self.__service + '/qualitysigns'
+            _url = self._service_url + '/qualitysigns'
             return await tools.get_parsed_response(
                 _url, self.__base_parameter, Catalogue.QualitySignsResponse
             )
@@ -378,7 +378,85 @@ class AsyncGENESISWrapper:
                 'area': 'all',
                 'pagelength': result_count
             }
-            _url = self.__service + '/results'
+            _url = self._service_url + '/results'
             return await tools.get_parsed_response(
                 _url, _param, Catalogue.ResultTableResponse
+            )
+        
+        async def statistics(
+                self,
+                selector: str = None,
+                search_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
+                sort_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
+                result_count: int = 100
+        ) -> Catalogue.StatisticsResponse:
+            """Get a list of statistics matching the supplied parameters
+            
+            :param selector: The filter which is applied to the field selected by ``search_by``
+            :type selector: str
+            :param search_by: The field on which the selector shall be applied to, defaults to
+                ``GENESISStatisticCriteria.Code``
+            :type search_by: GENESISStatisticCriteria
+            :param sort_by: Sort the results by the field, defaults to
+                ``GENESISStatisticCriteria.Code``
+            :type sort_by: GENESISStatisticCriteria
+            :param result_count: The number of results that shall be returned
+            :type result_count: int
+            :return: The response from the database
+            :rtype: Catalogue.StatisticsResponse
+            """
+            # Check if the selector matches the required constraints
+            if (selector is not None) and not (1 <= len(selector) <= 15):
+                raise ValueError("The selector's length needs to be between 1 and 15")
+            _param = self.__base_parameter | {
+                'selection': '' if selector is None else selector,
+                'searchcriterion': search_by.value,
+                'sortcriterion': sort_by.value,
+                'pagelength': result_count
+            }
+            _url = self._service_url + '/statistics'
+            return await tools.get_parsed_response(_url, _param, Catalogue.StatisticsResponse)
+            
+        async def statistics_to_variable(
+                self,
+                variable_name: str,
+                statistic_selector: str = None,
+                search_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
+                sort_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
+                result_count: int = 100
+        ):
+            """Get a list of statistics which are referenced by the selected variable
+            
+            :param variable_name: The name of the variable [required]
+            :type variable_name: str
+            :param statistic_selector: Filter for the statistics by the code of them, [optional,
+                stars allowed to wildcard, max. length 15]
+            :type statistic_selector: str
+            :param search_by: The field on which the code shall be applied, [optional, defaults
+                to `GENESISStatisticCriteria.CODE`]
+            :type search_by: GENESISStatisticCriteria
+            :param sort_by: The field by which the results are to be sorted, [optional, defaults
+                to `GENESISStatisticCriteria.CODE`]
+            :type sort_by: GENESISStatisticCriteria
+            :param result_count: The number of results which are returned by the request
+            :type result_count: int
+            :return: The response returned by the server
+            """
+            if variable_name is None:
+                raise ValueError('The variable name needs to be set to run a successful query')
+            if not 1 <= len(variable_name) <= 15:
+                raise ValueError('The variable names length needs to be between 1 and 15 signs')
+            if (statistic_selector is not None) and not (1 <= len(statistic_selector) <= 15):
+                raise ValueError("The selectors length may not exceed 15 characters")
+            # Create the parameters object
+            _param = self.__base_parameter | {
+                'name': variable_name,
+                'selection': '' if statistic_selector is None else statistic_selector,
+                'searchcriterion': search_by.value,
+                'sortcriterion': sort_by.value,
+                'pagelength': result_count
+            }
+            _url = self._service_url + '/statistics2variable'
+            return await tools.get_parsed_response(
+                _url, _param, Catalogue.StatisticsResponse
             )
