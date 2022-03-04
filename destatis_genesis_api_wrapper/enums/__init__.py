@@ -73,3 +73,11 @@ class GENESISArea(str, Enum):
     PUBLIC = 'Öffentlich'
     ALL = 'Alle'
 
+
+class GENESISTableCriteria(str, Enum):
+    """
+    Criteria for searching and sorting jobs
+    """
+    
+    CODE = 'Code'
+    TOP = 'Top'

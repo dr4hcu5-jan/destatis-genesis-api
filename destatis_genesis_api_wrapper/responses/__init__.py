@@ -106,7 +106,7 @@ class Find:
 
 class Catalogue:
     """Responses for requests in the /catalogue resources"""
-    
+
     class CubeResponse(BaseResponse):
         """A response for requesting lists for cubes"""
         
@@ -170,4 +170,15 @@ class Catalogue:
             alias='List'
         )
         """Information about the found statistics"""
+    
+    class TableResponse(BaseResponse):
+        """
+        A response containing the statistics matching the request made
+        """
+        
+        statistics: Optional[list[TableInformation]] = Field(
+            default=None,
+            alias='List'
+        )
+        """Information about the found tables"""
     

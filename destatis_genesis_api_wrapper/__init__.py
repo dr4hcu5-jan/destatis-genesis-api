@@ -5,7 +5,7 @@ from pydantic import SecretStr
 
 from . import tools
 from .enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
-    GENESISObjectType, GENESISStatisticCriteria, GENESISArea
+    GENESISObjectType, GENESISStatisticCriteria, GENESISArea, GENESISTableCriteria
 from .responses import *
 
 # Create a logger for the whole module
@@ -473,4 +473,34 @@ class AsyncGENESISWrapper:
             _url = self._service_url + '/statistics2variable'
             return await tools.get_parsed_response(
                 _url, _param, Catalogue.StatisticsResponse
+            )
+        
+        async def tables(
+                self,
+                table_selector: str,
+                object_area: GENESISArea = GENESISArea.ALL,
+                sort_by: GENESISTableCriteria = GENESISTableCriteria.CODE,
+                result_count: int = 100
+        ) -> Catalogue.TableResponse:
+            """Get a list of tables matching the selector from the selected object area
+            
+            :param table_selector: The code of the table [required, stars (*) allowed for wildcards]
+            :param object_area: The area in which the table is stored [defaults to ALL]
+            :param sort_by: The criteria by which the results shall be sorted [defaults to CODE]
+            :param result_count: The number of results that shall be returned
+            :return: A list of tables matching the request
+            """
+            if (table_selector is not None) and not (1 <= len(table_selector) <= 15):
+                raise ValueError('The table selector needs to be at least 1 character and max 15 '
+                                 'characters')
+            _param = self.__base_parameter | {
+                'selection': table_selector,
+                'area': object_area.value,
+                'searchcriterion': 'Code',
+                'sortcriterion': sort_by.value,
+                'pagelength': result_count
+            }
+            _url = self._service_url + '/tables'
+            return await tools.get_parsed_response(
+                _url, _param, Catalogue.TableResponse
             )

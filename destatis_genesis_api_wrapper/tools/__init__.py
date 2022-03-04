@@ -17,7 +17,8 @@ ResponseType = Type[
         HelloWorld.WhoAmIResponse, HelloWorld.LoginCheckResponse,
         Find.FindResult,
         Catalogue.CubeResponse, Catalogue.JobResponse, Catalogue.ModifiedDataResponse,
-        Catalogue.QualitySignsResponse, Catalogue.ResultTableResponse, Catalogue.StatisticsResponse
+        Catalogue.QualitySignsResponse, Catalogue.ResultTableResponse, Catalogue.StatisticsResponse,
+        Catalogue.TableResponse
     ]
 ]
 
