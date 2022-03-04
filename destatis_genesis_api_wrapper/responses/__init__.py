@@ -190,3 +190,10 @@ class Catalogue:
             alias='List'
         )
     
+    class TimeseriesResponse(BaseResponse):
+        
+        time_series: Optional[list[TimeSeriesInformation]] = Field(
+            default=None,
+            alias='List'
+        )
+    

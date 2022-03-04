@@ -18,7 +18,7 @@ ResponseType = Type[
         Find.FindResult,
         Catalogue.CubeResponse, Catalogue.JobResponse, Catalogue.ModifiedDataResponse,
         Catalogue.QualitySignsResponse, Catalogue.ResultTableResponse, Catalogue.StatisticsResponse,
-        Catalogue.TableResponse, Catalogue.TermResponse
+        Catalogue.TableResponse, Catalogue.TermResponse, Catalogue.TimeseriesResponse
     ]
 ]
 
@@ -94,6 +94,7 @@ async def get_parsed_response(
     try:
         return r.parse_obj(await get_raw_json_response(path, parameters))
     except ValidationError as error:
+        print(error)
         logger.error('Error during parsing the response received from the database. '
                      'Printing response into terminal...')
         print(await get_raw_json_response(path, parameters))

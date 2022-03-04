@@ -7,12 +7,13 @@ from pydantic import Field, constr, validator, Extra
 
 class BaseModel(PydanticBaseModel):
     """
-    A Basic Class used for all responses from the GENESIS database which presets some configuration variables
+    A Basic Class used for all responses from the GENESIS database which presets some
+    configuration variables
     """
-
+    
     class Config:
         """Configuration which is inherited into every other Response"""
-
+        
         allow_population_by_field_name = True
         """Allow the population of the fields by their names and aliases"""
 
@@ -42,7 +43,7 @@ class ObjectInformation(BaseModel):
     A textual description of the contents of the object. This may not be set or be an emtpy
     string depending on the object or resource
     """
-    
+
 
 class CubeInformation(ObjectInformation):
     """
@@ -115,7 +116,7 @@ class StatisticInformation(ObjectInformation):
     
     The number of cubes which are assigned to the Statistic
     """
-
+    
     extra_information: bool = Field(
         default=...,
         alias='Information'
@@ -125,7 +126,7 @@ class StatisticInformation(ObjectInformation):
 
     Boolean indicator if this data cube has extra information present
     """
-    
+
 
 class TableInformation(ObjectInformation):
     """
@@ -141,22 +142,51 @@ class TableInformation(ObjectInformation):
     
     Information about the time period displayed in the table
     """
-    
-    
+
+
 class TimeSeriesInformation(ObjectInformation):
     """
-    Information about a time series found in the GENESIS database
+    Information about a time series found in the GENESIS database"""
     
-    Since there is no official documentation found for this type of find result this class will
-    automatically assign extra values to the model
+    state: str = Field(
+        default=...,
+        alias='State'
+    )
+    """The state of the timeseries"""
+    
+    time_range: str = Field(
+        default=...,
+        alias='Time'
+    )
+    """The time range available in the time series"""
+    
+    last_update: datetime = Field(
+        default=...,
+        alias='LatestUpdate'
+    )
+    """Time of the last update of the timeseries"""
+    
+    extra_information: bool = Field(
+        default=...,
+        alias='Information'
+    )
+    """
+    Extra Information
+
+    Boolean indicator if this data cube has extra information present
     """
     
-    class Config:
-        """Configuration of the time series information"""
-        
-        extra = Extra.allow
-        """Allow some extra information to be populated"""
-        
+    @validator('last_update', pre=True, allow_reuse=True)
+    def convert_string_to_unix_timestamp(cls, v):
+        """Convert the input string into a UNIX timestamp
+
+        :param v: The string which shall be converted
+        :return:
+        """
+        input_format = '%d.%m.%Y %H:%M:%Sh'
+        _datetime = datetime.strptime(v, input_format)
+        return _datetime.timestamp()
+
 
 class VariableInformation(ObjectInformation):
     """
@@ -182,7 +212,7 @@ class VariableInformation(ObjectInformation):
     
     Number of values associated to the variable
     """
-
+    
     extra_information: bool = Field(
         default=...,
         alias='Information'
@@ -248,7 +278,7 @@ class JobInformation(ObjectInformation):
         """
         hour, minute, second = v.split(':')
         return time(hour, minute, second)
-    
+
 
 class ModifiedDataInformation(ObjectInformation):
     """Information about a modified dataset"""
@@ -270,7 +300,7 @@ class ModifiedDataInformation(ObjectInformation):
         alias='Added'
     )
     """Information about what has been added"""
-
+    
     @validator('change_date', pre=True, allow_reuse=True)
     def convert_date_string_to_date(cls, v) -> date:
         """Convert the date to a datetime object
@@ -280,7 +310,7 @@ class ModifiedDataInformation(ObjectInformation):
         """
         day, month, year = v.split('.')
         return date(int(year), int(month), int(day))
-    
+
 
 class QualitySignInformation(ObjectInformation):
     """Information about a quality sign"""
@@ -295,10 +325,9 @@ class ResultTableInformation(ObjectInformation):
         alias='Values'
     )
     """Number of values associated with the table"""
-    
+
 
 class TermInformation(BaseModel):
-    
     term: str = Field(
         default=...,
         alias='Content'

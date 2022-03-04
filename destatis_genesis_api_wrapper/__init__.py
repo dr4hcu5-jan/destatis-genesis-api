@@ -594,3 +594,34 @@ class AsyncGENESISWrapper:
             return await tools.get_parsed_response(
                 _url, _param, Catalogue.TermResponse
             )
+        
+        async def timeseries(
+                self,
+                timeseries_selector: str,
+                object_location: GENESISArea = GENESISArea.ALL,
+                result_count: int = 100
+        ) -> Catalogue.TimeseriesResponse:
+            """Get a list of timeseries according to the selector and the location of the object
+            
+            :param timeseries_selector: The selector for the timeseries [required, wildcards
+                allowed]
+            :param object_location: The area in which the object is stored [default:
+                ``GENESISArea.ALL``]
+            :param result_count: The number of results that shall be returned
+            :return: The list of found timeseries
+            """
+            if timeseries_selector is None:
+                raise ValueError('The selector is required for a successful database request')
+            if not 1 <= len(timeseries_selector) <= 15:
+                raise ValueError('The length of the selector needs to be between 1 and 15 '
+                                 'characters')
+            _param = self.__base_parameter | {
+                'selection': timeseries_selector,
+                'area': object_location.value,
+                'pagelength': result_count
+            }
+            _url = self._service_url + '/timeseries'
+            return await tools.get_parsed_response(
+                _url, _param, Catalogue.TimeseriesResponse
+            )
+
