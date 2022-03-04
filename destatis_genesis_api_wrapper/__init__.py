@@ -625,3 +625,36 @@ class AsyncGENESISWrapper:
                 _url, _param, Catalogue.TimeseriesResponse
             )
 
+        async def timeseries2statistic(
+                self,
+                statistic_name: str,
+                timeseries_selector: Optional[str] = None,
+                object_location: GENESISArea = GENESISArea.ALL,
+                result_count: int = 100
+        ):
+            """Get a list of timeseries which are related to the selected statistic
+            
+            :param statistic_name: Code of the statistic [required, length: 1-15 characters]
+            :param timeseries_selector: Filter for the timeseries by their code [optional,
+                wildcards allowed]
+            :param object_location: The storage location of the object
+            :param result_count: The number of results that shall be returned
+            :return: A response containing the list of timeseries which match the supplied
+                parameters
+            """
+            if statistic_name is None:
+                raise ValueError("The name of the statistic is a required parameter")
+            if timeseries_selector is not None and not (1 <= len(timeseries_selector) <= 15):
+                raise ValueError("If a timeseries_selector is supplied its length may not exceed "
+                                 "15 characters")
+            # Build the query parameters
+            param = self.__base_parameter | {
+                'name': statistic_name,
+                'selection': "" if timeseries_selector is None else timeseries_selector,
+                'area': object_location.value,
+                'pagelength': result_count
+            }
+            url = self._service_url + '/timeseries2statistic'
+            return await tools.get_parsed_response(
+                url, param, Catalogue.TimeseriesResponse
+            )
