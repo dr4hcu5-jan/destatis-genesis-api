@@ -236,7 +236,7 @@ class AsyncGENESISWrapper:
             _url = self._service_url + '/cubes'
             return await tools.get_parsed_response(_url, _parameters, Catalogue.CubeResponse)
         
-        async def cubes_to_statistic(
+        async def cubes2statistic(
                 self,
                 statistic_name: constr(min_length=1, max_length=6),
                 cube_code: constr(min_length=1, max_length=10),
@@ -261,7 +261,7 @@ class AsyncGENESISWrapper:
             _url = self._service_url + '/cubes2statistic'
             return await tools.get_parsed_response(_url, _parameters, Catalogue.CubeResponse)
     
-        async def cubes_to_variable(
+        async def cubes2variable(
                 self,
                 variable_name: constr(min_length=1, max_length=6),
                 cube_code: constr(min_length=1, max_length=10),
@@ -427,7 +427,7 @@ class AsyncGENESISWrapper:
             _url = self._service_url + '/statistics'
             return await tools.get_parsed_response(_url, _param, Catalogue.StatisticsResponse)
             
-        async def statistics_to_variable(
+        async def statistics2variable(
                 self,
                 variable_name: str,
                 statistic_selector: str = None,
@@ -505,7 +505,7 @@ class AsyncGENESISWrapper:
                 _url, _param, Catalogue.TableResponse
             )
         
-        async def tables_to_statistics(
+        async def tables2statistics(
                 self,
                 statistics_name: str,
                 table_selector: str = None,
@@ -538,7 +538,7 @@ class AsyncGENESISWrapper:
                 _url, _param, Catalogue.TableResponse
             )
 
-        async def tables_to_variable(
+        async def tables2variable(
                 self,
                 variable_name: str,
                 table_selector: str = None,
