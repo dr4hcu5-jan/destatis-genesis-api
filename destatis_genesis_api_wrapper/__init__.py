@@ -5,7 +5,8 @@ from pydantic import SecretStr
 
 from . import tools
 from .enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
-    GENESISObjectType, GENESISStatisticCriteria, GENESISArea, GENESISTableCriteria
+    GENESISObjectType, GENESISStatisticCriteria, GENESISArea, GENESISTableCriteria, \
+    GENESISValueCriteria
 from .responses import *
 
 # Create a logger for the whole module
@@ -694,3 +695,47 @@ class AsyncGENESISWrapper:
             return await tools.get_parsed_response(
                 _url, _query_parameter, Catalogue.TimeseriesResponse
             )
+        
+        async def values(
+                self,
+                value_filter: str,
+                object_location: GENESISArea = GENESISArea.ALL,
+                search_by: GENESISValueCriteria = GENESISValueCriteria.CODE,
+                sort_by: GENESISValueCriteria = GENESISValueCriteria.CODE,
+                result_count: int = 100
+        ) -> Catalogue.ValueResponse:
+            """Get a list of values specified by the filter
+            
+            :param value_filter: The filter for the value identifications [optional, wildcards
+                allowed]
+            :param object_location: The storage location which shall be used during the search [
+            optional, defaults to ``GENESISValueCriteria.CODE``]
+            :param search_by: The criteria which is used in combination to the value_filter [
+            optional, defaults to ``GENESISValueCriteria.CODE``]
+            :param sort_by: The criteria by which the results are sorted [optional, defaults to
+            ``GENESISValueCriteria.CODE``]
+            :param result_count: The number of results returned
+            :return: A parsed response containing the list of values
+            """
+            # Check the received variables
+            if value_filter is None:
+                raise ValueError('The value_filter is a required parameter')
+            if not 1 <= len(value_filter) <= 15:
+                raise ValueError('The length of the value_filter needs to be at least 1 character '
+                                 'and may not exceed 15 characters')
+            if not 1 <= result_count <= 2500:
+                raise ValueError('The number of results returned needs to be greater than 1, '
+                                 'but may not exceed 2500')
+            # Build the query parameters
+            params = self.__base_parameter | {
+                'selection': value_filter,
+                'area': object_location.value,
+                'searchcriterion': search_by.value,
+                'sortcriterion': sort_by.value,
+                'pagelength': result_count
+            }
+            _url = self._service_url + '/values'
+            return await tools.get_parsed_response(
+                _url, params, Catalogue.ValueResponse
+            )
+            

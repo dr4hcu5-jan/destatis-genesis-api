@@ -18,7 +18,8 @@ ResponseType = Type[
         Find.FindResult,
         Catalogue.CubeResponse, Catalogue.JobResponse, Catalogue.ModifiedDataResponse,
         Catalogue.QualitySignsResponse, Catalogue.ResultTableResponse, Catalogue.StatisticsResponse,
-        Catalogue.TableResponse, Catalogue.TermResponse, Catalogue.TimeseriesResponse
+        Catalogue.TableResponse, Catalogue.TermResponse, Catalogue.TimeseriesResponse,
+        Catalogue.ValueResponse
     ]
 ]
 

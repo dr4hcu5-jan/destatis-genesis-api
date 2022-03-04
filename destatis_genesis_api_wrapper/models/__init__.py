@@ -333,3 +333,23 @@ class TermInformation(BaseModel):
         alias='Content'
     )
     """The content of the term"""
+
+
+class ValueInformation(ObjectInformation):
+    """Information about a value present in the database"""
+    
+    variables: int = Field(
+        default=-1,
+        alias='Variables'
+    )
+    """Number of variables associated with this value"""
+
+    extra_information: bool = Field(
+        default=...,
+        alias='Information'
+    )
+    """
+    Extra Information
+
+    Boolean indicator if this data cube has extra information present
+    """

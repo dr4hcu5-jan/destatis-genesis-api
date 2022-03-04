@@ -14,13 +14,13 @@ class BaseResponse(BaseModel):
         alias='Ident'
     )
     """Information about the called service"""
-
+    
     request_status: Status = Field(
         default=...,
         alias='Status'
     )
     """Status information about the request"""
-
+    
     request_parameter: RequestParameter = Field(
         default=...,
         alias='Parameter'
@@ -69,7 +69,7 @@ class HelloWorld:
 
 class Find:
     """Responses for requests in the /find resources"""
-
+    
     class FindResult(BaseResponse):
         """The contents of a find request"""
         
@@ -106,7 +106,7 @@ class Find:
 
 class Catalogue:
     """Responses for requests in the /catalogue resources"""
-
+    
     class CubeResponse(BaseResponse):
         """A response for requesting lists for cubes"""
         
@@ -114,7 +114,7 @@ class Catalogue:
             default=None,
             alias='List'
         )
-        
+    
     class JobResponse(BaseResponse):
         """A response for getting a list of Jobs (e.g. getting big tables)"""
         
@@ -122,7 +122,7 @@ class Catalogue:
             default=None,
             alias='List'
         )
-        
+    
     class ModifiedDataResponse(BaseResponse):
         """A response for getting a list of changes made to the database entries"""
         
@@ -159,7 +159,7 @@ class Catalogue:
             default=...,
             alias='List'
         )
-
+    
     class StatisticsResponse(BaseResponse):
         """
         A response containing the statistics matching the request made
@@ -191,9 +191,13 @@ class Catalogue:
         )
     
     class TimeseriesResponse(BaseResponse):
-        
         time_series: Optional[list[TimeSeriesInformation]] = Field(
             default=None,
             alias='List'
         )
     
+    class ValueResponse(BaseResponse):
+        time_series: Optional[list[ValueInformation]] = Field(
+            default=None,
+            alias='List'
+        )
