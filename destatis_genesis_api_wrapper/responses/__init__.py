@@ -182,3 +182,11 @@ class Catalogue:
         )
         """Information about the found tables"""
     
+    class TermResponse(BaseResponse):
+        """A response containing a list of terms"""
+        
+        terms: Optional[list[TermInformation]] = Field(
+            default=None,
+            alias='List'
+        )
+    

@@ -295,3 +295,12 @@ class ResultTableInformation(ObjectInformation):
         alias='Values'
     )
     """Number of values associated with the table"""
+    
+
+class TermInformation(BaseModel):
+    
+    term: str = Field(
+        default=...,
+        alias='Content'
+    )
+    """The content of the term"""

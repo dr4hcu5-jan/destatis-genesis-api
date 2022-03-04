@@ -570,3 +570,27 @@ class AsyncGENESISWrapper:
             return await tools.get_parsed_response(
                 _url, _param, Catalogue.TableResponse
             )
+        
+        async def terms(
+                self,
+                term_selector: str,
+                result_count: int = 100
+        ):
+            """Get a list of terms according to the selector
+            
+            :param term_selector: The selector for the terms [required, wildcards allowed]
+            :param result_count: The number of terms which shall be returned
+            :return: The parsed response from the server
+            """
+            if term_selector is None:
+                raise ValueError('The selector for the terms is a required parameter')
+            if not 1 <= len(term_selector) <= 15:
+                raise ValueError('The length of the selector needs to be between 1 and 15')
+            _param = self.__base_parameter | {
+                'selection': term_selector,
+                'pagelength': result_count
+            }
+            _url = self._service_url + '/terms'
+            return await tools.get_parsed_response(
+                _url, _param, Catalogue.TermResponse
+            )
