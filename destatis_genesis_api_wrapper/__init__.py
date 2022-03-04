@@ -504,3 +504,38 @@ class AsyncGENESISWrapper:
             return await tools.get_parsed_response(
                 _url, _param, Catalogue.TableResponse
             )
+        
+        async def tables_to_statistics(
+                self,
+                statistics_name: str,
+                table_selector: str = None,
+                object_area: GENESISArea = GENESISArea.ALL,
+                result_count: int = 100
+        ) -> Catalogue.TableResponse:
+            """Get a list of tables matching the table selector which are assigned to the
+            
+            :param statistics_name: Name of the statistic [required, 1-15 characters]
+            :param table_selector: Filter for the tables code [optional, wildcards allowed]
+            :param object_area: The location of the statistic/tables
+            :param result_count: The number of tables in the response
+            :return:
+            """
+            if statistics_name is None:
+                raise ValueError('The name of the statistic is required to get the tables')
+            if not 1 <= len(statistics_name) <= 15:
+                raise ValueError('The length of the statistics name needs to be between 1 and 15')
+            if (table_selector is not None) and not (1 <= len(table_selector) <= 15):
+                raise ValueError('The table selector needs to be at least 1 character and max 15 '
+                                 'characters')
+            _param = self.__base_parameter | {
+                'name': statistics_name,
+                'selection': table_selector,
+                'area': object_area.value,
+                'pagelength': result_count
+            }
+            _url = self._service_url + '/tables2statistic'
+            return await tools.get_parsed_response(
+                _url, _param, Catalogue.TableResponse
+            )
+
+        
