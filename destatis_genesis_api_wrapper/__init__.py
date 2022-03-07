@@ -6,7 +6,7 @@ from pydantic import SecretStr
 from . import tools
 from .enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
     GENESISObjectType, GENESISStatisticCriteria, GENESISArea, GENESISTableCriteria, \
-    GENESISValueCriteria
+    GENESISValueCriteria, GENESISVariableCriteria
 from .responses import *
 
 # Create a logger for the whole module
@@ -52,11 +52,11 @@ class AsyncGENESISWrapper:
             'password': self.__password.get_secret_value(),
             'language': self.__language.value
         }
-        self.HelloWorld: AsyncGENESISWrapper.__HelloWorld = self.__HelloWorld(username, password, language)
+        self.hello_world: AsyncGENESISWrapper.__HelloWorld = self.__HelloWorld(username, password, language)
         """Methods in the `Hello World` part of the official API documentation"""
-        self.Find: AsyncGENESISWrapper.__Find = self.__Find(username, password, language)
+        self.find: AsyncGENESISWrapper.__Find = self.__Find(username, password, language)
         """Methods in the `Find` part of the official API documentation"""
-        self.Catalogue: AsyncGENESISWrapper.__Catalogue = self.__Catalogue(username, password, language)
+        self.catalogue: AsyncGENESISWrapper.__Catalogue = self.__Catalogue(username, password, language)
         """Methods in the `Catalogue` part of the official API documentation"""
     
     class __HelloWorld:
@@ -87,13 +87,14 @@ class AsyncGENESISWrapper:
                 raise ValueError("The password is not between 10 and 20 characters long")
             # Since all values passed the check save the username and password to the wrapper,
             # but keep them private
-            self.__username = username
-            self.__password = SecretStr(password)
-            self.__language = language
-            self.__base_parameter = {
-                'username': self.__username,
-                'password': self.__password.get_secret_value(),
-                'language': self.__language.value
+            self._username = username
+            self._password = SecretStr(password)
+            self._language = language
+            self._service_url = '/catalogue'
+            self._base_parameter = {
+                'username': self._username,
+                'password': self._password.get_secret_value(),
+                'language': self._language.value
             }
         
         @staticmethod
@@ -116,7 +117,7 @@ class AsyncGENESISWrapper:
             """
             return await tools.get_parsed_response(
                 '/helloworld/logincheck',
-                self.__base_parameter,
+                self._base_parameter,
                 HelloWorld.LoginCheckResponse
             )
     
@@ -148,13 +149,14 @@ class AsyncGENESISWrapper:
                 raise ValueError("The password is not between 10 and 20 characters long")
             # Since all values passed the check save the username and password to the wrapper,
             # but keep them private
-            self.__username = username
-            self.__password = SecretStr(password)
-            self.__language = language
-            self.__base_parameter = {
-                'username': self.__username,
-                'password': self.__password.get_secret_value(),
-                'language': self.__language.value
+            self._username = username
+            self._password = SecretStr(password)
+            self._language = language
+            self._service_url = '/catalogue'
+            self._base_parameter = {
+                'username': self._username,
+                'password': self._password.get_secret_value(),
+                'language': self._language.value
             }
     
         async def find(
@@ -170,7 +172,7 @@ class AsyncGENESISWrapper:
             :param results_per_category: Number of results per category
             :return: A response containing the results of the search
             """
-            _params = self.__base_parameter | {
+            _params = self._base_parameter | {
                 'term':       search_term,
                 'category':   category.value,
                 'pagelength': str(results_per_category)
@@ -205,14 +207,14 @@ class AsyncGENESISWrapper:
                 raise ValueError("The password is not between 10 and 20 characters long")
             # Since all values passed the check save the username and password to the wrapper,
             # but keep them private
-            self.__username = username
-            self.__password = SecretStr(password)
-            self.__language = language
+            self._username = username
+            self._password = SecretStr(password)
+            self._language = language
             self._service_url = '/catalogue'
-            self.__base_parameter = {
-                'username': self.__username,
-                'password': self.__password.get_secret_value(),
-                'language': self.__language.value
+            self._base_parameter = {
+                'username': self._username,
+                'password': self._password.get_secret_value(),
+                'language': self._language.value
             }
             
         async def cubes(
@@ -229,7 +231,7 @@ class AsyncGENESISWrapper:
             :param results: The maximum items which are received from the database
             :return: A list of information about the found data cubes
             """
-            _parameters = self.__base_parameter | {
+            _parameters = self._base_parameter | {
                 'selection': selection,
                 'area': object_area.value,
                 'pagelength': str(results)
@@ -253,7 +255,7 @@ class AsyncGENESISWrapper:
             :param results: The number of maximum results that should be pulled
             :return: A list of information about the data cubes
             """
-            _parameters = self.__base_parameter | {
+            _parameters = self._base_parameter | {
                 'name': statistic_name,
                 'selection':  cube_code,
                 'area': object_area.value,
@@ -278,7 +280,7 @@ class AsyncGENESISWrapper:
             :param results: Number of results which are retrieved
             :return: A list of the data cubes which are related to the variable
             """
-            _parameters = self.__base_parameter | {
+            _parameters = self._base_parameter | {
                 'name': variable_name,
                 'selection': cube_code,
                 'area': object_area.value,
@@ -314,7 +316,7 @@ class AsyncGENESISWrapper:
                                  'inclusive)')
             if None in [search_by, sort_by]:
                 raise ValueError('All parameter without a default value need to be set')
-            _params = self.__base_parameter | {
+            _params = self._base_parameter | {
                 'selection': selector,
                 'searchcriterion': search_by.value,
                 'sortcriterion': sort_by.value,
@@ -352,7 +354,7 @@ class AsyncGENESISWrapper:
             if not (0 < results <= 2500):
                 raise ValueError('The number of results need to be between 1 and 2500')
             # Build the query parameters
-            _param = self.__base_parameter | {
+            _param = self._base_parameter | {
                 'selection': '' if selector is None else selector,
                 'type': GENESISObjectType.ALL.value if object_type is None else object_type.value,
                 'date': updated_after.strftime('%d.%m.%Y') if updated_after is not None else None,
@@ -365,7 +367,7 @@ class AsyncGENESISWrapper:
             """Get a list of the quality signs used in the GENESIS database"""
             _url = self._service_url + '/qualitysigns'
             return await tools.get_parsed_response(
-                _url, self.__base_parameter, Catalogue.QualitySignsResponse
+                _url, self._base_parameter, Catalogue.QualitySignsResponse
             )
         
         async def results(
@@ -384,7 +386,7 @@ class AsyncGENESISWrapper:
             """
             if (selector is not None) and (not (1 <= len(selector) <= 15)):
                 raise ValueError("The selector's length needs to be between 1 and 15")
-            _param = self.__base_parameter | {
+            _param = self._base_parameter | {
                 'selection': '' if selector is None else selector,
                 'area': search_area.value,
                 'pagelength': result_count
@@ -419,7 +421,7 @@ class AsyncGENESISWrapper:
             # Check if the selector matches the required constraints
             if (selector is not None) and not (1 <= len(selector) <= 15):
                 raise ValueError("The selector's length needs to be between 1 and 15")
-            _param = self.__base_parameter | {
+            _param = self._base_parameter | {
                 'selection': '' if selector is None else selector,
                 'searchcriterion': search_by.value,
                 'sortcriterion': sort_by.value,
@@ -463,7 +465,7 @@ class AsyncGENESISWrapper:
             if (statistic_selector is not None) and not (1 <= len(statistic_selector) <= 15):
                 raise ValueError("The selectors length may not exceed 15 characters")
             # Create the parameters object
-            _param = self.__base_parameter | {
+            _param = self._base_parameter | {
                 'name': variable_name,
                 'selection': '' if statistic_selector is None else statistic_selector,
                 'searchcriterion': search_by.value,
@@ -494,7 +496,7 @@ class AsyncGENESISWrapper:
             if (table_selector is not None) and not (1 <= len(table_selector) <= 15):
                 raise ValueError('The table selector needs to be at least 1 character and max 15 '
                                  'characters')
-            _param = self.__base_parameter | {
+            _param = self._base_parameter | {
                 'selection': table_selector,
                 'area': object_area.value,
                 'searchcriterion': 'Code',
@@ -528,7 +530,7 @@ class AsyncGENESISWrapper:
             if (table_selector is not None) and not (1 <= len(table_selector) <= 15):
                 raise ValueError('The table selector needs to be at least 1 character and max 15 '
                                  'characters')
-            _param = self.__base_parameter | {
+            _param = self._base_parameter | {
                 'name': statistics_name,
                 'selection': table_selector,
                 'area': object_area.value,
@@ -561,7 +563,7 @@ class AsyncGENESISWrapper:
             if (table_selector is not None) and not (1 <= len(table_selector) <= 15):
                 raise ValueError('The table selector needs to be at least 1 character and max 15 '
                                  'characters')
-            _param = self.__base_parameter | {
+            _param = self._base_parameter | {
                 'name':       variable_name,
                 'selection':  table_selector,
                 'area':       object_area.value,
@@ -587,7 +589,7 @@ class AsyncGENESISWrapper:
                 raise ValueError('The selector for the terms is a required parameter')
             if not 1 <= len(term_selector) <= 15:
                 raise ValueError('The length of the selector needs to be between 1 and 15')
-            _param = self.__base_parameter | {
+            _param = self._base_parameter | {
                 'selection': term_selector,
                 'pagelength': result_count
             }
@@ -616,7 +618,7 @@ class AsyncGENESISWrapper:
             if not 1 <= len(timeseries_selector) <= 15:
                 raise ValueError('The length of the selector needs to be between 1 and 15 '
                                  'characters')
-            _param = self.__base_parameter | {
+            _param = self._base_parameter | {
                 'selection': timeseries_selector,
                 'area': object_location.value,
                 'pagelength': result_count
@@ -649,7 +651,7 @@ class AsyncGENESISWrapper:
                 raise ValueError("If a timeseries_selector is supplied its length may not exceed "
                                  "15 characters")
             # Build the query parameters
-            param = self.__base_parameter | {
+            param = self._base_parameter | {
                 'name': statistic_name,
                 'selection': "" if timeseries_selector is None else timeseries_selector,
                 'area': object_location.value,
@@ -685,7 +687,7 @@ class AsyncGENESISWrapper:
                 raise ValueError("If a timeseries_selector is supplied its length may not exceed "
                                  "15 characters")
             # Build the query parameters
-            _query_parameter = self.__base_parameter | {
+            _query_parameter = self._base_parameter | {
                 'name': variable_name,
                 'selection': '' if timeseries_selector is None else timeseries_selector,
                 'area': object_location.value,
@@ -727,7 +729,7 @@ class AsyncGENESISWrapper:
                 raise ValueError('The number of results returned needs to be greater than 1, '
                                  'but may not exceed 2500')
             # Build the query parameters
-            params = self.__base_parameter | {
+            params = self._base_parameter | {
                 'selection': value_filter,
                 'area': object_location.value,
                 'searchcriterion': search_by.value,
@@ -738,4 +740,58 @@ class AsyncGENESISWrapper:
             return await tools.get_parsed_response(
                 _url, params, Catalogue.ValueResponse
             )
+        
+        async def values2variable(
+                self,
+                variable_name: str,
+                value_filter: Optional[str] = None,
+                object_location: GENESISArea = GENESISArea.ALL,
+                search_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
+                sort_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
+                result_count: int = 100
+        ) -> Catalogue.ValueResponse:
+            """Get a list of characteristic values for the supplied variable
+            
+            :param variable_name: The code of the variable
+            :param value_filter: A filter for the returned values [optional, wildcards allowed]
+            :param object_location: The storage location of the variable
+            :param search_by: Criteria which is applied to the ``value_filter``
+            :param sort_by: Criteria which is used to sort the results
+            :param result_count: The number of characteristic values which may be returned
+            :return: A parsed response from the server containing the list of characteristic values
+            """
+            # Check if the variable name is set correctly
+            if not variable_name:
+                raise ValueError('The variable_name is a required parameter for the request')
+            if not (1 <= len(variable_name) <= 15):
+                raise ValueError('The length of the variable_name may not exceed 15 characters '
+                                 'and may not be below 1 character')
+            if '*' in variable_name:
+                raise ValueError('The variable_name may not contain any wildcards (*)')
+            # Check the value filter
+            if value_filter and not (1 <= len(value_filter) <= 15):
+                raise ValueError('The length of the value_filter may not exceed 15 characters and '
+                                 'may not be below 1')
+            # Check the number of results returned
+            if not 1 <= result_count <= 2500:
+                raise ValueError('The number of results returned needs to be greater than 1, '
+                                 'but may not exceed 2500')
+            # Create the query parameter
+            _param = self._base_parameter | {
+                'name': variable_name,
+                'selection': value_filter,
+                'area': object_location.value,
+                'searchcriterion': search_by.value,
+                'sortcriterion': sort_by.value,
+                'pagelength': result_count
+            }
+            # Build the url for the call
+            _url = self._service_url + '/values2variable'
+            # Make the call and await the response
+            return await tools.get_parsed_response(
+                _url, _param, Catalogue.ValueResponse
+            )
+        
+        
+            
             

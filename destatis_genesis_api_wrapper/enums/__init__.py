@@ -86,3 +86,8 @@ class GENESISTableCriteria(str, Enum):
 class GENESISValueCriteria(str, Enum):
     CODE = 'Code'
     CONTENT = 'Inhalt'
+
+
+class GENESISVariableCriteria(str, Enum):
+    CODE = 'Code'
+    CONTENT = 'Inhalt'
