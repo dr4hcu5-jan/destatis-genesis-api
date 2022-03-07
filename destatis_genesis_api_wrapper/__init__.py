@@ -6,7 +6,7 @@ from pydantic import SecretStr
 from . import tools
 from .enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
     GENESISObjectType, GENESISStatisticCriteria, GENESISArea, GENESISTableCriteria, \
-    GENESISValueCriteria, GENESISVariableCriteria
+    GENESISValueCriteria, GENESISVariableCriteria, GENESISVariableType
 from .responses import *
 
 # Create a logger for the whole module
@@ -761,8 +761,8 @@ class AsyncGENESISWrapper:
             :return: A parsed response from the server containing the list of characteristic values
             """
             # Check if the variable name is set correctly
-            if not variable_name:
-                raise ValueError('The variable_name is a required parameter for the request')
+            if not variable_name or len(variable_name.strip()) == 0:
+                raise ValueError('The variable_name is a required parameter and may not be empty')
             if not (1 <= len(variable_name) <= 15):
                 raise ValueError('The length of the variable_name may not exceed 15 characters '
                                  'and may not be below 1 character')
@@ -791,7 +791,49 @@ class AsyncGENESISWrapper:
             return await tools.get_parsed_response(
                 _url, _param, Catalogue.ValueResponse
             )
-        
-        
+
+        async def variables(
+                self,
+                variable_filter: str,
+                object_location: GENESISArea = GENESISArea.ALL,
+                search_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
+                sort_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
+                variable_type: GENESISVariableType = GENESISVariableType.ALL,
+                result_count: int = 100
+        ) -> Catalogue.VariableResponse:
+            """Get a list of variables matching the filter and object location
+            
+            :param variable_filter: Identification Code of the variable [required, wildcards
+              allowed]
+            :param object_location: The storage location of the object [optional]
+            :param search_by: Criteria which is applied to the variable filter [optional]
+            :param sort_by: Criteria by which the result is sorted [optional]
+            :param variable_type: The type of variable [optional]
+            :param result_count: The number of results that may be returned [optional]
+            :return: A parsed response from the server containing the variables
+            """
+            # Check if the filter is supplied correctly
+            if not variable_filter or len(variable_filter.strip()) == 0:
+                raise ValueError('The variable_filter is a required parameter any may not be empty')
+            if not (1 <= len(variable_filter) <= 6):
+                raise ValueError('The variable_filter may only contain up to 6 characters')
+            # Check if the result count is set properly
+            if not (1 <= result_count <= 2500):
+                raise ValueError('The number of possible results needs to be between 1 and 2500')
+            # Build the query parameters
+            _param = self._base_parameter | {
+                'selection': variable_filter,
+                'area': object_location.value,
+                'searchcriterion': search_by.value,
+                'sortcriterion': sort_by.value,
+                'type': variable_type.value,
+                'pagelength': result_count
+            }
+            # Build the url
+            _url = self._service_url + '/variables'
+            # Return the parsed result
+            return await tools.get_parsed_response(
+                _url, _param, Catalogue.VariableResponse
+            )
             
             

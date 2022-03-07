@@ -201,3 +201,9 @@ class Catalogue:
             default=None,
             alias='List'
         )
+        
+    class VariableResponse(BaseResponse):
+        variables: Optional[list[VariableInformation]] = Field(
+            default=None,
+            alias='List'
+        )

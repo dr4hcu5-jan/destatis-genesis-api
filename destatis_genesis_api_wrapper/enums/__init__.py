@@ -91,3 +91,14 @@ class GENESISValueCriteria(str, Enum):
 class GENESISVariableCriteria(str, Enum):
     CODE = 'Code'
     CONTENT = 'Inhalt'
+
+
+class GENESISVariableType(str, Enum):
+    ALL = 'Alle'
+    CLASSIFYING = 'klassifizierend'
+    TOTAL = 'insgesamt'
+    SPATIAL = 'räumlich'
+    FACTUAL = 'sachlich'
+    VALUE = 'wert'
+    TEMPORAL = 'zeitlich'
+    TIME_IDENTIFYING = 'zeitidentifizierend'

@@ -19,7 +19,7 @@ ResponseType = Type[
         Catalogue.CubeResponse, Catalogue.JobResponse, Catalogue.ModifiedDataResponse,
         Catalogue.QualitySignsResponse, Catalogue.ResultTableResponse, Catalogue.StatisticsResponse,
         Catalogue.TableResponse, Catalogue.TermResponse, Catalogue.TimeseriesResponse,
-        Catalogue.ValueResponse
+        Catalogue.ValueResponse, Catalogue.VariableResponse
     ]
 ]
 
