@@ -231,6 +231,7 @@ class AsyncGENESISWrapper:
             :param results: The maximum items which are received from the database
             :return: A list of information about the found data cubes
             """
+            # TODO: Add check of parameters
             _parameters = self._base_parameter | {
                 'selection': selection,
                 'area': object_area.value,
@@ -255,6 +256,7 @@ class AsyncGENESISWrapper:
             :param results: The number of maximum results that should be pulled
             :return: A list of information about the data cubes
             """
+            # TODO: Add check of parameters
             _parameters = self._base_parameter | {
                 'name': statistic_name,
                 'selection':  cube_code,
@@ -280,6 +282,7 @@ class AsyncGENESISWrapper:
             :param results: Number of results which are retrieved
             :return: A list of the data cubes which are related to the variable
             """
+            # TODO: Add check of parameters
             _parameters = self._base_parameter | {
                 'name': variable_name,
                 'selection': cube_code,
@@ -311,7 +314,7 @@ class AsyncGENESISWrapper:
             :param results: The number of results that shall be returned
             :return:
             """
-            if not (1 <= len(selector) <= 50):
+            if not (1 <= len(selector.strip()) <= 50):
                 raise ValueError('The length of the selector needs to be between 1 and 50 ('
                                  'inclusive)')
             if None in [search_by, sort_by]:
@@ -347,7 +350,7 @@ class AsyncGENESISWrapper:
             :param results: The number of results that should be returned
             """
             # Check the parameters for consistency
-            if (selector is not None) and (not (1 <= len(selector) <= 15)):
+            if (selector is not None) and (not (1 <= len(selector.strip()) <= 15)):
                 raise ValueError("The selector's length needs to be between 1 and 15 (inclusive)")
             if (updated_after is not None) and not (updated_after < date.today()):
                 raise ValueError("The specified date may not be today or in the future")
@@ -384,7 +387,7 @@ class AsyncGENESISWrapper:
             :param result_count: The number of results which should be returned
             :return: A List of information about the result tables
             """
-            if (selector is not None) and (not (1 <= len(selector) <= 15)):
+            if (selector is not None) and (not (1 <= len(selector.strip()) <= 15)):
                 raise ValueError("The selector's length needs to be between 1 and 15")
             _param = self._base_parameter | {
                 'selection': '' if selector is None else selector,
@@ -419,7 +422,7 @@ class AsyncGENESISWrapper:
             :rtype: Catalogue.StatisticsResponse
             """
             # Check if the selector matches the required constraints
-            if (selector is not None) and not (1 <= len(selector) <= 15):
+            if (selector is not None) and not (1 <= len(selector.strip()) <= 15):
                 raise ValueError("The selector's length needs to be between 1 and 15")
             _param = self._base_parameter | {
                 'selection': '' if selector is None else selector,
@@ -460,9 +463,9 @@ class AsyncGENESISWrapper:
             """
             if variable_name is None:
                 raise ValueError('The variable name needs to be set to run a successful query')
-            if not 1 <= len(variable_name) <= 15:
+            if not 1 <= len(variable_name.strip()) <= 15:
                 raise ValueError('The variable names length needs to be between 1 and 15 signs')
-            if (statistic_selector is not None) and not (1 <= len(statistic_selector) <= 15):
+            if statistic_selector and not (1 <= len(statistic_selector.strip()) <= 15):
                 raise ValueError("The selectors length may not exceed 15 characters")
             # Create the parameters object
             _param = self._base_parameter | {
@@ -493,7 +496,7 @@ class AsyncGENESISWrapper:
             :param result_count: The number of results that shall be returned
             :return: A list of tables matching the request
             """
-            if (table_selector is not None) and not (1 <= len(table_selector) <= 15):
+            if table_selector and not (1 <= len(table_selector.strip()) <= 15):
                 raise ValueError('The table selector needs to be at least 1 character and max 15 '
                                  'characters')
             _param = self._base_parameter | {
@@ -525,9 +528,9 @@ class AsyncGENESISWrapper:
             """
             if statistics_name is None:
                 raise ValueError('The name of the statistic is required to get the tables')
-            if not 1 <= len(statistics_name) <= 15:
+            if not 1 <= len(statistics_name.strip()) <= 15:
                 raise ValueError('The length of the statistics name needs to be between 1 and 15')
-            if (table_selector is not None) and not (1 <= len(table_selector) <= 15):
+            if table_selector and not (1 <= len(table_selector.strip()) <= 15):
                 raise ValueError('The table selector needs to be at least 1 character and max 15 '
                                  'characters')
             _param = self._base_parameter | {
@@ -560,7 +563,7 @@ class AsyncGENESISWrapper:
                 raise ValueError('The name of the statistic is required to get the tables')
             if not 1 <= len(variable_name) <= 15:
                 raise ValueError('The length of the statistics name needs to be between 1 and 15')
-            if (table_selector is not None) and not (1 <= len(table_selector) <= 15):
+            if table_selector and not (1 <= len(table_selector.strip()) <= 15):
                 raise ValueError('The table selector needs to be at least 1 character and max 15 '
                                  'characters')
             _param = self._base_parameter | {
@@ -587,7 +590,7 @@ class AsyncGENESISWrapper:
             """
             if term_selector is None:
                 raise ValueError('The selector for the terms is a required parameter')
-            if not 1 <= len(term_selector) <= 15:
+            if not 1 <= len(term_selector.strip()) <= 15:
                 raise ValueError('The length of the selector needs to be between 1 and 15')
             _param = self._base_parameter | {
                 'selection': term_selector,
@@ -615,7 +618,7 @@ class AsyncGENESISWrapper:
             """
             if timeseries_selector is None:
                 raise ValueError('The selector is required for a successful database request')
-            if not 1 <= len(timeseries_selector) <= 15:
+            if not 1 <= len(timeseries_selector.strip()) <= 15:
                 raise ValueError('The length of the selector needs to be between 1 and 15 '
                                  'characters')
             _param = self._base_parameter | {
@@ -647,7 +650,7 @@ class AsyncGENESISWrapper:
             """
             if statistic_name is None:
                 raise ValueError("The name of the statistic is a required parameter")
-            if timeseries_selector is not None and not (1 <= len(timeseries_selector) <= 15):
+            if timeseries_selector and not (1 <= len(timeseries_selector.strip()) <= 15):
                 raise ValueError("If a timeseries_selector is supplied its length may not exceed "
                                  "15 characters")
             # Build the query parameters
@@ -681,9 +684,9 @@ class AsyncGENESISWrapper:
             """
             if variable_name is None:
                 raise ValueError('The variable_name is a required parameter')
-            if not (1 <= len(variable_name) <= 15):
+            if not (1 <= len(variable_name.strip()) <= 15):
                 raise ValueError('The length of the variable name may not exceed 15 characters')
-            if timeseries_selector is not None and not (1 <= len(timeseries_selector) <= 15):
+            if timeseries_selector and not (1 <= len(timeseries_selector.strip()) <= 15):
                 raise ValueError("If a timeseries_selector is supplied its length may not exceed "
                                  "15 characters")
             # Build the query parameters
@@ -722,7 +725,7 @@ class AsyncGENESISWrapper:
             # Check the received variables
             if value_filter is None:
                 raise ValueError('The value_filter is a required parameter')
-            if not 1 <= len(value_filter) <= 15:
+            if not 1 <= len(value_filter.strip()) <= 15:
                 raise ValueError('The length of the value_filter needs to be at least 1 character '
                                  'and may not exceed 15 characters')
             if not 1 <= result_count <= 2500:
@@ -763,13 +766,13 @@ class AsyncGENESISWrapper:
             # Check if the variable name is set correctly
             if not variable_name or len(variable_name.strip()) == 0:
                 raise ValueError('The variable_name is a required parameter and may not be empty')
-            if not (1 <= len(variable_name) <= 15):
+            if not (1 <= len(variable_name.strip()) <= 15):
                 raise ValueError('The length of the variable_name may not exceed 15 characters '
                                  'and may not be below 1 character')
             if '*' in variable_name:
                 raise ValueError('The variable_name may not contain any wildcards (*)')
             # Check the value filter
-            if value_filter and not (1 <= len(value_filter) <= 15):
+            if value_filter and not (1 <= len(value_filter.strip()) <= 15):
                 raise ValueError('The length of the value_filter may not exceed 15 characters and '
                                  'may not be below 1')
             # Check the number of results returned
@@ -815,7 +818,7 @@ class AsyncGENESISWrapper:
             # Check if the filter is supplied correctly
             if not variable_filter or len(variable_filter.strip()) == 0:
                 raise ValueError('The variable_filter is a required parameter any may not be empty')
-            if not (1 <= len(variable_filter) <= 6):
+            if not (1 <= len(variable_filter.strip()) <= 6):
                 raise ValueError('The variable_filter may only contain up to 6 characters')
             # Check if the result count is set properly
             if not (1 <= result_count <= 2500):
