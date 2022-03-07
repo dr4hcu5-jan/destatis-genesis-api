@@ -838,5 +838,50 @@ class AsyncGENESISWrapper:
             return await tools.get_parsed_response(
                 _url, _param, Catalogue.VariableResponse
             )
+        
+        async def variables2statistic(
+                self,
+                statistic_name: str,
+                variable_filter: Optional[str] = None,
+                object_location: GENESISArea = GENESISArea.ALL,
+                search_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
+                sort_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
+                variable_type: GENESISVariableType = GENESISVariableType.ALL,
+                result_count: int = 100
+        ) -> Catalogue.VariableResponse:
+            """Get a list of variables related to the supplied statistic
             
+            :param statistic_name: The identification of the statistic [required]
+            :param variable_filter: Filter for the returned variables [optional, wildcards allowed]
+            :param object_location: Storage location which is used for the search [optional]
+            :param search_by: Criteria which is applied to the variable_filter [optional]
+            :param sort_by: Criteria specifying how the results are to be sorted [optional]
+            :param variable_type: The type of variables that shall be returned [optional]
+            :param result_count: Max. amount of results returned by the server [optional]
+            :return: A parsed response containing a list of variables
+            """
+            # Check if the statistic_name is set correctly
+            if not statistic_name or len(statistic_name.strip()) == 0:
+                raise ValueError('The statistic_name is a required parameter')
+            if not (1 <= len(statistic_name.strip()) <= 15):
+                raise ValueError('The length of statistic_name may not exceed 15 characters')
+            if '*' in statistic_name:
+                raise ValueError('The statistic_name may not contain wildcards (*)')
+            # Check if the variable_filter is set correctly if set
+            if variable_filter and not (1 <= len(variable_filter.strip()) <= 6):
+                raise ValueError('The variable_filter may not exceed the length of 6 characters, '
+                                 'if it is supplied')
+            # Build the query parameters
+            _param = self._base_parameter | {
+                'name': statistic_name,
+                'selection': variable_filter,
+                'area': object_location.value,
+                'searchcriterion': search_by.value,
+                'sortcriterion': sort_by.value,
+                'type': variable_type.value,
+                'pagelength': result_count
+            }
+            # Build the query path
+            _path = self._service_url + '/variables2statistic'
+            return await tools.get_parsed_response(_path, _param, Catalogue.VariableResponse)
             
