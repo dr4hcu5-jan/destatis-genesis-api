@@ -884,4 +884,40 @@ class AsyncGENESISWrapper:
             # Build the query path
             _path = self._service_url + '/variables2statistic'
             return await tools.get_parsed_response(_path, _param, Catalogue.VariableResponse)
+    
+    class __Data:
+        def __init__(
+                self,
+                username: str,
+                password: SecretStr,
+                language: GENESISLanguage = GENESISLanguage.GERMAN
+        ):
+            """Create a new part wrapper for the methods listed in the Data (2.5) section
             
+            :param username: The username which is used to access the database
+            :param password: The password which is used to access the database
+            :param language: The language used in responses by the database
+            """
+            # Check that the username is not None
+            if not username:
+                raise ValueError('There was no username supplied during the creation of the '
+                                 'section wrapper')
+            if not len(username) == 10:
+                raise ValueError('The username has not the required length of 10 characters')
+            # Check that a password is supplied
+            if not password:
+                raise ValueError('There was no password supplied during the creation of the '
+                                 'section wrapper')
+            # Check that the password is between 10 and 20 characters long
+            if not 10 <= len(password) <= 20:
+                raise ValueError('The password has not the required length of at least 10 '
+                                 'characters and 20 characters')
+            # Save the service path
+            self._service_path = '/data'
+            # Create the base parameters
+            self._base_parameter = {
+                'username': username,
+                'password': password.get_secret_value(),
+                'language': language.value
+            }
+                
