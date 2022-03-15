@@ -1,1 +1,3 @@
 # DESTATIS GENESIS API Wrapper
+[![CodeQL](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/code-analysis.yaml/badge.svg)](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/code-analysis.yaml)
+[![OSSAR](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/ossar.yaml/badge.svg)](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/ossar.yaml)
