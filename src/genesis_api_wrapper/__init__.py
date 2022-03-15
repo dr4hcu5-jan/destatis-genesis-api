@@ -10,7 +10,7 @@ from .enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobC
 from .responses import *
 
 # Create a logger for the whole module
-logger = logging.getLogger('DESTATIS-GENESIS')
+logger = logging.getLogger('genesis_api_wrapper')
 """The logger which is used in this module"""
 
 
