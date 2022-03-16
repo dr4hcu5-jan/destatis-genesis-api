@@ -1289,7 +1289,8 @@ class AsyncGENESISWrapper:
                 # Cube settings
                 values: bool = True,
                 metadata: bool = True,
-                additional_metadata: bool = False
+                additional_metadata: bool = False,
+                time_slices: int = None
         ) -> dict:
             """Get a datacube embedded into an dictionary
             
@@ -1341,6 +1342,8 @@ class AsyncGENESISWrapper:
             :type metadata: bool, optional
             :param additional_metadata: Should additional metadata be returned, defaults to `False`
             :type additional_metadata: bool, optional
+            :param time_slices: The number of time slices into which the data shall be accumulated
+            :type time_slices: int, optional
             :return: The csv embedded in the response body
             :rtype: dict
             """
