@@ -1,12 +1,15 @@
 """Wrapper for the JSON API of the DESTATIS GENESIS database"""
 import logging
+from os import PathLike
+from typing import Union
 
 from pydantic import SecretStr
 
 from . import tools
 from .enums import GENESISLanguage, GENESISCategory, GENESISJobType, GENESISJobCriteria, \
     GENESISObjectType, GENESISStatisticCriteria, GENESISArea, GENESISTableCriteria, \
-    GENESISValueCriteria, GENESISVariableCriteria, GENESISVariableType
+    GENESISValueCriteria, GENESISVariableCriteria, GENESISVariableType, GENESISChartType, \
+    GENESISImageSize
 from .responses import *
 
 # Create a logger for the whole module
@@ -58,6 +61,8 @@ class AsyncGENESISWrapper:
         """Methods in the `Find` part of the official API documentation"""
         self.catalogue: AsyncGENESISWrapper.Catalogue = self.Catalogue(username, password, language)
         """Methods in the `Catalogue` part of the official API documentation"""
+        self.data: AsyncGENESISWrapper.Data = self.Data(username, password, language)
+        """Methods in the `Data` part of the official API documentation"""
     
     class HelloWorld:
         """All methods from the HelloWorld section of the API documentation"""
@@ -888,7 +893,7 @@ class AsyncGENESISWrapper:
         def __init__(
                 self,
                 username: str,
-                password: SecretStr,
+                password: str,
                 language: GENESISLanguage = GENESISLanguage.GERMAN
         ):
             """Create a new part wrapper for the methods listed in the Data (2.5) section
@@ -916,7 +921,212 @@ class AsyncGENESISWrapper:
             # Create the base parameters
             self._base_parameter = {
                 'username': username,
-                'password': password.get_secret_value(),
+                'password': password,
                 'language': language.value
             }
-                
+            
+        async def chart2result(
+                self,
+                # Selection Specifiers
+                object_name: str,
+                # Chart Settings
+                chart_type: GENESISChartType.LINE_CHART,
+                image_size: GENESISImageSize = GENESISImageSize.LEVEL_3,
+                draw_points_in_line_chart: bool = False,
+                compress_y_axis: bool = False,
+                show_top_values_first: bool = False,
+                # Object Storage Settings
+                object_location: GENESISArea = GENESISArea.ALL
+        ) -> Union[dict, PathLike]:
+            """Download a graph for a result table
+            
+            The file will be downloaded into a local temporary path. The path to the image will be
+            returned instead of the whole image
+            
+            :param object_location: The location in which the object is stored [optional]
+            :param object_name: The identifier of the result table [required]
+            :type object_name: str
+            :param chart_type: The type of chart which shall be downloaded [required]
+            :type chart_type: GENESISChartType
+            :param image_size: The size of the image which shall be downloaded [optional,
+                default 1024x768 pixels]
+            :type image_size: GENESISImageSize
+            :param draw_points_in_line_chart: Highlight data points in a line chart [optional,
+                only allowed if chart_type is line chart]
+            :type draw_points_in_line_chart: bool
+            :param compress_y_axis: Compress the y-axis to fit the values
+            :type compress_y_axis: bool
+            :param show_top_values_first:
+                When using a Pie Chart:
+                    Display the top five (5) values and group all other values into one extra slice
+                When using any other type of chart:
+                    Show the top four (4) values from the dataset instead of the first four values
+            :type show_top_values_first: bool
+            :return: The path to the image or the response from the server if there is an error
+            """
+            # Check if the object name is set correctly
+            if not object_name:
+                raise ValueError('The object_name is a required parameter')
+            # Check if the length of the object name is between 1 and 15 characters
+            if not (1 <= len(object_name.strip()) <= 15):
+                raise ValueError('The object_name may only contain between 1 and 15 characters')
+            # Validate that a chart type is set:
+            if chart_type is None:
+                raise ValueError('The chart_type is a required parameter')
+            # Check that draw_points_in_line_chart is only working if the chart type is line chart
+            if draw_points_in_line_chart and chart_type != GENESISChartType.LINE_CHART:
+                raise ValueError('The parameter draw_points_in_line_chart is only supported for '
+                                 'GENESISChartType.LINE_CHART')
+            # Build the query parameters
+            query_parameter = self._base_parameter | {
+                'name': object_name,
+                'area': object_location.value,
+                'charttype': chart_type.value,
+                'drawpoints': str(draw_points_in_line_chart),
+                'zoom': image_size.value,
+                'focus': str(compress_y_axis),
+                'tops': str(show_top_values_first),
+                'format': 'png'
+            }
+            # Build the query path
+            query_path = self._service_path + '/chart2result'
+            # Download the image
+            return await tools.download_image_from_database(
+                query_path, query_parameter
+            )
+        
+        async def chart2table(
+                self,
+                object_name: str,
+                # Selection Specifier
+                object_location: GENESISArea = GENESISArea.ALL,
+                updated_after: Optional[datetime] = None,
+                start_year: Optional[str] = None,
+                end_year: Optional[str] = None,
+                region_code: Optional[str] = None,
+                region_key: Optional[str] = None,
+                # Data Classifiers
+                classifying_code_1: Optional[str] = None,
+                classifying_key_1: Optional[Union[str, list[str]]] = None,
+                classifying_code_2: Optional[str] = None,
+                classifying_key_2: Optional[Union[str, list[str]]] = None,
+                classifying_code_3: Optional[str] = None,
+                classifying_key_3: Optional[Union[str, list[str]]] = None,
+                # Chart settings:
+                chart_type: GENESISChartType = GENESISChartType.LINE_CHART,
+                image_size: GENESISImageSize = GENESISImageSize.LEVEL_3,
+                draw_points_in_line_chart: bool = False,
+                compress_y_axis: bool = False,
+                show_top_values_first: bool = False,
+                time_slices: int = None
+        ) -> Union[dict, PathLike]:
+            """Download a graph for a table
+            
+            The image of the graph will be downloaded into a temporary directory and the path to
+            the image will be returned
+            
+            :param object_name: The identifier of the table [required, 1-15 characters]
+            :type object_name: str
+            :param object_location: The location in which the table is stored, defaults to
+                :attr:`~enums.GENESISObjectLocation.ALL`
+            :type object_location: str, optional
+            :param updated_after: Time after which the table needs to have been updated to be
+                returned, defaults to :attr:`None`
+            :type updated_after: datetime, optional
+            :param start_year: Data starting from this year will be selected for the chart ,
+                defaults to :attr:`None`
+            :type start_year: str, optional
+            :param end_year: Data after this year will be excluded for the chart, defaults to
+                :attr:`None`
+            :type end_year: str, optional
+            :param region_code: Code of the regional classifier which shall be used to limit the
+                regional component of the data, defaults to :attr:`None`
+            :type region_code: str, optional
+            :param region_key: The official municipality key (AGS) specifying from which
+                municipalities the data shall be taken from, defaults to :attr:`None`
+            :type region_key: str, optional
+            :param classifying_code_1: Code of the classificator which shall be used to limit the
+                data selection further, defaults to :attr:`None`
+            :type classifying_code_1: str, optional
+            :param classifying_key_1: Code of the classificator value which shall be used to
+                limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_1: str, optional
+            :param classifying_code_2: Code of the classificator which shall be used to limit the
+                data selection further, defaults to :attr:`None`
+            :type classifying_code_2: str, optional
+            :param classifying_key_2: Code of the classificator value which shall be used to
+                limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_2: str, optional
+            :param classifying_code_3: Code of the classificator which shall be used to limit the
+                data selection further, defaults to :attr:`None`
+            :type classifying_code_3: str, optional
+            :param classifying_key_3: Code of the classificator value which shall be used to
+                limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_3: str, optional
+            :param chart_type: The type of chart which shall be downloaded, defaults to
+                :attr:`~enums.GENESISChartType.LINE_CHART`
+            :type chart_type: GENESISChartType, optional
+            :param image_size: The size of the image which shall be downloaded, defaults to
+                :attr:`~enums.GENESISImageSize.LEVEL3`
+            :type image_size: GENESISImageSize, optional
+            :param draw_points_in_line_chart: Highlight the data points in a line chart,
+                only allowed if chart_type is :attr:`enums.GENESISChartType.LINE_CHART`
+            :type draw_points_in_line_chart: bool, optional
+            :param compress_y_axis: Compress the y-axis to fit the values
+            :type compress_y_axis: bool, optional
+            :param show_top_values_first:
+                When using :attr:`enums.GENESISChartType.PIE_CHART` as chart_type:
+                    Display the top five (5) values as single slices and group all other slices into
+                    one other slice.
+                When using any other :class:`enums.GENESISChartType`:
+                    Display the top four (4) values instead of the first four (4) values
+            :type show_top_values_first: bool, optional
+            :param time_slices: The number of time slices into which the data shall be accumulated
+            :type time_slices: int, optional
+            :return: The path to the image or the file downloaded from the server.
+            :rtype: `typing.Union[PathLike, dict]`
+            """
+            # Check if the table name was set correctly
+            if not object_name:
+                raise ValueError('The object_name is a required parameter')
+            if not (1 <= len(object_name.strip()) <= 15):
+                raise ValueError('The object_name may only contain between 1 and 15 characters')
+            # Check if any illegal parameter combination was set
+            if draw_points_in_line_chart and chart_type is not GENESISChartType.LINE_CHART:
+                raise ValueError('The parameter draw_points_in_line_chart is only supported for '
+                                 'GENESISChartType.LINE_CHART')
+            # Convert the times to string
+            _time_string = None if updated_after is None else updated_after.strftime(
+                '%d.%m.%Y %H:%M:%Sh'
+            )
+            # Build the query parameters
+            query_parameter = self._base_parameter | {
+                'name':                 object_name,
+                'area':                 object_location.value,
+                'charttype':            chart_type.value,
+                'drawpoints':           str(draw_points_in_line_chart),
+                'zoom':                 image_size.value,
+                'focus':                str(compress_y_axis),
+                'tops':                 str(show_top_values_first),
+                'startyear':            start_year,
+                'endyear':              end_year,
+                'timeslices':           time_slices,
+                'regionalvariable':     region_code,
+                'regionalkey':          region_key,
+                'classifyingvariable1': classifying_code_1,
+                'classifyingkey1':      classifying_key_1,
+                'classifyingvariable2': classifying_code_2,
+                'classifyingkey2':      classifying_key_2,
+                'classifyingvariable3': classifying_code_3,
+                'classifyingkey3':      classifying_key_3,
+                'format':               'png',
+                'stand':                _time_string
+            }
+            # Build the query path
+            query_path = self._service_path + '/chart2table'
+            # Download the image
+            return await tools.download_image_from_database(
+                query_path, query_parameter
+            )
+            
+        

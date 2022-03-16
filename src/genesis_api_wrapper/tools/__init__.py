@@ -1,7 +1,12 @@
 """A collection of tools which are used and needed multiple times in this project"""
 import asyncio
 import logging
+import mimetypes
+import secrets
 import time
+import tempfile
+from os import PathLike
+from pathlib import Path
 from typing import TypeVar, Union, Type
 
 import aiohttp
@@ -99,3 +104,57 @@ async def get_parsed_response(
         logger.error('Error during parsing the response received from the database. '
                      'Printing response into terminal...')
         print(await get_raw_json_response(path, parameters))
+
+
+async def download_image_from_database(
+        query_path: str,
+        query_parameters: Optional[dict]
+) -> Union[dict, PathLike]:
+    """Download an image from the database
+    
+    This will try to download an image from the specified method with the specified parameters.
+    
+    If the response does not contain a valid content type for an image the response will be
+    returned as json (if the response is json parseable). If the response is not parseable the
+    response will be written to a file which has the file extension set by the content type
+    
+    :param query_path: The path that shall be queries
+    :type query_path: str
+    :param query_parameters: The parameters that shall be used for the query
+    :type query_parameters: dict
+    :return: The path to the image
+    """
+    # Check if a query path has been set
+    if not query_path:
+        raise ValueError('The query_path is a required parameter')
+    # Cleanup possible None values from the request
+    for key, value in dict(query_parameters).items():
+        if value is None:
+            del query_parameters[key]
+    # Create the url which will be called
+    url = 'https://www-genesis.destatis.de/genesisWS/rest/2020' + query_path
+    # Start downloading the image
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, params=query_parameters) as response:
+            # Check if the content type indicates a png image
+            if response.content_type == 'image/png':
+                _file_name = secrets.token_urlsafe(nbytes=32)
+                _file_location = tempfile.gettempdir()
+                _file_path = f'{_file_location}/{_file_name}.png'
+                with open(_file_path, 'wb') as file:
+                    async for _file_chunk in response.content.iter_chunked(128):
+                        file.write(_file_chunk)
+                    file.close()
+                return Path(_file_path)
+            elif response.content_type == 'application/json':
+                return await response.json()
+            else:
+                _file_ending = mimetypes.guess_extension(response.content_type)
+                _file_name = secrets.token_hex(nbytes=8)
+                _file_location = tempfile.gettempdir()
+                _file_path = f'{_file_location}/{_file_name}.{_file_ending}'
+                with open(_file_path, 'wb') as file:
+                    async for _file_chunk in response.content.iter_chunked(128):
+                        file.write(_file_chunk)
+                    file.close()
+                return Path(_file_path)

@@ -1,24 +1,24 @@
 """A package containing the enums used in the main code"""
-from enum import Enum
+from enum import Enum, IntEnum
 
 
 class GENESISLanguage(str, Enum):
     """The languages supported by the GENESIS API"""
-
+    
     GERMAN = 'de'
     ENGLISH = 'en'
 
 
 class GENESISCategory(str, Enum):
     """Categories which are available during the search"""
-
+    
     TABLES = 'tables'
     STATISTICS = 'statistics'
     DATA_CUBES = 'cubes'
     VARIABLES = 'variables'
     TIME_SERIES = 'time_series'
     ALL = 'all'
-    
+
 
 class GENESISJobType(str, Enum):
     """
@@ -30,7 +30,7 @@ class GENESISJobType(str, Enum):
     VALUE_RETRIEVAL = 'Werteabruf'
     CALCULATE_SUM_CUBES = 'Summenquader berechnen'
     CLEANUP_DATA_CUBES = 'Datenquader bereinigen'
-    
+
 
 class GENESISJobCriteria(str, Enum):
     """
@@ -60,7 +60,7 @@ class GENESISStatisticCriteria(str, Enum):
     
     CODE = 'Code'
     CONTENT = 'Inhalt'
-    
+
 
 class GENESISArea(str, Enum):
     """
@@ -81,7 +81,7 @@ class GENESISTableCriteria(str, Enum):
     
     CODE = 'Code'
     TOP = 'Top'
-    
+
 
 class GENESISValueCriteria(str, Enum):
     CODE = 'Code'
@@ -102,3 +102,28 @@ class GENESISVariableType(str, Enum):
     VALUE = 'wert'
     TEMPORAL = 'zeitlich'
     TIME_IDENTIFYING = 'zeitidentifizierend'
+
+
+class GENESISChartType(IntEnum):
+    """The different chart types supported by the database"""
+    
+    LINE_CHART = 0
+    BAR_CHART = 1
+    PIE_CHART = 2
+    POINT_CLOUD = 3
+
+
+class GENESISImageSize(IntEnum):
+    """The different image size levels"""
+    
+    LEVEL_0 = 0
+    """Image resolution of: 480x320 pixels"""
+    
+    LEVEL_1 = 1
+    """Image resolution of: 640x480 pixels"""
+    
+    LEVEL_2 = 2
+    """Image resolution of: 800x600 pixels"""
+    
+    LEVEL_3 = 3
+    """Image resolution of: 1024x768 pixels (recommended size)"""
