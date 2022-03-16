@@ -1,0 +1,10 @@
+genesis\_api\_wrapper.models package
+====================================
+
+Module contents
+---------------
+
+.. automodule:: genesis_api_wrapper.models
+   :members:
+   :undoc-members:
+   :show-inheritance:

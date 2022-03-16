@@ -1,0 +1,22 @@
+genesis\_api\_wrapper package
+=============================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   genesis_api_wrapper.enums
+   genesis_api_wrapper.exceptions
+   genesis_api_wrapper.models
+   genesis_api_wrapper.responses
+   genesis_api_wrapper.tools
+
+Module contents
+---------------
+
+.. automodule:: genesis_api_wrapper
+   :members:
+   :undoc-members:
+   :show-inheritance:

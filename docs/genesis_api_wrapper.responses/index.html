@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>genesis_api_wrapper.responses package &mdash; GENESIS Database RESTful API Wrapper  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="genesis_api_wrapper.responses.internals package" href="../genesis_api_wrapper.responses.internals/" />
+    <link rel="prev" title="genesis_api_wrapper.models package" href="../genesis_api_wrapper.models/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> GENESIS Database RESTful API Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../modules/">genesis_api_wrapper</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../genesis_api_wrapper/">genesis_api_wrapper package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../genesis_api_wrapper/#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.enums/">genesis_api_wrapper.enums package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.exceptions/">genesis_api_wrapper.exceptions package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.models/">genesis_api_wrapper.models package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">genesis_api_wrapper.responses package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.tools/">genesis_api_wrapper.tools package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper/#module-genesis_api_wrapper">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">GENESIS Database RESTful API Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../modules/">genesis_api_wrapper</a> &raquo;</li>
+          <li><a href="../genesis_api_wrapper/">genesis_api_wrapper package</a> &raquo;</li>
+      <li>genesis_api_wrapper.responses package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/genesis_api_wrapper.responses.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="genesis-api-wrapper-responses-package">
+<h1>genesis_api_wrapper.responses package<a class="headerlink" href="#genesis-api-wrapper-responses-package" title="Permalink to this headline"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/">genesis_api_wrapper.responses.internals package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#module-genesis_api_wrapper.responses.internals">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-genesis_api_wrapper.responses">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-genesis_api_wrapper.responses" title="Permalink to this headline"></a></h2>
+<p>Responses which are received from the GENESIS database</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.BaseResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.responses.</span></span><span class="sig-name descname"><span class="pre">BaseResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.BaseResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.BaseModel" title="genesis_api_wrapper.models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.models.BaseModel</span></code></a></p>
+<p>A Basic Response which contains data that is always sent for every request</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.BaseResponse.copyright_notice">
+<span class="sig-name descname"><span class="pre">copyright_notice</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#genesis_api_wrapper.responses.BaseResponse.copyright_notice" title="Permalink to this definition"></a></dt>
+<dd><p>A copyright notice indicating license information and who holds the copyright for the
+requested data</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.BaseResponse.request_parameter">
+<span class="sig-name descname"><span class="pre">request_parameter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></em><a class="headerlink" href="#genesis_api_wrapper.responses.BaseResponse.request_parameter" title="Permalink to this definition"></a></dt>
+<dd><p>The request parameter which where sent to the server</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.BaseResponse.request_status">
+<span class="sig-name descname"><span class="pre">request_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></em><a class="headerlink" href="#genesis_api_wrapper.responses.BaseResponse.request_status" title="Permalink to this definition"></a></dt>
+<dd><p>Status information about the request</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.BaseResponse.service_identification">
+<span class="sig-name descname"><span class="pre">service_identification</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></em><a class="headerlink" href="#genesis_api_wrapper.responses.BaseResponse.service_identification" title="Permalink to this definition"></a></dt>
+<dd><p>Information about the called service</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.responses.</span></span><span class="sig-name descname"><span class="pre">Catalogue</span></span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Responses for requests in the /catalogue resources</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.CubeResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CubeResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.CubeInformation" title="genesis_api_wrapper.models.CubeInformation"><span class="pre">genesis_api_wrapper.models.CubeInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.CubeResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<p>A response for requesting lists for cubes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.CubeResponse.cube_list">
+<span class="sig-name descname"><span class="pre">cube_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.CubeInformation" title="genesis_api_wrapper.models.CubeInformation"><span class="pre">genesis_api_wrapper.models.CubeInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.CubeResponse.cube_list" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.JobResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">JobResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.JobInformation" title="genesis_api_wrapper.models.JobInformation"><span class="pre">genesis_api_wrapper.models.JobInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.JobResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<p>A response for getting a list of Jobs (e.g. getting big tables)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.JobResponse.job_list">
+<span class="sig-name descname"><span class="pre">job_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.JobInformation" title="genesis_api_wrapper.models.JobInformation"><span class="pre">genesis_api_wrapper.models.JobInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.JobResponse.job_list" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.ModifiedDataResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ModifiedDataResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.ModifiedDataInformation" title="genesis_api_wrapper.models.ModifiedDataInformation"><span class="pre">genesis_api_wrapper.models.ModifiedDataInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.ModifiedDataResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<p>A response for getting a list of changes made to the database entries</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.ModifiedDataResponse.changed_objects">
+<span class="sig-name descname"><span class="pre">changed_objects</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.ModifiedDataInformation" title="genesis_api_wrapper.models.ModifiedDataInformation"><span class="pre">genesis_api_wrapper.models.ModifiedDataInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.ModifiedDataResponse.changed_objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.ModifiedDataResponse.remove_none_values_from_list">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove_none_values_from_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.ModifiedDataInformation" title="genesis_api_wrapper.models.ModifiedDataInformation"><span class="pre">genesis_api_wrapper.models.ModifiedDataInformation</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.ModifiedDataResponse.remove_none_values_from_list" title="Permalink to this definition"></a></dt>
+<dd><p>Removed the None entries from the list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – The list of data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.QualitySignsResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QualitySignsResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.QualitySignInformation" title="genesis_api_wrapper.models.QualitySignInformation"><span class="pre">genesis_api_wrapper.models.QualitySignInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.QualitySignsResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<p>A response containing the currently active quality signs</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.QualitySignsResponse.quality_signs">
+<span class="sig-name descname"><span class="pre">quality_signs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.QualitySignInformation" title="genesis_api_wrapper.models.QualitySignInformation"><span class="pre">genesis_api_wrapper.models.QualitySignInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.QualitySignsResponse.quality_signs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.ResultTableResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResultTableResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.ResultTableInformation" title="genesis_api_wrapper.models.ResultTableInformation"><span class="pre">genesis_api_wrapper.models.ResultTableInformation</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.ResultTableResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<p>A response containing information about the requested result tables</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.ResultTableResponse.result_tables">
+<span class="sig-name descname"><span class="pre">result_tables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.ResultTableInformation" title="genesis_api_wrapper.models.ResultTableInformation"><span class="pre">genesis_api_wrapper.models.ResultTableInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.ResultTableResponse.result_tables" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.StatisticsResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StatisticsResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.StatisticInformation" title="genesis_api_wrapper.models.StatisticInformation"><span class="pre">genesis_api_wrapper.models.StatisticInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.StatisticsResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<p>A response containing the statistics matching the request made</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.StatisticsResponse.statistics">
+<span class="sig-name descname"><span class="pre">statistics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.StatisticInformation" title="genesis_api_wrapper.models.StatisticInformation"><span class="pre">genesis_api_wrapper.models.StatisticInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.StatisticsResponse.statistics" title="Permalink to this definition"></a></dt>
+<dd><p>Information about the found statistics</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.TableResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TableResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TableInformation" title="genesis_api_wrapper.models.TableInformation"><span class="pre">genesis_api_wrapper.models.TableInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.TableResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<p>A response containing the statistics matching the request made</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.TableResponse.statistics">
+<span class="sig-name descname"><span class="pre">statistics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TableInformation" title="genesis_api_wrapper.models.TableInformation"><span class="pre">genesis_api_wrapper.models.TableInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.TableResponse.statistics" title="Permalink to this definition"></a></dt>
+<dd><p>Information about the found tables</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.TermResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TermResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TermInformation" title="genesis_api_wrapper.models.TermInformation"><span class="pre">genesis_api_wrapper.models.TermInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.TermResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<p>A response containing a list of terms</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.TermResponse.terms">
+<span class="sig-name descname"><span class="pre">terms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TermInformation" title="genesis_api_wrapper.models.TermInformation"><span class="pre">genesis_api_wrapper.models.TermInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.TermResponse.terms" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.TimeseriesResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TimeseriesResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TimeSeriesInformation" title="genesis_api_wrapper.models.TimeSeriesInformation"><span class="pre">genesis_api_wrapper.models.TimeSeriesInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.TimeseriesResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.TimeseriesResponse.time_series">
+<span class="sig-name descname"><span class="pre">time_series</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TimeSeriesInformation" title="genesis_api_wrapper.models.TimeSeriesInformation"><span class="pre">genesis_api_wrapper.models.TimeSeriesInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.TimeseriesResponse.time_series" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.ValueResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ValueResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.ValueInformation" title="genesis_api_wrapper.models.ValueInformation"><span class="pre">genesis_api_wrapper.models.ValueInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.ValueResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.ValueResponse.time_series">
+<span class="sig-name descname"><span class="pre">time_series</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.ValueInformation" title="genesis_api_wrapper.models.ValueInformation"><span class="pre">genesis_api_wrapper.models.ValueInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.ValueResponse.time_series" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.VariableResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VariableResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">List</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.VariableInformation" title="genesis_api_wrapper.models.VariableInformation"><span class="pre">genesis_api_wrapper.models.VariableInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.VariableResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Catalogue.VariableResponse.variables">
+<span class="sig-name descname"><span class="pre">variables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.VariableInformation" title="genesis_api_wrapper.models.VariableInformation"><span class="pre">genesis_api_wrapper.models.VariableInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Catalogue.VariableResponse.variables" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Find">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.responses.</span></span><span class="sig-name descname"><span class="pre">Find</span></span><a class="headerlink" href="#genesis_api_wrapper.responses.Find" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Responses for requests in the /find resources</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Find.FindResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FindResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ident</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.ServiceIdent" title="genesis_api_wrapper.responses.internals.ServiceIdent"><span class="pre">genesis_api_wrapper.responses.internals.ServiceIdent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.Status" title="genesis_api_wrapper.responses.internals.Status"><span class="pre">genesis_api_wrapper.responses.internals.Status</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#genesis_api_wrapper.responses.internals.RequestParameter" title="genesis_api_wrapper.responses.internals.RequestParameter"><span class="pre">genesis_api_wrapper.responses.internals.RequestParameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">Copyright</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cubes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.CubeInformation" title="genesis_api_wrapper.models.CubeInformation"><span class="pre">genesis_api_wrapper.models.CubeInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Statistics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.StatisticInformation" title="genesis_api_wrapper.models.StatisticInformation"><span class="pre">genesis_api_wrapper.models.StatisticInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TableInformation" title="genesis_api_wrapper.models.TableInformation"><span class="pre">genesis_api_wrapper.models.TableInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Timeseries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TimeSeriesInformation" title="genesis_api_wrapper.models.TimeSeriesInformation"><span class="pre">genesis_api_wrapper.models.TimeSeriesInformation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.VariableInformation" title="genesis_api_wrapper.models.VariableInformation"><span class="pre">genesis_api_wrapper.models.VariableInformation</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.Find.FindResult" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#genesis_api_wrapper.responses.BaseResponse" title="genesis_api_wrapper.responses.BaseResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.responses.BaseResponse</span></code></a></p>
+<p>The contents of a find request</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Find.FindResult.data_cubes">
+<span class="sig-name descname"><span class="pre">data_cubes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.CubeInformation" title="genesis_api_wrapper.models.CubeInformation"><span class="pre">genesis_api_wrapper.models.CubeInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Find.FindResult.data_cubes" title="Permalink to this definition"></a></dt>
+<dd><p>A list of data cubes which matched the find request</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Find.FindResult.statistics">
+<span class="sig-name descname"><span class="pre">statistics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.StatisticInformation" title="genesis_api_wrapper.models.StatisticInformation"><span class="pre">genesis_api_wrapper.models.StatisticInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Find.FindResult.statistics" title="Permalink to this definition"></a></dt>
+<dd><p>A list of statistics which matched with the find request</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Find.FindResult.tables">
+<span class="sig-name descname"><span class="pre">tables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TableInformation" title="genesis_api_wrapper.models.TableInformation"><span class="pre">genesis_api_wrapper.models.TableInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Find.FindResult.tables" title="Permalink to this definition"></a></dt>
+<dd><p>A list of tables which matched with the find request</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Find.FindResult.time_series">
+<span class="sig-name descname"><span class="pre">time_series</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.TimeSeriesInformation" title="genesis_api_wrapper.models.TimeSeriesInformation"><span class="pre">genesis_api_wrapper.models.TimeSeriesInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Find.FindResult.time_series" title="Permalink to this definition"></a></dt>
+<dd><p>A list of time series which matched with the find request</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.Find.FindResult.variables">
+<span class="sig-name descname"><span class="pre">variables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.VariableInformation" title="genesis_api_wrapper.models.VariableInformation"><span class="pre">genesis_api_wrapper.models.VariableInformation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#genesis_api_wrapper.responses.Find.FindResult.variables" title="Permalink to this definition"></a></dt>
+<dd><p>A list of variables which matched with the find request</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.HelloWorld">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.responses.</span></span><span class="sig-name descname"><span class="pre">HelloWorld</span></span><a class="headerlink" href="#genesis_api_wrapper.responses.HelloWorld" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LoginCheckResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.BaseModel" title="genesis_api_wrapper.models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.models.BaseModel</span></code></a></p>
+<p>The contents of the response after requesting the “logincheck” method on the api</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse.status">
+<span class="sig-name descname"><span class="pre">status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse.status" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse.username">
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse.username" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">WhoAmIResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_agent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../genesis_api_wrapper.models/#genesis_api_wrapper.models.BaseModel" title="genesis_api_wrapper.models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">genesis_api_wrapper.models.BaseModel</span></code></a></p>
+<p>The contents of the response after requesting the “whoami” method on the api</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse.user_agent">
+<span class="sig-name descname"><span class="pre">user_agent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse.user_agent" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse.user_ip">
+<span class="sig-name descname"><span class="pre">user_ip</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse.user_ip" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../genesis_api_wrapper.models/" class="btn btn-neutral float-left" title="genesis_api_wrapper.models package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../genesis_api_wrapper.responses.internals/" class="btn btn-neutral float-right" title="genesis_api_wrapper.responses.internals package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jan Eike Suchard.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

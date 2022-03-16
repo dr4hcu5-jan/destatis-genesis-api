@@ -1,0 +1,18 @@
+genesis\_api\_wrapper.responses package
+=======================================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   genesis_api_wrapper.responses.internals
+
+Module contents
+---------------
+
+.. automodule:: genesis_api_wrapper.responses
+   :members:
+   :undoc-members:
+   :show-inheritance:

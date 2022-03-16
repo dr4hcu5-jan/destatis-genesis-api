@@ -52,14 +52,14 @@ class AsyncGENESISWrapper:
             'password': self.__password.get_secret_value(),
             'language': self.__language.value
         }
-        self.hello_world: AsyncGENESISWrapper.__HelloWorld = self.__HelloWorld(username, password, language)
+        self.hello_world: AsyncGENESISWrapper.HelloWorld = self.HelloWorld(username, password, language)
         """Methods in the `Hello World` part of the official API documentation"""
-        self.find: AsyncGENESISWrapper.__Find = self.__Find(username, password, language)
+        self.find: AsyncGENESISWrapper.Find = self.Find(username, password, language)
         """Methods in the `Find` part of the official API documentation"""
-        self.catalogue: AsyncGENESISWrapper.__Catalogue = self.__Catalogue(username, password, language)
+        self.catalogue: AsyncGENESISWrapper.Catalogue = self.Catalogue(username, password, language)
         """Methods in the `Catalogue` part of the official API documentation"""
     
-    class __HelloWorld:
+    class HelloWorld:
         """All methods from the HelloWorld section of the API documentation"""
 
         def __init__(
@@ -71,12 +71,12 @@ class AsyncGENESISWrapper:
             """Create a new HelloWorld method wrapper
 
             :param username: The username which was assigned during the creation of an account (
-            length: 10 characters)
+                length: 10 characters)
             :type username: str
             :param password: The password for the username (length: 10-20 characters)
             :type password: SecretStr
             :param language: The language which should be used in the response bodies, defaults to
-            German
+                German
             :type language: GENESISLanguage
             """
             # Check if the username consists of 10 characters
@@ -102,8 +102,7 @@ class AsyncGENESISWrapper:
             """Get information about the client data transmitted to the GENESIS database
             
             :return: A Response containing the IP Address and the User-Agent for the request that
-            has
-                been executed
+                has been executed
             :rtype: WhoAmIResponse
             """
             return await tools.get_parsed_response('/helloworld/whoami', None,
@@ -121,7 +120,7 @@ class AsyncGENESISWrapper:
                 HelloWorld.LoginCheckResponse
             )
     
-    class __Find:
+    class Find:
         """Methods for searching for objects"""
     
         def __init__(
@@ -133,12 +132,12 @@ class AsyncGENESISWrapper:
             """Create a new Find section method wrapper
 
             :param username: The username which was assigned during the creation of an account (
-            length: 10 characters)
+                length: 10 characters)
             :type username: str
             :param password: The password for the username (length: 10-20 characters)
             :type password: SecretStr
             :param language: The language which should be used in the response bodies, defaults to
-            German
+                German
             :type language: GENESISLanguage
             """
             # Check if the username consists of 10 characters
@@ -179,7 +178,7 @@ class AsyncGENESISWrapper:
             }
             return await tools.get_parsed_response('/find/find', _params, Find.FindResult)
     
-    class __Catalogue:
+    class Catalogue:
         """Methods for listing objects"""
     
         def __init__(
@@ -191,12 +190,12 @@ class AsyncGENESISWrapper:
             """Create a new Find section method wrapper
 
             :param username: The username which was assigned during the creation of an account (
-            length: 10 characters)
+                length: 10 characters)
             :type username: str
             :param password: The password for the username (length: 10-20 characters)
             :type password: SecretStr
             :param language: The language which should be used in the response bodies, defaults to
-            German
+                German
             :type language: GENESISLanguage
             """
             # Check if the username consists of 10 characters
@@ -226,7 +225,7 @@ class AsyncGENESISWrapper:
             """Get a list of data cubes matching the selector (PREMIUM ACCOUNTS ONLY)
             
             :param selection: The code of the data cube. You may use a star (*) to allow wild
-            carding
+                carding
             :param object_area: The location of the object
             :param results: The maximum items which are received from the database
             :return: A list of information about the found data cubes
@@ -408,13 +407,13 @@ class AsyncGENESISWrapper:
         ) -> Catalogue.StatisticsResponse:
             """Get a list of statistics matching the supplied parameters
             
-            :param selector: The filter which is applied to the field selected by ``search_by``
+            :param selector: The filter which is applied to the field selected by `search_by`
             :type selector: str
             :param search_by: The field on which the selector shall be applied to, defaults to
-                ``GENESISStatisticCriteria.Code``
+                `GENESISStatisticCriteria.Code`
             :type search_by: GENESISStatisticCriteria
             :param sort_by: Sort the results by the field, defaults to
-                ``GENESISStatisticCriteria.Code``
+                `GENESISStatisticCriteria.Code`
             :type sort_by: GENESISStatisticCriteria
             :param result_count: The number of results that shall be returned
             :type result_count: int
@@ -714,11 +713,11 @@ class AsyncGENESISWrapper:
             :param value_filter: The filter for the value identifications [optional, wildcards
                 allowed]
             :param object_location: The storage location which shall be used during the search [
-            optional, defaults to ``GENESISValueCriteria.CODE``]
+                optional, defaults to ``GENESISValueCriteria.CODE``]
             :param search_by: The criteria which is used in combination to the value_filter [
-            optional, defaults to ``GENESISValueCriteria.CODE``]
+                optional, defaults to ``GENESISValueCriteria.CODE``]
             :param sort_by: The criteria by which the results are sorted [optional, defaults to
-            ``GENESISValueCriteria.CODE``]
+                ``GENESISValueCriteria.CODE``]
             :param result_count: The number of results returned
             :return: A parsed response containing the list of values
             """
@@ -885,7 +884,7 @@ class AsyncGENESISWrapper:
             _path = self._service_url + '/variables2statistic'
             return await tools.get_parsed_response(_path, _param, Catalogue.VariableResponse)
     
-    class __Data:
+    class Data:
         def __init__(
                 self,
                 username: str,

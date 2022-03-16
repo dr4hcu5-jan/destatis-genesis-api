@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to GENESIS Database RESTful API Wrapper’s documentation! &mdash; GENESIS Database RESTful API Wrapper  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="#" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex/" />
+    <link rel="search" title="Search" href="search/" />
+    <link rel="next" title="genesis_api_wrapper" href="modules/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> GENESIS Database RESTful API Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/">genesis_api_wrapper</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">GENESIS Database RESTful API Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>Welcome to GENESIS Database RESTful API Wrapper’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-genesis-database-restful-api-wrapper-s-documentation">
+<h1>Welcome to GENESIS Database RESTful API Wrapper’s documentation!<a class="headerlink" href="#welcome-to-genesis-database-restful-api-wrapper-s-documentation" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="genesis-database-api-wrapper">
+<h2>GENESIS database API wrapper<a class="headerlink" href="#genesis-database-api-wrapper" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/j-suchard/destatis-genesis-api/actions/workflows/code-analysis.yaml"><img alt="CodeQL" src="https://github.com/j-suchard/destatis-genesis-api/actions/workflows/code-analysis.yaml/badge.svg" /></a>
+<a class="reference external" href="https://github.com/j-suchard/destatis-genesis-api/actions/workflows/ossar.yaml"><img alt="OSSAR" src="https://github.com/j-suchard/destatis-genesis-api/actions/workflows/ossar.yaml/badge.svg" /></a>
+<a class="reference external" href="https://github.com/j-suchard/destatis-genesis-api/actions/workflows/pylint.yaml"><img alt="Pylint" src="https://github.com/j-suchard/destatis-genesis-api/actions/workflows/pylint.yaml/badge.svg?branch=main" /></a></p>
+<p>This library offers a Python implementation of the RESTful API the GENESIS databases hosted by
+the DESTATIS (Federal Statistical Office of Germany).</p>
+<section id="credentials">
+<h3>Credentials<a class="headerlink" href="#credentials" title="Permalink to this headline"></a></h3>
+<p>To successfully use the GENESIS database instance of the DESTATIS you will need to create some
+credentials at the <a class="reference external" href="https://www-genesis.destatis.de/genesis/online?Menu=Registrierung#abreadcrumb">Registration Page</a></p>
+<blockquote>
+<div><p><em>Note</em>: Some services are only accessible for premium access users. Using methods of those
+services will result in an Error</p>
+</div></blockquote>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h3>
+<section id="general">
+<h4>General<a class="headerlink" href="#general" title="Permalink to this headline"></a></h4>
+<p>This wrapper is implemented in an asynchronous way. Meaning you will need to await your calls to
+the wrapper. If you are using the wrapper in a synchronous application you will need to work
+with <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> and their event loops.</p>
+<details><summary>Synchronous Usage Example</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">genesis_api_wrapper</span> <span class="kn">import</span> <span class="n">AsyncGENESISWrapper</span>
+
+<span class="c1"># Create a new wrapper with your credentials</span>
+<span class="n">_wrapper</span> <span class="o">=</span> <span class="n">AsyncGENESISWrapper</span><span class="p">(</span>
+    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;&lt;&lt;your-username-here&gt;&gt;&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;&lt;&lt;your-password-here&gt;&gt;&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Get the current event loop</span>
+<span class="n">_loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+
+<span class="c1"># Execute a call in the loop which checks your credentials</span>
+<span class="n">call_result</span> <span class="o">=</span> <span class="n">_loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">_wrapper</span><span class="o">.</span><span class="n">hello_world</span><span class="o">.</span><span class="n">login_check</span><span class="p">())</span>
+</pre></div>
+</div>
+</details>
+</section>
+<section id="create-a-new-wrapper">
+<h4>Create a new wrapper<a class="headerlink" href="#create-a-new-wrapper" title="Permalink to this headline"></a></h4>
+<p>To be able to use the wrapper you first need to instantiate a new wrapper object.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">genesis_api_wrapper</span> <span class="kn">import</span> <span class="n">AsyncGENESISWrapper</span>
+
+<span class="c1"># Create a new instance of the wrapper and its functions</span>
+<span class="n">_wrapper</span> <span class="o">=</span> <span class="n">AsyncGENESISWrapper</span><span class="p">(</span>
+    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;&lt;&lt;your-username-here&gt;&gt;&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;&lt;&lt;your-password-here&gt;&gt;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>After instantiating the new wrapper you are able to access all methods under their respective
+service.</p>
+<details><summary>The following services are available:</summary>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Service Name</p></th>
+<th class="head"><p>Property of the wrapper</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Hello World</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hello_world</span></code></p></td>
+<td><p>Methods for testing the access to the API (User Agent Check/Credential Validation)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Find</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">find</span></code></p></td>
+<td><p>Methods for finding objects stored in the database (Tables, Statistics, Variables, Data Cubes and Timeseries)</p></td>
+</tr>
+<tr class="row-even"><td><p>Catalogue</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">catalogue</span></code></p></td>
+<td><p>Methods for listing objects</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
+<td><p>Methods for downloading data</p></td>
+</tr>
+<tr class="row-even"><td><p>Metadata</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">metadata</span></code></p></td>
+<td><p>Methods for downloading metadata about objects in the database</p></td>
+</tr>
+<tr class="row-odd"><td><p>Profile</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">profile</span></code></p></td>
+<td><p>Methods for maintaining the own user account</p></td>
+</tr>
+</tbody>
+</table>
+</details>
+</section>
+<section id="services">
+<h4>Services<a class="headerlink" href="#services" title="Permalink to this headline"></a></h4>
+<section id="helloworld">
+<h5>HelloWorld<a class="headerlink" href="#helloworld" title="Permalink to this headline"></a></h5>
+<p>This service includes methods for testing the general access to the GENESIS database and a method
+for checking the supplied credentials.</p>
+<details><summary>Methods</summary>
+<section id="who-am-i">
+<h6><code class="docutils literal notranslate"><span class="pre">who_am_i()</span></code><a class="headerlink" href="#who-am-i" title="Permalink to this headline"></a></h6>
+<p>This method may be used to check the access to the GENESIS database. This request does not send any
+credentials to the database.</p>
+</section>
+<section id="login-check">
+<h6><code class="docutils literal notranslate"><span class="pre">login_check()</span></code><a class="headerlink" href="#login-check" title="Permalink to this headline"></a></h6>
+<p>This method validates the supplied credentials and returns the response from the database</p>
+</details>
+</section>
+</section>
+<section id="find">
+<h5>Find<a class="headerlink" href="#find" title="Permalink to this headline"></a></h5>
+<p>This service includes methods for finding objects stored in the GENESIS database</p>
+<details><summary>Methods</summary>
+<section id="id1">
+<h6><code class="docutils literal notranslate"><span class="pre">find()</span></code><a class="headerlink" href="#id1" title="Permalink to this headline"></a></h6>
+<p>Get a list of objects which match the search term</p>
+</details></section>
+</section>
+</section>
+</section>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex/"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex/"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search/"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules/" class="btn btn-neutral float-right" title="genesis_api_wrapper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jan Eike Suchard.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

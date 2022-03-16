@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>genesis_api_wrapper package &mdash; GENESIS Database RESTful API Wrapper  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="genesis_api_wrapper.enums package" href="../genesis_api_wrapper.enums/" />
+    <link rel="prev" title="genesis_api_wrapper" href="../modules/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> GENESIS Database RESTful API Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../modules/">genesis_api_wrapper</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">genesis_api_wrapper package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.enums/">genesis_api_wrapper.enums package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.exceptions/">genesis_api_wrapper.exceptions package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.models/">genesis_api_wrapper.models package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.responses/">genesis_api_wrapper.responses package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.tools/">genesis_api_wrapper.tools package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-genesis_api_wrapper">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">GENESIS Database RESTful API Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../modules/">genesis_api_wrapper</a> &raquo;</li>
+      <li>genesis_api_wrapper package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/genesis_api_wrapper.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="genesis-api-wrapper-package">
+<h1>genesis_api_wrapper package<a class="headerlink" href="#genesis-api-wrapper-package" title="Permalink to this headline"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../genesis_api_wrapper.enums/">genesis_api_wrapper.enums package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../genesis_api_wrapper.enums/#module-genesis_api_wrapper.enums">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genesis_api_wrapper.exceptions/">genesis_api_wrapper.exceptions package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../genesis_api_wrapper.exceptions/#module-genesis_api_wrapper.exceptions">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genesis_api_wrapper.models/">genesis_api_wrapper.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../genesis_api_wrapper.models/#module-genesis_api_wrapper.models">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genesis_api_wrapper.responses/">genesis_api_wrapper.responses package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../genesis_api_wrapper.responses/#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/">genesis_api_wrapper.responses.internals package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.responses.internals/#module-genesis_api_wrapper.responses.internals">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../genesis_api_wrapper.responses/#module-genesis_api_wrapper.responses">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genesis_api_wrapper.tools/">genesis_api_wrapper.tools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../genesis_api_wrapper.tools/#module-genesis_api_wrapper.tools">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-genesis_api_wrapper">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-genesis_api_wrapper" title="Permalink to this headline"></a></h2>
+<p>Wrapper for the JSON API of the DESTATIS GENESIS database</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.</span></span><span class="sig-name descname"><span class="pre">AsyncGENESISWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISLanguage" title="genesis_api_wrapper.enums.GENESISLanguage"><span class="pre">genesis_api_wrapper.enums.GENESISLanguage</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISLanguage.GERMAN</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An asynchronous Wrapper for the GENESIS API</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Catalogue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISLanguage" title="genesis_api_wrapper.enums.GENESISLanguage"><span class="pre">genesis_api_wrapper.enums.GENESISLanguage</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISLanguage.GERMAN</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Methods for listing objects</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.cubes">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cubes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.CubeResponse" title="genesis_api_wrapper.responses.Catalogue.CubeResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.CubeResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.cubes" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of data cubes matching the selector (PREMIUM ACCOUNTS ONLY)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>selection</strong> – The code of the data cube. You may use a star (*) to allow wild
+carding</p></li>
+<li><p><strong>object_area</strong> – The location of the object</p></li>
+<li><p><strong>results</strong> – The maximum items which are received from the database</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of information about the found data cubes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.cubes2statistic">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cubes2statistic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">statistic_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">genesis_api_wrapper.ConstrainedStrValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cube_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">genesis_api_wrapper.ConstrainedStrValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.CubeResponse" title="genesis_api_wrapper.responses.Catalogue.CubeResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.CubeResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.cubes2statistic" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of data cubes of a statistic matching the selector (PREMIUM ACCOUNTS ONLY)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>statistic_name</strong> – The name of the statistic that shall be used</p></li>
+<li><p><strong>cube_code</strong> – The code of the data cube in this statistic, star based wild-carding
+is allowed</p></li>
+<li><p><strong>object_area</strong> – The area in which the object is stored</p></li>
+<li><p><strong>results</strong> – The number of maximum results that should be pulled</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of information about the data cubes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.cubes2variable">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cubes2variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">genesis_api_wrapper.ConstrainedStrValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cube_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">genesis_api_wrapper.ConstrainedStrValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.CubeResponse" title="genesis_api_wrapper.responses.Catalogue.CubeResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.CubeResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.cubes2variable" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of data cubes related to the specified variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> – The name of the variable, (max. 6 character)</p></li>
+<li><p><strong>cube_code</strong> – The code of a cube which is related to the variable, stars (*) may be
+used for wild carding</p></li>
+<li><p><strong>object_area</strong> – The area in which the object is stored</p></li>
+<li><p><strong>results</strong> – Number of results which are retrieved</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of the data cubes which are related to the variable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.jobs">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jobs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISJobCriteria" title="genesis_api_wrapper.enums.GENESISJobCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISJobCriteria</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISJobCriteria" title="genesis_api_wrapper.enums.GENESISJobCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISJobCriteria</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISJobType" title="genesis_api_wrapper.enums.GENESISJobType"><span class="pre">genesis_api_wrapper.enums.GENESISJobType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISJobType.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.JobResponse" title="genesis_api_wrapper.responses.Catalogue.JobResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.JobResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.jobs" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of jobs which were created</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>selector</strong> – Filter for the jobs to be displayed. (1-50 characters, stars (*)
+allowed for wildcarding)</p></li>
+<li><p><strong>search_by</strong> – The criteria on which the selector is applied to</p></li>
+<li><p><strong>sort_by</strong> – The criteria by which the result shall be listed</p></li>
+<li><p><strong>job_type</strong> – The type of job which is to be returned</p></li>
+<li><p><strong>results</strong> – The number of results that shall be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.modified_data">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">modified_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISObjectType" title="genesis_api_wrapper.enums.GENESISObjectType"><span class="pre">genesis_api_wrapper.enums.GENESISObjectType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISObjectType.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated_after</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime.date</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.ModifiedDataResponse" title="genesis_api_wrapper.responses.Catalogue.ModifiedDataResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.ModifiedDataResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.modified_data" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of modified objects</p>
+<p>DUE TO AN ERROR IN THE DATABASE THE <cite>results</cite> PARAMETER IS BEING IGNORED</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>selector</strong> (<em>str</em>) – Filter for the objects to be displayed. (1-15 characters, stars (*)
+allowed for wildcarding)</p></li>
+<li><p><strong>object_type</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISObjectType" title="genesis_api_wrapper.enums.GENESISObjectType"><em>GENESISObjectType</em></a>) – The type of object that shall be returned</p></li>
+<li><p><strong>updated_after</strong> (<em>date</em>) – The date after which the objects needed to be changed to be
+returned, defaults to one week (7 days)</p></li>
+<li><p><strong>results</strong> – The number of results that should be returned</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.quality_signs">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">quality_signs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.QualitySignsResponse" title="genesis_api_wrapper.responses.Catalogue.QualitySignsResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.QualitySignsResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.quality_signs" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of the quality signs used in the GENESIS database</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.results">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.ResultTableResponse" title="genesis_api_wrapper.responses.Catalogue.ResultTableResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.ResultTableResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.results" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of result tables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_area</strong> – The area in which the objects are saved</p></li>
+<li><p><strong>selector</strong> (<em>str</em>) – Filter for the result tables code, (1-15 characters, stars(*) allowed)</p></li>
+<li><p><strong>result_count</strong> – The number of results which should be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A List of information about the result tables</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.statistics">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISStatisticCriteria" title="genesis_api_wrapper.enums.GENESISStatisticCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISStatisticCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISStatisticCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISStatisticCriteria" title="genesis_api_wrapper.enums.GENESISStatisticCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISStatisticCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISStatisticCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.StatisticsResponse" title="genesis_api_wrapper.responses.Catalogue.StatisticsResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.StatisticsResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.statistics" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of statistics matching the supplied parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>selector</strong> (<em>str</em>) – The filter which is applied to the field selected by <cite>search_by</cite></p></li>
+<li><p><strong>search_by</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISStatisticCriteria" title="genesis_api_wrapper.enums.GENESISStatisticCriteria"><em>GENESISStatisticCriteria</em></a>) – The field on which the selector shall be applied to, defaults to
+<cite>GENESISStatisticCriteria.Code</cite></p></li>
+<li><p><strong>sort_by</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISStatisticCriteria" title="genesis_api_wrapper.enums.GENESISStatisticCriteria"><em>GENESISStatisticCriteria</em></a>) – Sort the results by the field, defaults to
+<cite>GENESISStatisticCriteria.Code</cite></p></li>
+<li><p><strong>result_count</strong> (<em>int</em>) – The number of results that shall be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response from the database</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.StatisticsResponse" title="genesis_api_wrapper.responses.Catalogue.StatisticsResponse">Catalogue.StatisticsResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.statistics2variable">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">statistics2variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statistic_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISStatisticCriteria" title="genesis_api_wrapper.enums.GENESISStatisticCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISStatisticCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISStatisticCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISStatisticCriteria" title="genesis_api_wrapper.enums.GENESISStatisticCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISStatisticCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISStatisticCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.statistics2variable" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of statistics which are referenced by the selected variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> (<em>str</em>) – The name of the variable [required]</p></li>
+<li><p><strong>statistic_selector</strong> (<em>str</em>) – Filter for the statistics by the code of them, [optional,
+stars allowed to wildcard, max. length 15]</p></li>
+<li><p><strong>search_by</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISStatisticCriteria" title="genesis_api_wrapper.enums.GENESISStatisticCriteria"><em>GENESISStatisticCriteria</em></a>) – The field on which the code shall be applied, [optional, defaults
+to <cite>GENESISStatisticCriteria.CODE</cite>]</p></li>
+<li><p><strong>sort_by</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISStatisticCriteria" title="genesis_api_wrapper.enums.GENESISStatisticCriteria"><em>GENESISStatisticCriteria</em></a>) – The field by which the results are to be sorted, [optional, defaults
+to <cite>GENESISStatisticCriteria.CODE</cite>]</p></li>
+<li><p><strong>object_area</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><em>GENESISArea</em></a>) – The area in which the object is stored</p></li>
+<li><p><strong>result_count</strong> (<em>int</em>) – The number of results which are returned by the request</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response returned by the server</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.tables">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISTableCriteria" title="genesis_api_wrapper.enums.GENESISTableCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISTableCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISTableCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.TableResponse" title="genesis_api_wrapper.responses.Catalogue.TableResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.TableResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.tables" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of tables matching the selector from the selected object area</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_selector</strong> – The code of the table [required, stars (*) allowed for wildcards]</p></li>
+<li><p><strong>object_area</strong> – The area in which the table is stored [defaults to ALL]</p></li>
+<li><p><strong>sort_by</strong> – The criteria by which the results shall be sorted [defaults to CODE]</p></li>
+<li><p><strong>result_count</strong> – The number of results that shall be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of tables matching the request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.tables2statistics">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tables2statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">statistics_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.TableResponse" title="genesis_api_wrapper.responses.Catalogue.TableResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.TableResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.tables2statistics" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of tables matching the table selector which are assigned to the</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>statistics_name</strong> – Name of the statistic [required, 1-15 characters]</p></li>
+<li><p><strong>table_selector</strong> – Filter for the tables code [optional, wildcards allowed]</p></li>
+<li><p><strong>object_area</strong> – The location of the statistic/tables</p></li>
+<li><p><strong>result_count</strong> – The number of tables in the response</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.tables2variable">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tables2variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.TableResponse" title="genesis_api_wrapper.responses.Catalogue.TableResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.TableResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.tables2variable" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of tables matching the table selector which are assigned to the</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> – Name of the statistic [required, 1-15 characters]</p></li>
+<li><p><strong>table_selector</strong> – Filter for the tables code [optional, wildcards allowed]</p></li>
+<li><p><strong>object_area</strong> – The location of the statistic/tables</p></li>
+<li><p><strong>result_count</strong> – The number of tables in the response</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.terms">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">term_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.terms" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of terms according to the selector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term_selector</strong> – The selector for the terms [required, wildcards allowed]</p></li>
+<li><p><strong>result_count</strong> – The number of terms which shall be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed response from the server</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.timeseries">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.TimeseriesResponse" title="genesis_api_wrapper.responses.Catalogue.TimeseriesResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.TimeseriesResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.timeseries" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of timeseries according to the selector and the location of the object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timeseries_selector</strong> – The selector for the timeseries [required, wildcards
+allowed]</p></li>
+<li><p><strong>object_location</strong> – The area in which the object is stored [default:
+<code class="docutils literal notranslate"><span class="pre">GENESISArea.ALL</span></code>]</p></li>
+<li><p><strong>result_count</strong> – The number of results that shall be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The list of found timeseries</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.timeseries2statistic">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeseries2statistic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">statistic_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeseries_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.timeseries2statistic" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of timeseries which are related to the selected statistic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>statistic_name</strong> – Code of the statistic [required, length: 1-15 characters]</p></li>
+<li><p><strong>timeseries_selector</strong> – Filter for the timeseries by their code [optional,
+wildcards allowed]</p></li>
+<li><p><strong>object_location</strong> – The storage location of the object</p></li>
+<li><p><strong>result_count</strong> – The number of results that shall be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A response containing the list of timeseries which match the supplied
+parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.timeseries2variable">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeseries2variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeseries_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.TimeseriesResponse" title="genesis_api_wrapper.responses.Catalogue.TimeseriesResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.TimeseriesResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.timeseries2variable" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of timeseries which are related to the specified variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> – The code of the variable [required]</p></li>
+<li><p><strong>timeseries_selector</strong> – A filter for the returned timeseries [optional, wildcards
+allowed]</p></li>
+<li><p><strong>object_location</strong> – The storage location in which the search shall be executed [
+optional, defaults to <code class="docutils literal notranslate"><span class="pre">GENESISArea.ALL</span></code>]</p></li>
+<li><p><strong>result_count</strong> – The number of results that shall be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A parsed response containing the list of timeseries, if any were found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.values">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISValueCriteria" title="genesis_api_wrapper.enums.GENESISValueCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISValueCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISValueCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISValueCriteria" title="genesis_api_wrapper.enums.GENESISValueCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISValueCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISValueCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.ValueResponse" title="genesis_api_wrapper.responses.Catalogue.ValueResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.ValueResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.values" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of values specified by the filter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_filter</strong> – The filter for the value identifications [optional, wildcards
+allowed]</p></li>
+<li><p><strong>object_location</strong> – The storage location which shall be used during the search [
+optional, defaults to <code class="docutils literal notranslate"><span class="pre">GENESISValueCriteria.CODE</span></code>]</p></li>
+<li><p><strong>search_by</strong> – The criteria which is used in combination to the value_filter [
+optional, defaults to <code class="docutils literal notranslate"><span class="pre">GENESISValueCriteria.CODE</span></code>]</p></li>
+<li><p><strong>sort_by</strong> – The criteria by which the results are sorted [optional, defaults to
+<code class="docutils literal notranslate"><span class="pre">GENESISValueCriteria.CODE</span></code>]</p></li>
+<li><p><strong>result_count</strong> – The number of results returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A parsed response containing the list of values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.values2variable">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">values2variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISVariableCriteria" title="genesis_api_wrapper.enums.GENESISVariableCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISVariableCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISVariableCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISVariableCriteria" title="genesis_api_wrapper.enums.GENESISVariableCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISVariableCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISVariableCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.ValueResponse" title="genesis_api_wrapper.responses.Catalogue.ValueResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.ValueResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.values2variable" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of characteristic values for the supplied variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> – The code of the variable</p></li>
+<li><p><strong>value_filter</strong> – A filter for the returned values [optional, wildcards allowed]</p></li>
+<li><p><strong>object_location</strong> – The storage location of the variable</p></li>
+<li><p><strong>search_by</strong> – Criteria which is applied to the <code class="docutils literal notranslate"><span class="pre">value_filter</span></code></p></li>
+<li><p><strong>sort_by</strong> – Criteria which is used to sort the results</p></li>
+<li><p><strong>result_count</strong> – The number of characteristic values which may be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A parsed response from the server containing the list of characteristic values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.variables">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISVariableCriteria" title="genesis_api_wrapper.enums.GENESISVariableCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISVariableCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISVariableCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISVariableCriteria" title="genesis_api_wrapper.enums.GENESISVariableCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISVariableCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISVariableCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISVariableType" title="genesis_api_wrapper.enums.GENESISVariableType"><span class="pre">genesis_api_wrapper.enums.GENESISVariableType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISVariableType.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.VariableResponse" title="genesis_api_wrapper.responses.Catalogue.VariableResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.VariableResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.variables" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of variables matching the filter and object location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_filter</strong> – Identification Code of the variable [required, wildcards
+allowed]</p></li>
+<li><p><strong>object_location</strong> – The storage location of the object [optional]</p></li>
+<li><p><strong>search_by</strong> – Criteria which is applied to the variable filter [optional]</p></li>
+<li><p><strong>sort_by</strong> – Criteria by which the result is sorted [optional]</p></li>
+<li><p><strong>variable_type</strong> – The type of variable [optional]</p></li>
+<li><p><strong>result_count</strong> – The number of results that may be returned [optional]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A parsed response from the server containing the variables</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.variables2statistic">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variables2statistic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">statistic_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISVariableCriteria" title="genesis_api_wrapper.enums.GENESISVariableCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISVariableCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISVariableCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISVariableCriteria" title="genesis_api_wrapper.enums.GENESISVariableCriteria"><span class="pre">genesis_api_wrapper.enums.GENESISVariableCriteria</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISVariableCriteria.CODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISVariableType" title="genesis_api_wrapper.enums.GENESISVariableType"><span class="pre">genesis_api_wrapper.enums.GENESISVariableType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISVariableType.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Catalogue.VariableResponse" title="genesis_api_wrapper.responses.Catalogue.VariableResponse"><span class="pre">genesis_api_wrapper.responses.Catalogue.VariableResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue.variables2statistic" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of variables related to the supplied statistic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>statistic_name</strong> – The identification of the statistic [required]</p></li>
+<li><p><strong>variable_filter</strong> – Filter for the returned variables [optional, wildcards allowed]</p></li>
+<li><p><strong>object_location</strong> – Storage location which is used for the search [optional]</p></li>
+<li><p><strong>search_by</strong> – Criteria which is applied to the variable_filter [optional]</p></li>
+<li><p><strong>sort_by</strong> – Criteria specifying how the results are to be sorted [optional]</p></li>
+<li><p><strong>variable_type</strong> – The type of variables that shall be returned [optional]</p></li>
+<li><p><strong>result_count</strong> – Max. amount of results returned by the server [optional]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A parsed response containing a list of variables</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Data">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pydantic.types.SecretStr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISLanguage" title="genesis_api_wrapper.enums.GENESISLanguage"><span class="pre">genesis_api_wrapper.enums.GENESISLanguage</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISLanguage.GERMAN</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Data" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Find">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISLanguage" title="genesis_api_wrapper.enums.GENESISLanguage"><span class="pre">genesis_api_wrapper.enums.GENESISLanguage</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISLanguage.GERMAN</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Find" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Methods for searching for objects</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Find.find">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_term</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISCategory" title="genesis_api_wrapper.enums.GENESISCategory"><span class="pre">genesis_api_wrapper.enums.GENESISCategory</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISCategory.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_per_category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.Find.FindResult" title="genesis_api_wrapper.responses.Find.FindResult"><span class="pre">genesis_api_wrapper.responses.Find.FindResult</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Find.find" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of objects in the specified category which match the search term</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_term</strong> – Term for which the search is executed</p></li>
+<li><p><strong>category</strong> – The category in which the search is executed</p></li>
+<li><p><strong>results_per_category</strong> – Number of results per category</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A response containing the results of the search</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.HelloWorld">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HelloWorld</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISLanguage" title="genesis_api_wrapper.enums.GENESISLanguage"><span class="pre">genesis_api_wrapper.enums.GENESISLanguage</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISLanguage.GERMAN</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.HelloWorld" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>All methods from the HelloWorld section of the API documentation</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.HelloWorld.login_check">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">login_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse" title="genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse"><span class="pre">genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.HelloWorld.login_check" title="Permalink to this definition"></a></dt>
+<dd><p>Check the login data which were supplied during the creation of the wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The response from the server containing the success or failure of the reqeust</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse" title="genesis_api_wrapper.responses.HelloWorld.LoginCheckResponse">LoginCheckResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.HelloWorld.who_am_i">
+<em class="property"><span class="pre">async</span><span class="w"> </span><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">who_am_i</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse" title="genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse"><span class="pre">genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse</span></a></span></span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.HelloWorld.who_am_i" title="Permalink to this definition"></a></dt>
+<dd><p>Get information about the client data transmitted to the GENESIS database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Response containing the IP Address and the User-Agent for the request that
+has been executed</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../genesis_api_wrapper.responses/#genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse" title="genesis_api_wrapper.responses.HelloWorld.WhoAmIResponse">WhoAmIResponse</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.catalogue">
+<span class="sig-name descname"><span class="pre">catalogue</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#genesis_api_wrapper.AsyncGENESISWrapper.Catalogue" title="genesis_api_wrapper.AsyncGENESISWrapper.Catalogue"><span class="pre">genesis_api_wrapper.AsyncGENESISWrapper.Catalogue</span></a></em><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.catalogue" title="Permalink to this definition"></a></dt>
+<dd><p>Methods in the <cite>Catalogue</cite> part of the official API documentation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.find">
+<span class="sig-name descname"><span class="pre">find</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#genesis_api_wrapper.AsyncGENESISWrapper.Find" title="genesis_api_wrapper.AsyncGENESISWrapper.Find"><span class="pre">genesis_api_wrapper.AsyncGENESISWrapper.Find</span></a></em><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.find" title="Permalink to this definition"></a></dt>
+<dd><p>Methods in the <cite>Find</cite> part of the official API documentation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.hello_world">
+<span class="sig-name descname"><span class="pre">hello_world</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#genesis_api_wrapper.AsyncGENESISWrapper.HelloWorld" title="genesis_api_wrapper.AsyncGENESISWrapper.HelloWorld"><span class="pre">genesis_api_wrapper.AsyncGENESISWrapper.HelloWorld</span></a></em><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.hello_world" title="Permalink to this definition"></a></dt>
+<dd><p>Methods in the <cite>Hello World</cite> part of the official API documentation</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="genesis_api_wrapper.logger">
+<span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">genesis_api_wrapper</span> <span class="pre">(WARNING)&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.logger" title="Permalink to this definition"></a></dt>
+<dd><p>The logger which is used in this module</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../modules/" class="btn btn-neutral float-left" title="genesis_api_wrapper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../genesis_api_wrapper.enums/" class="btn btn-neutral float-right" title="genesis_api_wrapper.enums package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jan Eike Suchard.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
