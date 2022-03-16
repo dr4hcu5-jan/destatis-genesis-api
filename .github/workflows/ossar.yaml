@@ -11,6 +11,10 @@ name: OSSAR
 on:
   push:
     branches: [ main ]
+    paths:
+      - '**.py'
+      - '!docs/**'
+      - '!documentation_source/**'
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ main ]
