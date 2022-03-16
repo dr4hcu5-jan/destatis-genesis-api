@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>genesis_api_wrapper package &mdash; GENESIS Database RESTful API Wrapper  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -81,9 +80,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="genesis-api-wrapper-package">
+  <div class="section" id="genesis-api-wrapper-package">
 <h1>genesis_api_wrapper package<a class="headerlink" href="#genesis-api-wrapper-package" title="Permalink to this headline"></a></h1>
-<section id="subpackages">
+<div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
@@ -116,8 +115,8 @@
 </li>
 </ul>
 </div>
-</section>
-<section id="module-genesis_api_wrapper">
+</div>
+<div class="section" id="module-genesis_api_wrapper">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-genesis_api_wrapper" title="Permalink to this headline"></a></h2>
 <p>Wrapper for the JSON API of the DESTATIS GENESIS database</p>
 <dl class="py class">
@@ -541,7 +540,8 @@ returned instead of the whole image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>object_location</strong> – The location in which the object is stored [optional]</p></li>
+<li><p><strong>object_location</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><em>GENESISArea</em></a>) – The location in which the object is stored, defaults
+to <a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">enums.GENESISArea</span></code></a></p></li>
 <li><p><strong>object_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The identifier of the result table [required]</p></li>
 <li><p><strong>chart_type</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISChartType" title="genesis_api_wrapper.enums.GENESISChartType"><em>GENESISChartType</em></a>) – The type of chart which shall be downloaded [required]</p></li>
 <li><p><strong>image_size</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISImageSize" title="genesis_api_wrapper.enums.GENESISImageSize"><em>GENESISImageSize</em></a>) – The size of the image which shall be downloaded [optional,
@@ -578,7 +578,7 @@ the image will be returned</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>object_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The identifier of the table [required, 1-15 characters]</p></li>
 <li><p><strong>object_location</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – The location in which the table is stored, defaults to
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">ALL</span></code></p></li>
+<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea.ALL" title="genesis_api_wrapper.enums.GENESISArea.ALL"><code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">GENESISArea.ALL</span></code></a></p></li>
 <li><p><strong>updated_after</strong> (<em>datetime</em><em>, </em><em>optional</em>) – Time after which the table needs to have been updated to be
 returned, defaults to <code class="xref py py-attr docutils literal notranslate"><span class="pre">None</span></code></p></li>
 <li><p><strong>start_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Data starting from this year will be selected for the chart ,
@@ -639,8 +639,8 @@ the image will be returned</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>object_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The identifier of the timeseries</p></li>
 <li><p><strong>contents</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – The names of the values which shall be in the chart</p></li>
-<li><p><strong>object_location</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – The location in which the table is stored, defaults to
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">ALL</span></code></p></li>
+<li><p><strong>object_location</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><em>GENESISArea</em></a><em>, </em><em>optional</em>) – The location in which the table is stored,
+defaults to <a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea.ALL" title="genesis_api_wrapper.enums.GENESISArea.ALL"><code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">GENESISArea.ALL</span></code></a></p></li>
 <li><p><strong>updated_after</strong> (<em>datetime</em><em>, </em><em>optional</em>) – Time after which the table needs to have been updated to be
 returned, defaults to <code class="xref py py-attr docutils literal notranslate"><span class="pre">None</span></code></p></li>
 <li><p><strong>start_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Data starting from this year will be selected for the chart ,
@@ -664,17 +664,17 @@ data selection further, defaults to <code class="xref py py-attr docutils litera
 <li><p><strong>classifying_key_3</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Code of the classificator value which shall be used to
 limit the data selection further, defaults to <code class="xref py py-attr docutils literal notranslate"><span class="pre">None</span></code></p></li>
 <li><p><strong>chart_type</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISChartType" title="genesis_api_wrapper.enums.GENESISChartType"><em>GENESISChartType</em></a><em>, </em><em>optional</em>) – The type of chart which shall be downloaded, defaults to
-<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISChartType.LINE_CHART" title="genesis_api_wrapper.enums.GENESISChartType.LINE_CHART"><code class="xref py py-attr docutils literal notranslate"><span class="pre">LINE_CHART</span></code></a></p></li>
+<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISChartType.LINE_CHART" title="genesis_api_wrapper.enums.GENESISChartType.LINE_CHART"><code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">GENESISChartType.LINE_CHART</span></code></a></p></li>
 <li><p><strong>image_size</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISImageSize" title="genesis_api_wrapper.enums.GENESISImageSize"><em>GENESISImageSize</em></a><em>, </em><em>optional</em>) – The size of the image which shall be downloaded, defaults to
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">LEVEL3</span></code></p></li>
+<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISImageSize.LEVEL_3" title="genesis_api_wrapper.enums.GENESISImageSize.LEVEL_3"><code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">GENESISImageSize.LEVEL_3</span></code></a></p></li>
 <li><p><strong>draw_points_in_line_chart</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – Highlight the data points in a line chart,
 only allowed if chart_type is <a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISChartType.LINE_CHART" title="genesis_api_wrapper.enums.GENESISChartType.LINE_CHART"><code class="xref py py-attr docutils literal notranslate"><span class="pre">enums.GENESISChartType.LINE_CHART</span></code></a></p></li>
 <li><p><strong>compress_y_axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – Compress the y-axis to fit the values</p></li>
 <li><p><strong>show_top_values_first</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – <dl class="simple">
-<dt>When using <a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISChartType.PIE_CHART" title="genesis_api_wrapper.enums.GENESISChartType.PIE_CHART"><code class="xref py py-attr docutils literal notranslate"><span class="pre">enums.GENESISChartType.PIE_CHART</span></code></a> as chart_type:</dt><dd><p>Display the top five (5) values as single slices and group all other slices into
+<dt>When using <a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISChartType.PIE_CHART" title="genesis_api_wrapper.enums.GENESISChartType.PIE_CHART"><code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">GENESISChartType.PIE_CHART</span></code></a> as chart_type:</dt><dd><p>Display the top five (5) values as single slices and group all other slices into
 one other slice.</p>
 </dd>
-<dt>When using any other <a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISChartType" title="genesis_api_wrapper.enums.GENESISChartType"><code class="xref py py-class docutils literal notranslate"><span class="pre">enums.GENESISChartType</span></code></a>:</dt><dd><p>Display the top four (4) values instead of the first four (4) values</p>
+<dt>When using any other <a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISChartType" title="genesis_api_wrapper.enums.GENESISChartType"><code class="xref py py-enum docutils literal notranslate"><span class="pre">GENESISChartType</span></code></a>:</dt><dd><p>Display the top four (4) values instead of the first four (4) values</p>
 </dd>
 </dl>
 </p></li>
@@ -701,7 +701,7 @@ one other slice.</p>
 <li><p><strong>object_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The identifier of the data cube</p></li>
 <li><p><strong>contents</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – The names of the values which shall be in the chart</p></li>
 <li><p><strong>object_location</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – The location in which the table is stored, defaults to
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">ALL</span></code></p></li>
+<code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">GENESISObjectLocation.ALL</span></code></p></li>
 <li><p><strong>updated_after</strong> (<em>datetime</em><em>, </em><em>optional</em>) – Time after which the table needs to have been updated to be
 returned, defaults to <code class="xref py py-attr docutils literal notranslate"><span class="pre">None</span></code></p></li>
 <li><p><strong>start_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Data starting from this year will be selected for the chart ,
@@ -749,8 +749,8 @@ limit the data selection further, defaults to <code class="xref py py-attr docut
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>object_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The identifier of the data cube</p></li>
 <li><p><strong>contents</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – The names of the values which shall be in the chart</p></li>
-<li><p><strong>object_location</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – The location in which the table is stored,
-defaults to <code class="xref py py-attr docutils literal notranslate"><span class="pre">ALL</span></code></p></li>
+<li><p><strong>object_location</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><em>GENESISArea</em></a><em>, </em><em>optional</em>) – The location in which the table is stored,
+defaults to <a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea.ALL" title="genesis_api_wrapper.enums.GENESISArea.ALL"><code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">GENESISArea.ALL</span></code></a></p></li>
 <li><p><strong>updated_after</strong> (<em>datetime</em><em>, </em><em>optional</em>) – Time after which the table needs to have been
 updated to be returned, defaults to <code class="xref py py-attr docutils literal notranslate"><span class="pre">None</span></code></p></li>
 <li><p><strong>start_year</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Data starting from this year will be selected for the
@@ -786,6 +786,34 @@ be accumulated</p></li>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="genesis_api_wrapper.AsyncGENESISWrapper.Data.map2result">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">map2result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><span class="pre">genesis_api_wrapper.enums.GENESISArea</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISArea.ALL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_distinction_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classify_by_same_value_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISImageSize" title="genesis_api_wrapper.enums.GENESISImageSize"><span class="pre">genesis_api_wrapper.enums.GENESISImageSize</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GENESISImageSize.LEVEL_3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.AsyncGENESISWrapper.Data.map2result" title="Permalink to this definition"></a></dt>
+<dd><p>Download a map displaying the values of the specified result table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The identifier of the data cube</p></li>
+<li><p><strong>object_location</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea" title="genesis_api_wrapper.enums.GENESISArea"><em>GENESISArea</em></a><em>, </em><em>optional</em>) – The location in which the table is stored,
+defaults to <a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISArea.ALL" title="genesis_api_wrapper.enums.GENESISArea.ALL"><code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">GENESISArea.ALL</span></code></a></p></li>
+<li><p><strong>number_of_distinction_classes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – The number of distinction classes to be
+generated, defaults to 5</p></li>
+<li><p><strong>classify_by_same_value_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If this is set to <cite>True</cite>, the distinction classes
+have the same size. If this is set to <cite>False</cite> the distinction classes have
+different sizes, but the same amount of values in them. Defaults to <cite>True</cite></p></li>
+<li><p><strong>image_size</strong> (<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISImageSize" title="genesis_api_wrapper.enums.GENESISImageSize"><em>GENESISImageSize</em></a><em>, </em><em>optional</em>) – The size of the image which shall be downloaded, defaults to
+<a class="reference internal" href="../genesis_api_wrapper.enums/#genesis_api_wrapper.enums.GENESISImageSize.LEVEL_3" title="genesis_api_wrapper.enums.GENESISImageSize.LEVEL_3"><code class="xref py py-enum:mem docutils literal notranslate"><span class="pre">GENESISImageSize.LEVEL_3</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The path to the image or the file downloaded from the server.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.10)">os.PathLike</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -885,8 +913,8 @@ has been executed</p>
 <dd><p>The logger which is used in this module</p>
 </dd></dl>
 
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
