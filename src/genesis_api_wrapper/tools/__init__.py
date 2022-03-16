@@ -106,7 +106,7 @@ async def get_parsed_response(
         print(await get_raw_json_response(path, parameters))
 
 
-async def download_image_from_database(
+async def download_file_from_database(
         query_path: str,
         query_parameters: Optional[dict]
 ) -> Union[dict, PathLike]:
