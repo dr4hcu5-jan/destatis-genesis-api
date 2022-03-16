@@ -1383,3 +1383,120 @@ class AsyncGENESISWrapper:
                 query_path, query_parameters
             )
         
+        async def cube_file(
+                self,
+                object_name: str,
+                # Selection Specifier
+                contents: Optional[list[str]] = None,
+                object_location: GENESISArea = GENESISArea.ALL,
+                updated_after: Optional[datetime] = None,
+                start_year: Optional[str] = None,
+                end_year: Optional[str] = None,
+                region_code: Optional[str] = None,
+                region_key: Optional[str] = None,
+                # Data Classifiers
+                classifying_code_1: Optional[str] = None,
+                classifying_key_1: Optional[Union[str, list[str]]] = None,
+                classifying_code_2: Optional[str] = None,
+                classifying_key_2: Optional[Union[str, list[str]]] = None,
+                classifying_code_3: Optional[str] = None,
+                classifying_key_3: Optional[Union[str, list[str]]] = None,
+                # Cube settings
+                values: bool = True,
+                metadata: bool = True,
+                additional_metadata: bool = False,
+                time_slices: int = None
+        ):
+            """Download a data cube as csv-file (seperator: `;`)
+
+            This method requires the "premium" access to the database.
+
+            :param object_name: The identifier of the data cube
+            :type object_name: str
+            :param contents: The names of the values which shall be in the chart
+            :type contents: list[str], optional
+            :param object_location: The location in which the table is stored,
+                defaults to :attr:`~enums.GENESISObjectLocation.ALL`
+            :type object_location: str, optional
+            :param updated_after: Time after which the table needs to have been
+                updated to be returned, defaults to :attr:`None`
+            :type updated_after: datetime, optional
+            :param start_year: Data starting from this year will be selected for the
+                chart, defaults to :attr:`None`
+            :type start_year: str, optional
+            :param end_year: Data after this year will be excluded for the chart,
+                defaults to :attr:`None`
+            :type end_year: str, optional
+            :param region_code: Code of the regional classifier which shall be used
+                to limit the regional component of the data, defaults to :attr:`None`
+            :type region_code: str, optional
+            :param region_key: The official municipality key (AGS) specifying from which
+                municipalities the data shall be taken from, defaults to :attr:`None`
+            :type region_key: str, optional
+            :param classifying_code_1: Code of the classificator which shall be used
+                to limit the data selection further, defaults to :attr:`None`
+            :type classifying_code_1: str, optional
+            :param classifying_key_1: Code of the classificator value which shall be
+                used to limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_1: str, optional
+            :param classifying_code_2: Code of the classificator which shall be used
+                to limit the data selection further, defaults to :attr:`None`
+            :type classifying_code_2: str, optional
+            :param classifying_key_2: Code of the classificator value which shall be
+                used to limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_2: str, optional
+            :param classifying_code_3: Code of the classificator which shall be used
+                to limit the data selection further, defaults to :attr:`None`
+            :type classifying_code_3: str, optional
+            :param classifying_key_3: Code of the classificator value which shall be
+                used to limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_3: str, optional
+            :param values: Should values be returned, defaults to `True`
+            :type values: bool, optional
+            :param metadata: Should metadata be returned, defaults to `True`
+            :type metadata: bool, optional
+            :param additional_metadata: Should additional metadata be returned,
+                defaults to `False`
+            :type additional_metadata: bool, optional
+            :param time_slices: The number of time slices into which the data shall
+                be accumulated
+            :type time_slices: int, optional
+            :return: The csv embedded in the response body
+            :rtype: dict
+            """
+
+            if not object_name:
+                raise ValueError('The object_name is a required parameter')
+            if not (1 <= len(object_name.strip()) <= 15):
+                raise ValueError('The object_name may only contain between 1 and 15 characters')
+            # Convert the times to string
+            _time_string = None if updated_after is None else updated_after.strftime(
+                '%d.%m.%Y %H:%M:%Sh'
+            )
+            # Build the query parameters
+            query_parameters = self._base_parameter | {
+                'name':                 object_name,
+                'area':                 object_location.value,
+                'contents':             ','.join(contents) if contents is not None else None,
+                'startyear':            start_year,
+                'endyear':              end_year,
+                'regionalvariable':     region_code,
+                'regionalkey':          region_key,
+                'classifyingvariable1': classifying_code_1,
+                'classifyingkey1':      classifying_key_1,
+                'classifyingvariable2': classifying_code_2,
+                'classifyingkey2':      classifying_key_2,
+                'classifyingvariable3': classifying_code_3,
+                'classifyingkey3':      classifying_key_3,
+                'format':               'csv',
+                'stand':                _time_string,
+                'values':               str(values),
+                'metadata':             str(metadata),
+                'additionals':          str(additional_metadata)
+            }
+            # Build the query path
+            query_path = self._service_path + '/cubefile'
+            # Download the file
+            return await tools.download_file_from_database(
+                query_path, query_parameters
+            )
