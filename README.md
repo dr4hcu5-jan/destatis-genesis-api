@@ -2,7 +2,6 @@
 [![CodeQL](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/code-analysis.yaml/badge.svg)](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/code-analysis.yaml)
 [![OSSAR](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/ossar.yaml/badge.svg)](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/ossar.yaml)
 [![Pylint](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/pylint.yaml/badge.svg?branch=main)](https://github.com/j-suchard/destatis-genesis-api/actions/workflows/pylint.yaml)
-<hr/>
 
 This library offers a Python implementation of the RESTful API the GENESIS databases hosted by 
 the DESTATIS (Federal Statistical Office of Germany).
@@ -56,7 +55,9 @@ _wrapper = AsyncGENESISWrapper(
 ```
 
 After instantiating the new wrapper you are able to access all methods under their respective 
-service. The following services are available:
+service. 
+
+<details><summary>The following services are available:</summary>
 
 | Service Name | Property of the wrapper | Description                                                                                                   |
 |--------------|-------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -64,13 +65,6 @@ service. The following services are available:
 | Find         | `find`                  | Methods for finding objects stored in the database (Tables, Statistics, Variables, Data Cubes and Timeseries) |
 | Catalogue    | `catalogue`             | Methods for listing objects                                                                                   |
 | Data         | `data`                  | Methods for downloading data                                                                                  |
-| Metadata     | `metadata`              | Methods for downloading metadata about objects in the database                                                |
-| Profile      | `profile`               | Methods for maintaining the own user account                                                                  |
-
-
-<hr/>
-
-![GENESISLogo](https://upload.wikimedia.org/wikipedia/commons/d/d3/Statistisches_Bundesamt.svg)
-![](https://www.statistikportal.de/themes/custom/stla/logo.svg)
-
-
+| ~~Metadata~~ | `metadata`              | Methods for downloading metadata about objects in the database                                                |
+| ~~Profile~~  | `profile`               | Methods for maintaining the own user account                                                                  |
+</details>
