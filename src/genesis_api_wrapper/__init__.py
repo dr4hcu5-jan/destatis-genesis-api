@@ -943,7 +943,9 @@ class AsyncGENESISWrapper:
             The file will be downloaded into a local temporary path. The path to the image will be
             returned instead of the whole image
             
-            :param object_location: The location in which the object is stored [optional]
+            :param object_location: The location in which the object is stored, defaults
+                to :py:enum:mem:`~enums.GENESISArea`
+            :type object_location: GENESISArea
             :param object_name: The identifier of the result table [required]
             :type object_name: str
             :param chart_type: The type of chart which shall be downloaded [required]
@@ -1029,7 +1031,7 @@ class AsyncGENESISWrapper:
             :param object_name: The identifier of the table [required, 1-15 characters]
             :type object_name: str
             :param object_location: The location in which the table is stored, defaults to
-                :attr:`~enums.GENESISObjectLocation.ALL`
+                :py:enum:mem:`~enums.GENESISArea.ALL`
             :type object_location: str, optional
             :param updated_after: Time after which the table needs to have been updated to be
                 returned, defaults to :attr:`None`
@@ -1165,9 +1167,9 @@ class AsyncGENESISWrapper:
             :type object_name: str
             :param contents: The names of the values which shall be in the chart
             :type contents: list[str], optional
-            :param object_location: The location in which the table is stored, defaults to
-                :attr:`~enums.GENESISObjectLocation.ALL`
-            :type object_location: str, optional
+            :param object_location: The location in which the table is stored,
+                defaults to :py:enum:mem:`~enums.GENESISArea.ALL`
+            :type object_location: GENESISArea, optional
             :param updated_after: Time after which the table needs to have been updated to be
                 returned, defaults to :attr:`None`
             :type updated_after: datetime, optional
@@ -1202,10 +1204,10 @@ class AsyncGENESISWrapper:
                 limit the data selection further, defaults to :attr:`None`
             :type classifying_key_3: str, optional
             :param chart_type: The type of chart which shall be downloaded, defaults to
-                :attr:`~enums.GENESISChartType.LINE_CHART`
+                :py:enum:mem:`~enums.GENESISChartType.LINE_CHART`
             :type chart_type: GENESISChartType, optional
             :param image_size: The size of the image which shall be downloaded, defaults to
-                :attr:`~enums.GENESISImageSize.LEVEL3`
+                :py:enum:mem:`~enums.GENESISImageSize.LEVEL_3`
             :type image_size: GENESISImageSize, optional
             :param draw_points_in_line_chart: Highlight the data points in a line chart,
                 only allowed if chart_type is :attr:`enums.GENESISChartType.LINE_CHART`
@@ -1213,10 +1215,10 @@ class AsyncGENESISWrapper:
             :param compress_y_axis: Compress the y-axis to fit the values
             :type compress_y_axis: bool, optional
             :param show_top_values_first:
-                When using :attr:`enums.GENESISChartType.PIE_CHART` as chart_type:
+                When using :py:enum:mem:`~enums.GENESISChartType.PIE_CHART` as chart_type:
                     Display the top five (5) values as single slices and group all other slices into
                     one other slice.
-                When using any other :class:`enums.GENESISChartType`:
+                When using any other :enum:`~enums.GENESISChartType`:
                     Display the top four (4) values instead of the first four (4) values
             :type show_top_values_first: bool, optional
             :param time_slices: The number of time slices into which the data shall be accumulated
@@ -1301,7 +1303,7 @@ class AsyncGENESISWrapper:
             :param contents: The names of the values which shall be in the chart
             :type contents: list[str], optional
             :param object_location: The location in which the table is stored, defaults to
-                :attr:`~enums.GENESISObjectLocation.ALL`
+                :py:enum:mem:`~enums.GENESISObjectLocation.ALL`
             :type object_location: str, optional
             :param updated_after: Time after which the table needs to have been updated to be
                 returned, defaults to :attr:`None`
@@ -1416,8 +1418,8 @@ class AsyncGENESISWrapper:
             :param contents: The names of the values which shall be in the chart
             :type contents: list[str], optional
             :param object_location: The location in which the table is stored,
-                defaults to :attr:`~enums.GENESISObjectLocation.ALL`
-            :type object_location: str, optional
+                defaults to :py:enum:mem:`~enums.GENESISArea.ALL`
+            :type object_location: GENESISArea, optional
             :param updated_after: Time after which the table needs to have been
                 updated to be returned, defaults to :attr:`None`
             :type updated_after: datetime, optional
@@ -1464,7 +1466,6 @@ class AsyncGENESISWrapper:
             :return: The csv embedded in the response body
             :rtype: dict
             """
-
             if not object_name:
                 raise ValueError('The object_name is a required parameter')
             if not (1 <= len(object_name.strip()) <= 15):
@@ -1500,3 +1501,55 @@ class AsyncGENESISWrapper:
             return await tools.download_file_from_database(
                 query_path, query_parameters
             )
+        
+        async def map2result(
+                self,
+                object_name: str,
+                object_location: GENESISArea = GENESISArea.ALL,
+                number_of_distinction_classes: Optional[int] = 5,
+                classify_by_same_value_range: Optional[bool] = True,
+                image_size: GENESISImageSize = GENESISImageSize.LEVEL_3
+        ):
+            """Download a map displaying the values of the specified result table
+            
+            :param object_name: The identifier of the data cube
+            :type object_name: str
+            :param object_location: The location in which the table is stored,
+                defaults to :py:enum:mem:`~enums.GENESISArea.ALL`
+            :type object_location: GENESISArea, optional
+            :param number_of_distinction_classes: The number of distinction classes to be
+                generated, defaults to 5
+            :type number_of_distinction_classes: int, optional
+            :param classify_by_same_value_range: If this is set to `True`, the distinction classes
+                have the same size. If this is set to `False` the distinction classes have
+                different sizes, but the same amount of values in them. Defaults to `True`
+            :type classify_by_same_value_range: bool, optional
+            :param image_size: The size of the image which shall be downloaded, defaults to
+                :py:enum:mem:`~enums.GENESISImageSize.LEVEL_3`
+            :type image_size: GENESISImageSize, optional
+            :return: The path to the image or the file downloaded from the server.
+            :rtype: Union[os.PathLike, dict]
+            """
+            if not object_name:
+                raise ValueError('The object_name is a required parameter')
+            if not (1 <= len(object_name.strip()) <= 15):
+                raise ValueError('The object_name may only contain between 1 and 15 characters')
+            if not (2 <= number_of_distinction_classes <= 5):
+                raise ValueError('The number of distinction classes need to be between 2 and 5')
+            # Build the query parameters
+            query_parameters = self._base_parameter | {
+                "name": object_name,
+                "area": object_location.value,
+                "mapType": 0,
+                "classes": number_of_distinction_classes,
+                "classification": int(classify_by_same_value_range),
+                "zoom": image_size.value,
+                "format": "png"
+            }
+            # Build the query path
+            query_path = self._service_path + '/map2result'
+            # Download the file
+            return await tools.download_file_from_database(
+                query_path, query_parameters
+            )
+        
