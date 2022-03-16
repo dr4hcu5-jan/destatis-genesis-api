@@ -17,6 +17,8 @@ from ..responses import *
 
 logger = logging.getLogger('DESTATIS-GENESIS')
 
+TEMP_DIR = tempfile.mkdtemp(suffix='genesis-wrapper')
+
 ResponseType = Type[
     Union[
         HelloWorld.WhoAmIResponse, HelloWorld.LoginCheckResponse,
@@ -136,23 +138,19 @@ async def download_file_from_database(
     # Start downloading the image
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=query_parameters) as response:
-            # Check if the content type indicates a png image
-            if response.content_type == 'image/png':
-                _file_name = secrets.token_urlsafe(nbytes=32)
-                _file_location = tempfile.gettempdir()
-                _file_path = f'{_file_location}/{_file_name}.png'
-                with open(_file_path, 'wb') as file:
-                    async for _file_chunk in response.content.iter_chunked(128):
-                        file.write(_file_chunk)
-                    file.close()
-                return Path(_file_path)
-            elif response.content_type == 'application/json':
+            # Check if any error occurred during the request
+            if response.status == 401:
+                raise GENESISPermissionError('This account is not allowed to access this service')
+            if 500 <= response.status <= 599:
+                raise GENESISInternalServerError('An error occurred on the server side. Please '
+                                                 'try again')
+            # Check if the content type indicates a json response
+            if response.content_type == 'application/json':
                 return await response.json()
             else:
                 _file_ending = mimetypes.guess_extension(response.content_type)
-                _file_name = secrets.token_hex(nbytes=8)
-                _file_location = tempfile.gettempdir()
-                _file_path = f'{_file_location}/{_file_name}.{_file_ending}'
+                _file_name = secrets.token_urlsafe(nbytes=128)
+                _file_path = f'{TEMP_DIR}/{_file_name}{_file_ending}'
                 with open(_file_path, 'wb') as file:
                     async for _file_chunk in response.content.iter_chunked(128):
                         file.write(_file_chunk)
