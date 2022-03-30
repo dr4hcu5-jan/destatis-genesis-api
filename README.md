@@ -62,9 +62,9 @@ service.
 | Service Name | Property of the wrapper | Description                                                                                                   |
 |--------------|-------------------------|---------------------------------------------------------------------------------------------------------------|
 | Hello World  | `hello_world`           | Methods for testing the access to the API (User Agent Check/Credential Validation)                            |
-| Find         | `find`                  | Methods for finding objects stored in the database (Tables, Statistics, Variables, Data Cubes and Timeseries) |
+| FindAPIWrapper         | `find`                  | Methods for finding objects stored in the database (Tables, Statistics, Variables, DataAPIWrapper Cubes and Timeseries) |
 | Catalogue    | `catalogue`             | Methods for listing objects                                                                                   |
-| Data         | `data`                  | Methods for downloading data                                                                                  |
+| DataAPIWrapper         | `data`                  | Methods for downloading data                                                                                  |
 | ~~Metadata~~ | `metadata`              | Methods for downloading metadata about objects in the database                                                |
 | ~~Profile~~  | `profile`               | Methods for maintaining the own user account                                                                  |
 </details>
