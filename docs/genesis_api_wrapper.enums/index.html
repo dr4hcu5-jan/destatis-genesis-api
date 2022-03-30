@@ -1,317 +1,216 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>genesis_api_wrapper.enums package &mdash; GENESIS Database RESTful API Wrapper  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="genesis_api_wrapper.exceptions module" href="../genesis_api_wrapper.exceptions/" /><link rel="prev" title="genesis_api_wrapper.data module" href="../genesis_api_wrapper.data/" />
+
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
+        <title>genesis_api_wrapper.enums module - GENESIS Database API Wrapper 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-    <script src="../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../genindex/" />
-    <link rel="search" title="Search" href="../search/" />
-    <link rel="next" title="genesis_api_wrapper.exceptions package" href="../genesis_api_wrapper.exceptions/" />
-    <link rel="prev" title="genesis_api_wrapper package" href="../genesis_api_wrapper/" /> 
-</head>
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../" class="icon icon-home"> GENESIS Database RESTful API Wrapper
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../modules/">genesis_api_wrapper</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../genesis_api_wrapper/">genesis_api_wrapper package</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../genesis_api_wrapper/#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">genesis_api_wrapper.enums package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.exceptions/">genesis_api_wrapper.exceptions package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.models/">genesis_api_wrapper.models package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.responses/">genesis_api_wrapper.responses package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../genesis_api_wrapper.tools/">genesis_api_wrapper.tools package</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper/#module-genesis_api_wrapper">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
 
-        </div>
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../"><div class="brand">GENESIS Database API Wrapper 1.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
       </div>
-    </nav>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../">
+  
+  
+  <span class="sidebar-brand-text">GENESIS Database API Wrapper 1.1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search/" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules/">Package Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../genesis_api_wrapper/">genesis_api_wrapper package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper.catalogue/">genesis_api_wrapper.catalogue module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper.data/">genesis_api_wrapper.data module</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">genesis_api_wrapper.enums module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper.exceptions/">genesis_api_wrapper.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper.find/">genesis_api_wrapper.find module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper.hello_world/">genesis_api_wrapper.hello_world module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper.metadata/">genesis_api_wrapper.metadata module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper.profile/">genesis_api_wrapper.profile module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genesis_api_wrapper.tools/">genesis_api_wrapper.tools module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../">GENESIS Database RESTful API Wrapper</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../modules/">genesis_api_wrapper</a> &raquo;</li>
-          <li><a href="../genesis_api_wrapper/">genesis_api_wrapper package</a> &raquo;</li>
-      <li>genesis_api_wrapper.enums package</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/genesis_api_wrapper.enums.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <div class="section" id="genesis-api-wrapper-enums-package">
-<h1>genesis_api_wrapper.enums package<a class="headerlink" href="#genesis-api-wrapper-enums-package" title="Permalink to this headline"></a></h1>
-<div class="section" id="module-genesis_api_wrapper.enums">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-genesis_api_wrapper.enums" title="Permalink to this headline"></a></h2>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <div class="section" id="module-genesis_api_wrapper.enums">
+<span id="genesis-api-wrapper-enums-module"></span><h1>genesis_api_wrapper.enums module<a class="headerlink" href="#module-genesis_api_wrapper.enums" title="Permalink to this headline">#</a></h1>
 <p>A package containing the enums used in the main code</p>
 <dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISArea">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISArea</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISArea" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
-<p>Locations of objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Member Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-</dl>
-<p>Valid values are as follows:</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISArea.USER">
-<span class="sig-name descname"><span class="pre">USER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISArea.USER:</span> <span class="pre">'Benutzer'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISArea.USER" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISArea.GROUP">
-<span class="sig-name descname"><span class="pre">GROUP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISArea.GROUP:</span> <span class="pre">'Gruppe'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISArea.GROUP" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISArea.OFFICE">
-<span class="sig-name descname"><span class="pre">OFFICE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISArea.OFFICE:</span> <span class="pre">'Amt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISArea.OFFICE" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISArea.PUBLIC">
-<span class="sig-name descname"><span class="pre">PUBLIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISArea.PUBLIC:</span> <span class="pre">'Öffentlich'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISArea.PUBLIC" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISArea.ALL">
-<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISArea.ALL:</span> <span class="pre">'Alle'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISArea.ALL" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISCategory">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISCategory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISCategory" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
-<p>Categories which are available during the search</p>
-<dl class="field-list simple">
-<dt class="field-odd">Member Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-</dl>
-<p>Valid values are as follows:</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISCategory.TABLES">
-<span class="sig-name descname"><span class="pre">TABLES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISCategory.TABLES:</span> <span class="pre">'tables'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISCategory.TABLES" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISCategory.STATISTICS">
-<span class="sig-name descname"><span class="pre">STATISTICS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISCategory.STATISTICS:</span> <span class="pre">'statistics'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISCategory.STATISTICS" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISCategory.DATA_CUBES">
-<span class="sig-name descname"><span class="pre">DATA_CUBES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISCategory.DATA_CUBES:</span> <span class="pre">'cubes'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISCategory.DATA_CUBES" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISCategory.VARIABLES">
-<span class="sig-name descname"><span class="pre">VARIABLES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISCategory.VARIABLES:</span> <span class="pre">'variables'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISCategory.VARIABLES" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISCategory.TIME_SERIES">
-<span class="sig-name descname"><span class="pre">TIME_SERIES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISCategory.TIME_SERIES:</span> <span class="pre">'time_series'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISCategory.TIME_SERIES" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISCategory.ALL">
-<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISCategory.ALL:</span> <span class="pre">'all'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISCategory.ALL" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISChartType">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISChartType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISChartType" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a></p>
-<p>The different chart types supported by the database</p>
-<dl class="field-list simple">
-<dt class="field-odd">Member Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
-</dd>
-</dl>
-<p>Valid values are as follows:</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISChartType.LINE_CHART">
-<span class="sig-name descname"><span class="pre">LINE_CHART</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISChartType.LINE_CHART:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISChartType.LINE_CHART" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISChartType.BAR_CHART">
-<span class="sig-name descname"><span class="pre">BAR_CHART</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISChartType.BAR_CHART:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISChartType.BAR_CHART" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISChartType.PIE_CHART">
-<span class="sig-name descname"><span class="pre">PIE_CHART</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISChartType.PIE_CHART:</span> <span class="pre">2&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISChartType.PIE_CHART" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISChartType.POINT_CLOUD">
-<span class="sig-name descname"><span class="pre">POINT_CLOUD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISChartType.POINT_CLOUD:</span> <span class="pre">3&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISChartType.POINT_CLOUD" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISImageSize">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISImageSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISImageSize" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a></p>
-<p>The different image size levels</p>
-<dl class="field-list simple">
-<dt class="field-odd">Member Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
-</dd>
-</dl>
-<p>Valid values are as follows:</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISImageSize.LEVEL_0">
-<span class="sig-name descname"><span class="pre">LEVEL_0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISImageSize.LEVEL_0:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISImageSize.LEVEL_0" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISImageSize.LEVEL_1">
-<span class="sig-name descname"><span class="pre">LEVEL_1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISImageSize.LEVEL_1:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISImageSize.LEVEL_1" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISImageSize.LEVEL_2">
-<span class="sig-name descname"><span class="pre">LEVEL_2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISImageSize.LEVEL_2:</span> <span class="pre">2&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISImageSize.LEVEL_2" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISImageSize.LEVEL_3">
-<span class="sig-name descname"><span class="pre">LEVEL_3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISImageSize.LEVEL_3:</span> <span class="pre">3&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISImageSize.LEVEL_3" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobCriteria">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISJobCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobCriteria" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
-<p>Criteria for searching and sorting jobs</p>
-<dl class="field-list simple">
-<dt class="field-odd">Member Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-</dl>
-<p>Valid values are as follows:</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobCriteria.CODE">
-<span class="sig-name descname"><span class="pre">CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobCriteria.CODE:</span> <span class="pre">'Code'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobCriteria.CODE" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobCriteria.STATUS">
-<span class="sig-name descname"><span class="pre">STATUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobCriteria.STATUS:</span> <span class="pre">'Status'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobCriteria.STATUS" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobCriteria.TYPE">
-<span class="sig-name descname"><span class="pre">TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobCriteria.TYPE:</span> <span class="pre">'Auftragstyp'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobCriteria.TYPE" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobCriteria.TIME">
-<span class="sig-name descname"><span class="pre">TIME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobCriteria.TIME:</span> <span class="pre">'Zeitpunkt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobCriteria.TIME" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobType">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISJobType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobType" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
-<p>The different types of jobs that are available on the GENESIS database</p>
-<dl class="field-list simple">
-<dt class="field-odd">Member Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-</dl>
-<p>Valid values are as follows:</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobType.ALL">
-<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobType.ALL:</span> <span class="pre">'all'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobType.ALL" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobType.IMPORT">
-<span class="sig-name descname"><span class="pre">IMPORT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobType.IMPORT:</span> <span class="pre">'Import'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobType.IMPORT" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobType.EXPORT">
-<span class="sig-name descname"><span class="pre">EXPORT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobType.EXPORT:</span> <span class="pre">'Export'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobType.EXPORT" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobType.VALUE_RETRIEVAL">
-<span class="sig-name descname"><span class="pre">VALUE_RETRIEVAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobType.VALUE_RETRIEVAL:</span> <span class="pre">'Werteabruf'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobType.VALUE_RETRIEVAL" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobType.CALCULATE_SUM_CUBES">
-<span class="sig-name descname"><span class="pre">CALCULATE_SUM_CUBES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobType.CALCULATE_SUM_CUBES:</span> <span class="pre">'Summenquader</span> <span class="pre">berechnen'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobType.CALCULATE_SUM_CUBES" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISJobType.CLEANUP_DATA_CUBES">
-<span class="sig-name descname"><span class="pre">CLEANUP_DATA_CUBES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISJobType.CLEANUP_DATA_CUBES:</span> <span class="pre">'Datenquader</span> <span class="pre">bereinigen'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISJobType.CLEANUP_DATA_CUBES" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISLanguage">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISLanguage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISLanguage" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.Language">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">Language</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.Language" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>The languages supported by the GENESIS API</p>
 <dl class="field-list simple">
@@ -321,22 +220,19 @@
 </dl>
 <p>Valid values are as follows:</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISLanguage.GERMAN">
-<span class="sig-name descname"><span class="pre">GERMAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISLanguage.GERMAN:</span> <span class="pre">'de'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISLanguage.GERMAN" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.Language.GERMAN">
+<span class="sig-name descname"><span class="pre">GERMAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Language.GERMAN:</span> <span class="pre">'de'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.Language.GERMAN" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISLanguage.ENGLISH">
-<span class="sig-name descname"><span class="pre">ENGLISH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISLanguage.ENGLISH:</span> <span class="pre">'en'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISLanguage.ENGLISH" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.Language.ENGLISH">
+<span class="sig-name descname"><span class="pre">ENGLISH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Language.ENGLISH:</span> <span class="pre">'en'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.Language.ENGLISH" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 </dd></dl>
-
 <dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISObjectType">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISObjectType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISObjectType" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectType">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">ObjectType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectType" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
-<p>Types of objects that are available in the database</p>
+<p>Categories which are available during the search</p>
 <dl class="field-list simple">
 <dt class="field-odd">Member Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
@@ -344,30 +240,73 @@
 </dl>
 <p>Valid values are as follows:</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISObjectType.ALL">
-<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISObjectType.ALL:</span> <span class="pre">'Alle'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISObjectType.ALL" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectType.TABLES">
+<span class="sig-name descname"><span class="pre">TABLES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectType.TABLES:</span> <span class="pre">'tables'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectType.TABLES" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISObjectType.TABLE">
-<span class="sig-name descname"><span class="pre">TABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISObjectType.TABLE:</span> <span class="pre">'Tabellen'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISObjectType.TABLE" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectType.STATISTICS">
+<span class="sig-name descname"><span class="pre">STATISTICS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectType.STATISTICS:</span> <span class="pre">'statistics'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectType.STATISTICS" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISObjectType.STATISTIC">
-<span class="sig-name descname"><span class="pre">STATISTIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISObjectType.STATISTIC:</span> <span class="pre">'Statistiken'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISObjectType.STATISTIC" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectType.DATA_CUBES">
+<span class="sig-name descname"><span class="pre">DATA_CUBES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectType.DATA_CUBES:</span> <span class="pre">'cubes'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectType.DATA_CUBES" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISObjectType.STATISTIC_UPDATE">
-<span class="sig-name descname"><span class="pre">STATISTIC_UPDATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISObjectType.STATISTIC_UPDATE:</span> <span class="pre">'StatistikUpdates'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISObjectType.STATISTIC_UPDATE" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectType.VARIABLES">
+<span class="sig-name descname"><span class="pre">VARIABLES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectType.VARIABLES:</span> <span class="pre">'variables'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectType.VARIABLES" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectType.TIME_SERIES">
+<span class="sig-name descname"><span class="pre">TIME_SERIES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectType.TIME_SERIES:</span> <span class="pre">'time_series'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectType.TIME_SERIES" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectType.STATISTICS_UPDATE">
+<span class="sig-name descname"><span class="pre">STATISTICS_UPDATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectType.STATISTICS_UPDATE:</span> <span class="pre">'StatistikUpdates'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectType.STATISTICS_UPDATE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectType.ALL">
+<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectType.ALL:</span> <span class="pre">'all'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectType.ALL" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 </dd></dl>
-
 <dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISStatisticCriteria">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISStatisticCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISStatisticCriteria" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobType">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">JobType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.JobType" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>The different types of jobs that are available on the GENESIS database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Member Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+<p>Valid values are as follows:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobType.ALL">
+<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobType.ALL:</span> <span class="pre">'all'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobType.ALL" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobType.IMPORT">
+<span class="sig-name descname"><span class="pre">IMPORT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobType.IMPORT:</span> <span class="pre">'Import'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobType.IMPORT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobType.EXPORT">
+<span class="sig-name descname"><span class="pre">EXPORT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobType.EXPORT:</span> <span class="pre">'Export'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobType.EXPORT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobType.VALUE_RETRIEVAL">
+<span class="sig-name descname"><span class="pre">VALUE_RETRIEVAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobType.VALUE_RETRIEVAL:</span> <span class="pre">'Werteabruf'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobType.VALUE_RETRIEVAL" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobType.CALCULATE_SUM_CUBES">
+<span class="sig-name descname"><span class="pre">CALCULATE_SUM_CUBES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobType.CALCULATE_SUM_CUBES:</span> <span class="pre">'Summenquader</span> <span class="pre">berechnen'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobType.CALCULATE_SUM_CUBES" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobType.CLEANUP_DATA_CUBES">
+<span class="sig-name descname"><span class="pre">CLEANUP_DATA_CUBES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobType.CLEANUP_DATA_CUBES:</span> <span class="pre">'Datenquader</span> <span class="pre">bereinigen'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobType.CLEANUP_DATA_CUBES" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class enum">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobCriteria">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">JobCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.JobCriteria" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>Criteria for searching and sorting jobs</p>
 <dl class="field-list simple">
@@ -377,20 +316,25 @@
 </dl>
 <p>Valid values are as follows:</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISStatisticCriteria.CODE">
-<span class="sig-name descname"><span class="pre">CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISStatisticCriteria.CODE:</span> <span class="pre">'Code'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISStatisticCriteria.CODE" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobCriteria.CODE">
+<span class="sig-name descname"><span class="pre">CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobCriteria.CODE:</span> <span class="pre">'Code'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobCriteria.CODE" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISStatisticCriteria.CONTENT">
-<span class="sig-name descname"><span class="pre">CONTENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISStatisticCriteria.CONTENT:</span> <span class="pre">'Inhalt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISStatisticCriteria.CONTENT" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobCriteria.STATUS">
+<span class="sig-name descname"><span class="pre">STATUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobCriteria.STATUS:</span> <span class="pre">'Status'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobCriteria.STATUS" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobCriteria.TYPE">
+<span class="sig-name descname"><span class="pre">TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobCriteria.TYPE:</span> <span class="pre">'Auftragstyp'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobCriteria.TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.JobCriteria.TIME">
+<span class="sig-name descname"><span class="pre">TIME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;JobCriteria.TIME:</span> <span class="pre">'Zeitpunkt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.JobCriteria.TIME" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 </dd></dl>
-
 <dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISTableCriteria">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISTableCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISTableCriteria" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.StatisticCriteria">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">StatisticCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.StatisticCriteria" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>Criteria for searching and sorting jobs</p>
 <dl class="field-list simple">
@@ -400,20 +344,69 @@
 </dl>
 <p>Valid values are as follows:</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISTableCriteria.CODE">
-<span class="sig-name descname"><span class="pre">CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISTableCriteria.CODE:</span> <span class="pre">'Code'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISTableCriteria.CODE" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.StatisticCriteria.CODE">
+<span class="sig-name descname"><span class="pre">CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;StatisticCriteria.CODE:</span> <span class="pre">'Code'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.StatisticCriteria.CODE" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISTableCriteria.TOP">
-<span class="sig-name descname"><span class="pre">TOP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISTableCriteria.TOP:</span> <span class="pre">'Top'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISTableCriteria.TOP" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.StatisticCriteria.CONTENT">
+<span class="sig-name descname"><span class="pre">CONTENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;StatisticCriteria.CONTENT:</span> <span class="pre">'Inhalt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.StatisticCriteria.CONTENT" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 </dd></dl>
-
 <dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISValueCriteria">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISValueCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISValueCriteria" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectStorage">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">ObjectStorage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectStorage" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Locations of objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Member Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+<p>Valid values are as follows:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectStorage.USER">
+<span class="sig-name descname"><span class="pre">USER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectStorage.USER:</span> <span class="pre">'Benutzer'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectStorage.USER" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectStorage.GROUP">
+<span class="sig-name descname"><span class="pre">GROUP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectStorage.GROUP:</span> <span class="pre">'Gruppe'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectStorage.GROUP" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectStorage.OFFICE">
+<span class="sig-name descname"><span class="pre">OFFICE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectStorage.OFFICE:</span> <span class="pre">'Amt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectStorage.OFFICE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectStorage.PUBLIC">
+<span class="sig-name descname"><span class="pre">PUBLIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectStorage.PUBLIC:</span> <span class="pre">'Öffentlich'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectStorage.PUBLIC" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ObjectStorage.ALL">
+<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ObjectStorage.ALL:</span> <span class="pre">'Alle'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ObjectStorage.ALL" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class enum">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.TableCriteria">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">TableCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.TableCriteria" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Criteria for searching and sorting jobs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Member Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+<p>Valid values are as follows:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.TableCriteria.CODE">
+<span class="sig-name descname"><span class="pre">CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TableCriteria.CODE:</span> <span class="pre">'Code'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.TableCriteria.CODE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.TableCriteria.TOP">
+<span class="sig-name descname"><span class="pre">TOP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TableCriteria.TOP:</span> <span class="pre">'Top'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.TableCriteria.TOP" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class enum">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GenericCriteria">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GenericCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GenericCriteria" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="field-list simple">
@@ -423,20 +416,17 @@
 </dl>
 <p>Valid values are as follows:</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISValueCriteria.CODE">
-<span class="sig-name descname"><span class="pre">CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISValueCriteria.CODE:</span> <span class="pre">'Code'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISValueCriteria.CODE" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GenericCriteria.CODE">
+<span class="sig-name descname"><span class="pre">CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GenericCriteria.CODE:</span> <span class="pre">'Code'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GenericCriteria.CODE" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISValueCriteria.CONTENT">
-<span class="sig-name descname"><span class="pre">CONTENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISValueCriteria.CONTENT:</span> <span class="pre">'Inhalt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISValueCriteria.CONTENT" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GenericCriteria.CONTENT">
+<span class="sig-name descname"><span class="pre">CONTENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GenericCriteria.CONTENT:</span> <span class="pre">'Inhalt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GenericCriteria.CONTENT" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 </dd></dl>
-
 <dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableCriteria">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISVariableCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableCriteria" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.VariableType">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">VariableType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.VariableType" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="field-list simple">
@@ -446,22 +436,99 @@
 </dl>
 <p>Valid values are as follows:</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableCriteria.CODE">
-<span class="sig-name descname"><span class="pre">CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableCriteria.CODE:</span> <span class="pre">'Code'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableCriteria.CODE" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.VariableType.ALL">
+<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;VariableType.ALL:</span> <span class="pre">'Alle'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.VariableType.ALL" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableCriteria.CONTENT">
-<span class="sig-name descname"><span class="pre">CONTENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableCriteria.CONTENT:</span> <span class="pre">'Inhalt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableCriteria.CONTENT" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.VariableType.CLASSIFYING">
+<span class="sig-name descname"><span class="pre">CLASSIFYING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;VariableType.CLASSIFYING:</span> <span class="pre">'klassifizierend'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.VariableType.CLASSIFYING" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.VariableType.TOTAL">
+<span class="sig-name descname"><span class="pre">TOTAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;VariableType.TOTAL:</span> <span class="pre">'insgesamt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.VariableType.TOTAL" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.VariableType.SPATIAL">
+<span class="sig-name descname"><span class="pre">SPATIAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;VariableType.SPATIAL:</span> <span class="pre">'räumlich'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.VariableType.SPATIAL" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.VariableType.FACTUAL">
+<span class="sig-name descname"><span class="pre">FACTUAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;VariableType.FACTUAL:</span> <span class="pre">'sachlich'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.VariableType.FACTUAL" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.VariableType.VALUE">
+<span class="sig-name descname"><span class="pre">VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;VariableType.VALUE:</span> <span class="pre">'wert'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.VariableType.VALUE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.VariableType.TEMPORAL">
+<span class="sig-name descname"><span class="pre">TEMPORAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;VariableType.TEMPORAL:</span> <span class="pre">'zeitlich'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.VariableType.TEMPORAL" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.VariableType.TIME_IDENTIFYING">
+<span class="sig-name descname"><span class="pre">TIME_IDENTIFYING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;VariableType.TIME_IDENTIFYING:</span> <span class="pre">'zeitidentifizierend'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.VariableType.TIME_IDENTIFYING" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 </dd></dl>
-
 <dl class="py class enum">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableType">
-<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">GENESISVariableType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableType" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ChartType">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">ChartType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.ChartType" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a></p>
+<p>The different chart types supported by the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Member Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+<p>Valid values are as follows:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ChartType.LINE_CHART">
+<span class="sig-name descname"><span class="pre">LINE_CHART</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ChartType.LINE_CHART:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ChartType.LINE_CHART" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ChartType.BAR_CHART">
+<span class="sig-name descname"><span class="pre">BAR_CHART</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ChartType.BAR_CHART:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ChartType.BAR_CHART" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ChartType.PIE_CHART">
+<span class="sig-name descname"><span class="pre">PIE_CHART</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ChartType.PIE_CHART:</span> <span class="pre">2&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ChartType.PIE_CHART" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ChartType.POINT_CLOUD">
+<span class="sig-name descname"><span class="pre">POINT_CLOUD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ChartType.POINT_CLOUD:</span> <span class="pre">3&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ChartType.POINT_CLOUD" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class enum">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ImageSize">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">ImageSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.ImageSize" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a></p>
+<p>The different image size levels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Member Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+<p>Valid values are as follows:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ImageSize.LEVEL_0">
+<span class="sig-name descname"><span class="pre">LEVEL_0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ImageSize.LEVEL_0:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ImageSize.LEVEL_0" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ImageSize.LEVEL_1">
+<span class="sig-name descname"><span class="pre">LEVEL_1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ImageSize.LEVEL_1:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ImageSize.LEVEL_1" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ImageSize.LEVEL_2">
+<span class="sig-name descname"><span class="pre">LEVEL_2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ImageSize.LEVEL_2:</span> <span class="pre">2&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ImageSize.LEVEL_2" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.ImageSize.LEVEL_3">
+<span class="sig-name descname"><span class="pre">LEVEL_3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ImageSize.LEVEL_3:</span> <span class="pre">3&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.ImageSize.LEVEL_3" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class enum">
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.FileFormat">
+<em class="property"><span class="pre">enum</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">genesis_api_wrapper.enums.</span></span><span class="sig-name descname"><span class="pre">FileFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#genesis_api_wrapper.enums.FileFormat" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
-<p>An enumeration.</p>
+<p>Formats for file downloads</p>
 <dl class="field-list simple">
 <dt class="field-odd">Member Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
@@ -469,79 +536,95 @@
 </dl>
 <p>Valid values are as follows:</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableType.ALL">
-<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableType.ALL:</span> <span class="pre">'Alle'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableType.ALL" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.FileFormat.CSV">
+<span class="sig-name descname"><span class="pre">CSV</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FileFormat.CSV:</span> <span class="pre">'csv'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.FileFormat.CSV" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableType.CLASSIFYING">
-<span class="sig-name descname"><span class="pre">CLASSIFYING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableType.CLASSIFYING:</span> <span class="pre">'klassifizierend'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableType.CLASSIFYING" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.FileFormat.DATA_CSV">
+<span class="sig-name descname"><span class="pre">DATA_CSV</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FileFormat.DATA_CSV:</span> <span class="pre">'datencsv'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.FileFormat.DATA_CSV" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableType.TOTAL">
-<span class="sig-name descname"><span class="pre">TOTAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableType.TOTAL:</span> <span class="pre">'insgesamt'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableType.TOTAL" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.FileFormat.GENML">
+<span class="sig-name descname"><span class="pre">GENML</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FileFormat.GENML:</span> <span class="pre">'genml'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.FileFormat.GENML" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableType.SPATIAL">
-<span class="sig-name descname"><span class="pre">SPATIAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableType.SPATIAL:</span> <span class="pre">'räumlich'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableType.SPATIAL" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.FileFormat.HTML">
+<span class="sig-name descname"><span class="pre">HTML</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FileFormat.HTML:</span> <span class="pre">'html'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.FileFormat.HTML" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableType.FACTUAL">
-<span class="sig-name descname"><span class="pre">FACTUAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableType.FACTUAL:</span> <span class="pre">'sachlich'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableType.FACTUAL" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.FileFormat.FFCSV">
+<span class="sig-name descname"><span class="pre">FFCSV</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FileFormat.FFCSV:</span> <span class="pre">'ffcsv'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.FileFormat.FFCSV" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
 <dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableType.VALUE">
-<span class="sig-name descname"><span class="pre">VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableType.VALUE:</span> <span class="pre">'wert'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableType.VALUE" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="genesis_api_wrapper.enums.FileFormat.XLSX">
+<span class="sig-name descname"><span class="pre">XLSX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FileFormat.XLSX:</span> <span class="pre">'xlsx'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.FileFormat.XLSX" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableType.TEMPORAL">
-<span class="sig-name descname"><span class="pre">TEMPORAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableType.TEMPORAL:</span> <span class="pre">'zeitlich'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableType.TEMPORAL" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="genesis_api_wrapper.enums.GENESISVariableType.TIME_IDENTIFYING">
-<span class="sig-name descname"><span class="pre">TIME_IDENTIFYING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;GENESISVariableType.TIME_IDENTIFYING:</span> <span class="pre">'zeitidentifizierend'&gt;</span></em><a class="headerlink" href="#genesis_api_wrapper.enums.GENESISVariableType.TIME_IDENTIFYING" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
 </dd></dl>
-
 </div>
-</div>
 
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../genesis_api_wrapper/" class="btn btn-neutral float-left" title="genesis_api_wrapper package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../genesis_api_wrapper.exceptions/" class="btn btn-neutral float-right" title="genesis_api_wrapper.exceptions package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2022, Jan Eike Suchard.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+        </article>
       </div>
-    </section>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../genesis_api_wrapper.exceptions/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">genesis_api_wrapper.exceptions module</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../genesis_api_wrapper.data/">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">genesis_api_wrapper.data module</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Jan Eike Suchard
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/j-suchard/destatis-genesis-api" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/tabs.js"></script>
+    </body>
 </html>

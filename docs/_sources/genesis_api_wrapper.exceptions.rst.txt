@@ -1,8 +1,5 @@
-genesis\_api\_wrapper.exceptions package
-========================================
-
-Module contents
----------------
+genesis\_api\_wrapper.exceptions module
+=======================================
 
 .. automodule:: genesis_api_wrapper.exceptions
    :members:

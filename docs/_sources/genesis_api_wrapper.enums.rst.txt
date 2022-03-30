@@ -1,8 +1,5 @@
-genesis\_api\_wrapper.enums package
-===================================
-
-Module contents
----------------
+genesis\_api\_wrapper.enums module
+==================================
 
 .. automodule:: genesis_api_wrapper.enums
    :members:

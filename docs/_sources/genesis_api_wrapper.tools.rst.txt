@@ -1,8 +1,5 @@
-genesis\_api\_wrapper.tools package
-===================================
-
-Module contents
----------------
+genesis\_api\_wrapper.tools module
+==================================
 
 .. automodule:: genesis_api_wrapper.tools
    :members:
