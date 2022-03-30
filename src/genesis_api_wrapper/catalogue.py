@@ -10,25 +10,41 @@ class CatalogueAPIWrapper:
     def __init__(
         self, username: str, password: str, language: enums.Language = enums.Language.GERMAN
     ):
-        """Create a new FindAPIWrapper section method wrapper
+        """Create a new Wrapper containing functions for listing different object types
 
-        :param username: The username which was assigned during the creation of an account (
-            length: 10 characters)
+        :param username: The username which will be used for authenticating at the database. Due
+            to constraints of the database the username needs to be exactly 10 characters long and
+            may not contain any whitespaces
         :type username: str
-        :param password: The password for the username (length: 10-20 characters)
-        :type password: SecretStr
-        :param language: The language which should be used in the response bodies, defaults to
-            German
-        :type language: Language
+        :param password: The password which will be used for authenticating at the database. Due
+            to constraints of the database the password needs to be at least 10 characters long,
+            may not exceed 20 characters and may not contain any whitespaces
+        :type password: str
+        :param language: The language in which the responses are returned by the database.
+            :py:enum:mem:`~genesis_api_wrapper.enums.Language.GERMAN` has the most compatibility
+            with the database
+            since most of the tables are on German. Therefore, this parameter defaults to
+            :py:enum:mem:`~genesis_api_wrapper.enums.Language.GERMAN`
+        :type language: enums.Language
+        :raise ValueError: The username or the password did not match the constraints stated in
+            their description.
         """
-        # Check if the username consists of 10 characters
+        if " " in username:
+            raise ValueError("The username may not contain any whitespaces")
         if len(username) != 10:
-            raise ValueError("The username is not 10 characters long.")
-        # Check if the password's length is between 10 and 20 characters
-        if not (10 <= len(password) <= 20):
-            raise ValueError("The password is not between 10 and 20 characters long")
-        # Since all values passed the check save the username and password to the wrapper,
-        # but keep them private
+            raise ValueError("The username may only be 10 characters long")
+        if " " in password:
+            raise ValueError("The password may not contain any whitespaces")
+        if len(password) < 10:
+            raise ValueError(
+                f"The password may not be shorter than 10 characters. Current "
+                f"length: {len(password)}"
+            )
+        if len(password) > 20:
+            raise ValueError(
+                f"The password may not be longer that 20 characters. Current "
+                f"length: {len(password)}"
+            )
         self._username = username
         self._password = password
         self._language = language
@@ -41,52 +57,121 @@ class CatalogueAPIWrapper:
 
     async def cubes(
         self,
-        selection: str,
-        object_area: enums.ObjectStorage = enums.ObjectStorage.ALL,
-        results: int = 100,
+        object_name: str,
+        storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL,
+        result_count: int = 100,
     ) -> dict:
-        """Get a list of data cubes matching the selector (PREMIUM ACCOUNTS ONLY)
-
-        :param selection: The code of the data cube. You may use a star (*) to allow wild
-            carding
-        :param object_area: The location of the object
-        :param results: The maximum items which are received from the database
-        :return: A list of information about the found data cubes
         """
-        # TODO: Add check of parameters
-        _parameters = self._base_parameter | {
-            "selection": selection,
-            "area": object_area.value,
-            "pagelength": str(results),
+        **PREMIUM ACCESS REQUIRED**
+
+        List the datacubes matching the ``object_name``
+
+        :param object_name: The identifier code of the data cubes. The usage of an asterisk
+            (``*``) is permitted as wildcard
+        :type object_name: str
+        :param storage_location: The storage location of the object, defaults to
+            :py:enum:mem:`~genesis_api_wrapper.enums.ObjectStorage.ALL`
+        :type storage_location: enums.ObjectStorage, optional
+        :param result_count: The maximal amount of results which are returned by the database,
+            defaults to 100
+        :type result_count: int, optional
+        :return: The response from the database parsed into a dict. If the ``Content-Type``
+            header indicated a non-JSON response the response is stored in a temporary file and
+            the file path will be returned
+        :rtype: dict, os.PathLike
+        :raises exceptions.GENESISPermissionError: The supplied account does not have the
+            permissions to access data cubes.
+        :raises ValueError: One of the parameters does not contain a valid value. Please check
+            the message of the exception for further information
+        """
+        if " " in object_name:
+            raise ValueError("The object_name parameter may not contain whitespaces")
+        if len(object_name) == 0:
+            raise ValueError("The object_name parameter may not be empty")
+        if len(object_name) > 10:
+            raise ValueError("The object_name parameter may not exceed 10 characters")
+        if type(storage_location) is not enums.ObjectStorage:
+            raise ValueError(
+                f"The storage_location parameter only accepts "
+                f"{repr(enums.ObjectStorage)} values"
+            )
+        if result_count < 1:
+            raise ValueError("The result_count parameter value may not be below 0")
+        if result_count > 2500:
+            raise ValueError("The result_count parameter value may not exceed 2500")
+        query_parameters = self._base_parameter | {
+            "selection": object_name,
+            "area": storage_location.value,
+            "pagelength": result_count,
         }
-        _url = self._service_url + "/cubes"
-        return await tools.get_database_response(_url, _parameters)
+        query_path = self._service_url + "/cubes"
+        return await tools.get_database_response(query_path, query_parameters)
 
     async def cubes2statistic(
         self,
-        statistic_name: str,
-        cube_code: str,
-        object_area: enums.ObjectStorage = enums.ObjectStorage.ALL,
-        results: int = 100,
+        object_name: str,
+        cube_code: typing.Optional[str] = None,
+        storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL,
+        result_count: int = 100,
     ) -> dict:
-        """Get a list of data cubes of a statistic matching the selector (PREMIUM ACCOUNTS ONLY)
-
-        :param statistic_name: The name of the statistic that shall be used
-        :param cube_code: The code of the data cube in this statistic, star based wild-carding
-            is allowed
-        :param object_area: The area in which the object is stored
-        :param results: The number of maximum results that should be pulled
-        :return: A list of information about the data cubes
         """
-        # TODO: Add check of parameters
-        _parameters = self._base_parameter | {
-            "name": statistic_name,
-            "selection": cube_code,
-            "area": object_area.value,
-            "pagelength": str(results),
+        **PREMIUM ACCESS REQUIRED**
+
+        List the datacubes matching the ``object_name``
+
+        :param object_name: The identifier code of the statistic
+        :type object_name: str
+        :param cube_code: The identifier code of the cube. The usage of an asterisk
+            (``*``) is permitted as wildcard. This value acts as filter, only showing the data
+            cubes matching this code
+        :type cube_code: str, optional
+        :param storage_location: The storage location of the object, defaults to
+            :py:enum:mem:`~genesis_api_wrapper.enums.ObjectStorage.ALL`
+        :type storage_location: enums.ObjectStorage
+        :param result_count: The maximal amount of results which are returned by the database,
+            defaults to 100
+        :type result_count: int
+        :return: The response from the database parsed into a dict. If the ``Content-Type``
+            header indicated a non-JSON response the response is stored in a temporary file and
+            the file path will be returned
+        :rtype: dict, os.PathLike
+        :raises exceptions.GENESISPermissionError: The supplied account does not have the
+            permissions to access data cubes.
+        """
+        if " " in object_name:
+            raise ValueError("The object_name parameter may not contain whitespaces")
+        if "*" in object_name:
+            raise ValueError(
+                "The object_name parameter may not contain asterisks. Wildcards are "
+                "not permitted"
+            )
+        if len(object_name) == 0:
+            raise ValueError("The object_name parameter may not be empty")
+        if len(object_name) > 6:
+            raise ValueError("The object_name parameter may not exceed 6 characters")
+        if cube_code is not None and " " in cube_code:
+            raise ValueError("The cube_code parameter may not contain whitespaces")
+        if cube_code is not None and len(cube_code) == 0:
+            raise ValueError("The cube_code parameter may not be empty")
+        if cube_code is not None and len(cube_code) > 10:
+            raise ValueError("The cube_code parameter may not exceed 10 characters")
+        if type(storage_location) is not enums.ObjectStorage:
+            raise ValueError(
+                f"The storage_location parameter only accepts "
+                f"{repr(enums.ObjectStorage)} values"
+            )
+        if result_count < 1:
+            raise ValueError("The result_count parameter value may not be below 0")
+        if result_count > 2500:
+            raise ValueError("The result_count parameter value may not exceed 2500")
+        query_parameters = self._base_parameter | {
+            "name": object_name,
+            "selection": "" if cube_code is None else cube_code,
+            "area": storage_location.value,
+            "pagelength": result_count,
         }
-        _url = self._service_url + "/cubes2statistic"
-        return await tools.get_database_response(_url, _parameters)
+        query_path = self._service_url + "/cubes2statistic"
+        return await tools.get_database_response(query_path, query_parameters)
 
     async def cubes2variable(
         self,
