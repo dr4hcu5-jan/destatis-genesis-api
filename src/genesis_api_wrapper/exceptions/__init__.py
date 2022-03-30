@@ -2,6 +2,7 @@ class GENESISPermissionError(Exception):
     """
     Exceptions raised if the account may not access the specified service and method
     """
+
     pass
 
 
