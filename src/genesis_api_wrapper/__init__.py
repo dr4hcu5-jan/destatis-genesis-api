@@ -1639,3 +1639,110 @@ class AsyncGENESISWrapper:
             query_path = self._service_path + "/map2table"
             # Download the file
             return await tools.download_file_from_database(query_path, query_parameters)
+
+        async def map2timeseries(
+                self,
+                object_name: str,
+                # Selection Specifier
+                object_location: GENESISArea = GENESISArea.ALL,
+                updated_after: Optional[datetime] = None,
+                start_year: Optional[str] = None,
+                end_year: Optional[str] = None,
+                region_code: Optional[str] = None,
+                region_key: Optional[str] = None,
+                # Data Classifiers
+                classifying_code_1: Optional[str] = None,
+                classifying_key_1: Optional[Union[str, list[str]]] = None,
+                classifying_code_2: Optional[str] = None,
+                classifying_key_2: Optional[Union[str, list[str]]] = None,
+                classifying_code_3: Optional[str] = None,
+                classifying_key_3: Optional[Union[str, list[str]]] = None,
+                # Map Settings
+                number_of_distinction_classes: Optional[int] = 5,
+                classify_by_same_value_range: Optional[bool] = True,
+                image_size: GENESISImageSize = GENESISImageSize.LEVEL_3
+        ):
+            """
+            Download a map visualizing the selected data from the table
+
+            :param object_name: The identifier of the table [required, 1-15 characters]
+            :type object_name: str
+            :param object_location: The location in which the table is stored, defaults to
+                :py:enum:mem:`~enums.GENESISArea.ALL`
+            :type object_location: str, optional
+            :param updated_after: Time after which the table needs to have been updated to be
+                returned, defaults to :attr:`None`
+            :type updated_after: datetime, optional
+            :param start_year: Data starting from this year will be selected for the chart ,
+                defaults to :attr:`None`
+            :type start_year: str, optional
+            :param end_year: Data after this year will be excluded for the chart, defaults to
+                :attr:`None`
+            :type end_year: str, optional
+            :param region_code: Code of the regional classifier which shall be used to limit the
+                regional component of the data, defaults to :attr:`None`
+            :type region_code: str, optional
+            :param region_key: The official municipality key (AGS) specifying from which
+                municipalities the data shall be taken from, defaults to :attr:`None`
+            :type region_key: str, optional
+            :param classifying_code_1: Code of the classificator which shall be used to limit the
+                data selection further, defaults to :attr:`None`
+            :type classifying_code_1: str, optional
+            :param classifying_key_1: Code of the classificator value which shall be used to
+                limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_1: str, optional
+            :param classifying_code_2: Code of the classificator which shall be used to limit the
+                data selection further, defaults to :attr:`None`
+            :type classifying_code_2: str, optional
+            :param classifying_key_2: Code of the classificator value which shall be used to
+                limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_2: str, optional
+            :param classifying_code_3: Code of the classificator which shall be used to limit the
+                data selection further, defaults to :attr:`None`
+            :type classifying_code_3: str, optional
+            :param classifying_key_3: Code of the classificator value which shall be used to
+                limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_3: str, optional
+            :param number_of_distinction_classes: The number of distinction classes to be
+                generated, defaults to 5
+            :type number_of_distinction_classes: int, optional
+            :param classify_by_same_value_range: If this is set to `True`, the distinction classes
+                have the same size. If this is set to `False` the distinction classes have
+                different sizes, but the same amount of values in them. Defaults to `True`
+            :type classify_by_same_value_range: bool, optional
+            :param image_size: The size of the image which shall be downloaded, defaults to
+                :py:enum:mem:`~enums.GENESISImageSize.LEVEL_3`
+            :type image_size: GENESISImageSize, optional
+            :return: The path to the image or the file downloaded from the server.
+            :rtype: Union[os.PathLike, dict]
+            """
+            if not object_name:
+                raise ValueError("The object_name is a required parameter")
+            if not (1 <= len(object_name.strip()) <= 15):
+                raise ValueError("The object_name may only contain between 1 and 15 characters")
+            if not (2 <= number_of_distinction_classes <= 5):
+                raise ValueError("The number of distinction classes need to be between 2 and 5")
+            # Build the query parameters
+            query_parameters = self._base_parameter | {
+                "name":                 object_name,
+                "area":                 object_location.value,
+                "mapType":              0,
+                "classes":              number_of_distinction_classes,
+                "classification":       int(classify_by_same_value_range),
+                "zoom":                 image_size.value,
+                "startyear":            start_year,
+                "endyear":              end_year,
+                "regionalvariable":     region_code,
+                "regionalkey":          region_key,
+                "classifyingvariable1": classifying_code_1,
+                "classifyingkey1":      classifying_key_1,
+                "classifyingvariable2": classifying_code_2,
+                "classifyingkey2":      classifying_key_2,
+                "classifyingvariable3": classifying_code_3,
+                "classifyingkey3":      classifying_key_3,
+                "format":               "png",
+            }
+            # Build the query path
+            query_path = self._service_path + "/map2timeseries"
+            # Download the file
+            return await tools.download_file_from_database(query_path, query_parameters)
