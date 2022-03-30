@@ -54,7 +54,7 @@ class ProfileAPIWrapper:
         query_path = self._service_url + "/password"
         return await tools.get_database_response(query_path, query_parameter)
 
-    def remove_result(
+    async def remove_result(
         self, object_name: str, storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
     ):
         """
@@ -63,7 +63,7 @@ class ProfileAPIWrapper:
         :param object_name: The object's identification code
         :type object_name: str
         :param storage_location: The storage location of the object, defaults to
-        :py:enum:mem:`enums.ObjectStorage.ALL`
+            :py:enum:mem:`enums.ObjectStorage.ALL`
         :type storage_location: enums.ObjectStorage
         :return: The response from the database
         :rtype: dict
