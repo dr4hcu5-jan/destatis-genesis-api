@@ -1114,3 +1114,208 @@ class DataAPIWrapper:
         query_path = self._service_path + "/tablefile"
         # Get the response
         return await tools.get_database_response(query_path, query_parameters)
+
+    async def timeseries(
+        self,
+        object_name: str,
+        # Selection Specifier
+        object_location: enums.ObjectStorage = enums.ObjectStorage.ALL,
+        updated_after: typing.Optional[datetime.datetime] = None,
+        start_year: typing.Optional[str] = None,
+        end_year: typing.Optional[str] = None,
+        region_code: typing.Optional[str] = None,
+        region_key: typing.Optional[str] = None,
+        # DataAPIWrapper Classifiers
+        classifying_code_1: typing.Optional[str] = None,
+        classifying_key_1: typing.Optional[typing.Union[str, list[str]]] = None,
+        classifying_code_2: typing.Optional[str] = None,
+        classifying_key_2: typing.Optional[typing.Union[str, list[str]]] = None,
+        classifying_code_3: typing.Optional[str] = None,
+        classifying_key_3: typing.Optional[typing.Union[str, list[str]]] = None,
+        # Output Selection
+        generate_job: bool = False,
+        remove_emtpy_rows: bool = False,
+        switch_rows_and_columns: bool = False,
+    ):
+        """
+        Download a timeseries embedded into a JSON response
+
+        :param object_name: The identifier of the table [required, 1-15 characters]
+        :type object_name: str
+        :param object_location: The location in which the table is stored, defaults to
+            :py:enum:mem:`~enums.ObjectStorage.ALL`
+        :type object_location: str, optional
+        :param updated_after: Time after which the table needs to have been updated to be
+            returned, defaults to :attr:`None`
+        :type updated_after: datetime, optional
+        :param start_year: DataAPIWrapper starting from this year will be selected for the chart ,
+            defaults to :attr:`None`
+        :type start_year: str, optional
+        :param end_year: DataAPIWrapper after this year will be excluded for the chart, defaults to
+            :attr:`None`
+        :type end_year: str, optional
+        :param region_code: Code of the regional classifier which shall be used to limit the
+            regional component of the data, defaults to :attr:`None`
+        :type region_code: str, optional
+        :param region_key: The official municipality key (AGS) specifying from which
+            municipalities the data shall be taken from, defaults to :attr:`None`
+        :type region_key: str, optional
+        :param classifying_code_1: Code of the classificator which shall be used to limit the
+            data selection further, defaults to :attr:`None`
+        :type classifying_code_1: str, optional
+        :param classifying_key_1: Code of the classificator value which shall be used to
+            limit the data selection further, defaults to :attr:`None`
+        :type classifying_key_1: str, optional
+        :param classifying_code_2: Code of the classificator which shall be used to limit the
+            data selection further, defaults to :attr:`None`
+        :type classifying_code_2: str, optional
+        :param classifying_key_2: Code of the classificator value which shall be used to
+            limit the data selection further, defaults to :attr:`None`
+        :type classifying_key_2: str, optional
+        :param classifying_code_3: Code of the classificator which shall be used to limit the
+            data selection further, defaults to :attr:`None`
+        :type classifying_code_3: str, optional
+        :param classifying_key_3: Code of the classificator value which shall be used to
+            limit the data selection further, defaults to :attr:`None`
+        :type classifying_key_3: str, optional
+        :param generate_job: Generate a Job if the table cannot be pulled directly, defaults
+            to ``False``
+        :type generate_job: bool
+        :param remove_emtpy_rows: Remove all empty data rows from the response, defaults to
+            ``False``
+        :type remove_emtpy_rows: bool
+        :param switch_rows_and_columns: Switch the rows and columns in the response,
+            defaults to ``False``
+        :type switch_rows_and_columns: bool
+        :return: The specified table data embedded in the response data
+        :rtype: dict
+        """
+        if not object_name:
+            raise ValueError("The object_name is a required parameter")
+        if not (1 <= len(object_name.strip()) <= 15):
+            raise ValueError("The object_name may only contain between 1 and 15 characters")
+        # Build the query parameters
+        query_parameters = self._base_parameter | {
+            "name": object_name,
+            "area": object_location.value,
+            "compress": str(remove_emtpy_rows),
+            "transpose": str(switch_rows_and_columns),
+            "startyear": start_year,
+            "endyear": end_year,
+            "regionalvariable": region_code,
+            "regionalkey": region_key,
+            "classifyingvariable1": classifying_code_1,
+            "classifyingkey1": classifying_key_1,
+            "classifyingvariable2": classifying_code_2,
+            "classifyingkey2": classifying_key_2,
+            "classifyingvariable3": classifying_code_3,
+            "classifyingkey3": classifying_key_3,
+            "job": str(generate_job),
+        }
+        # Build the query path
+        query_path = self._service_path + "/timeseries"
+        # Get the response
+        return await tools.get_database_response(query_path, query_parameters)
+
+    async def timeseriesfile(
+        self,
+        object_name: str,
+        # Selection Specifier
+        object_location: enums.ObjectStorage = enums.ObjectStorage.ALL,
+        updated_after: typing.Optional[datetime.datetime] = None,
+        start_year: typing.Optional[str] = None,
+        end_year: typing.Optional[str] = None,
+        region_code: typing.Optional[str] = None,
+        region_key: typing.Optional[str] = None,
+        # DataAPIWrapper Classifiers
+        classifying_code_1: typing.Optional[str] = None,
+        classifying_key_1: typing.Optional[typing.Union[str, list[str]]] = None,
+        classifying_code_2: typing.Optional[str] = None,
+        classifying_key_2: typing.Optional[typing.Union[str, list[str]]] = None,
+        classifying_code_3: typing.Optional[str] = None,
+        classifying_key_3: typing.Optional[typing.Union[str, list[str]]] = None,
+        # Output Selection
+        generate_job: bool = False,
+        remove_emtpy_rows: bool = False,
+        switch_rows_and_columns: bool = False,
+    ):
+        """
+        Download a timeseries embedded into a JSON response
+
+        :param object_name: The identifier of the table [required, 1-15 characters]
+        :type object_name: str
+        :param object_location: The location in which the table is stored, defaults to
+            :py:enum:mem:`~enums.ObjectStorage.ALL`
+        :type object_location: str, optional
+        :param updated_after: Time after which the table needs to have been updated to be
+            returned, defaults to :attr:`None`
+        :type updated_after: datetime, optional
+        :param start_year: DataAPIWrapper starting from this year will be selected for the chart ,
+            defaults to :attr:`None`
+        :type start_year: str, optional
+        :param end_year: DataAPIWrapper after this year will be excluded for the chart, defaults to
+            :attr:`None`
+        :type end_year: str, optional
+        :param region_code: Code of the regional classifier which shall be used to limit the
+            regional component of the data, defaults to :attr:`None`
+        :type region_code: str, optional
+        :param region_key: The official municipality key (AGS) specifying from which
+            municipalities the data shall be taken from, defaults to :attr:`None`
+        :type region_key: str, optional
+        :param classifying_code_1: Code of the classificator which shall be used to limit the
+            data selection further, defaults to :attr:`None`
+        :type classifying_code_1: str, optional
+        :param classifying_key_1: Code of the classificator value which shall be used to
+            limit the data selection further, defaults to :attr:`None`
+        :type classifying_key_1: str, optional
+        :param classifying_code_2: Code of the classificator which shall be used to limit the
+            data selection further, defaults to :attr:`None`
+        :type classifying_code_2: str, optional
+        :param classifying_key_2: Code of the classificator value which shall be used to
+            limit the data selection further, defaults to :attr:`None`
+        :type classifying_key_2: str, optional
+        :param classifying_code_3: Code of the classificator which shall be used to limit the
+            data selection further, defaults to :attr:`None`
+        :type classifying_code_3: str, optional
+        :param classifying_key_3: Code of the classificator value which shall be used to
+            limit the data selection further, defaults to :attr:`None`
+        :type classifying_key_3: str, optional
+        :param generate_job: Generate a Job if the table cannot be pulled directly, defaults
+            to ``False``
+        :type generate_job: bool
+        :param remove_emtpy_rows: Remove all empty data rows from the response, defaults to
+            ``False``
+        :type remove_emtpy_rows: bool
+        :param switch_rows_and_columns: Switch the rows and columns in the response,
+            defaults to ``False``
+        :type switch_rows_and_columns: bool
+        :return: The specified table data embedded in the response data
+        :rtype: dict
+        """
+        if not object_name:
+            raise ValueError("The object_name is a required parameter")
+        if not (1 <= len(object_name.strip()) <= 15):
+            raise ValueError("The object_name may only contain between 1 and 15 characters")
+        # Build the query parameters
+        query_parameters = self._base_parameter | {
+            "name": object_name,
+            "area": object_location.value,
+            "compress": str(remove_emtpy_rows),
+            "transpose": str(switch_rows_and_columns),
+            "startyear": start_year,
+            "endyear": end_year,
+            "regionalvariable": region_code,
+            "regionalkey": region_key,
+            "classifyingvariable1": classifying_code_1,
+            "classifyingkey1": classifying_key_1,
+            "classifyingvariable2": classifying_code_2,
+            "classifyingkey2": classifying_key_2,
+            "classifyingvariable3": classifying_code_3,
+            "classifyingkey3": classifying_key_3,
+            "job": str(generate_job),
+            "format": "csv",
+        }
+        # Build the query path
+        query_path = self._service_path + "/timeseriesfile"
+        # Get the response
+        return await tools.get_database_response(query_path, query_parameters)
