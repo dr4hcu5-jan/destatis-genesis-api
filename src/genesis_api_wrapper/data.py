@@ -67,10 +67,10 @@ class DataAPIWrapper:
         :type object_name: str
         :param chart_type: The type of chart which shall be downloaded [required]
         :type chart_type: enums.ChartType
-        :param image_size: The size of the image which shall be downloaded [typing.Optional,
+        :param image_size: The size of the image which shall be downloaded [optional,
             default 1024x768 pixels]
         :type image_size: enums.ImageSize
-        :param draw_points_in_line_chart: Highlight data points in a line chart [typing.Optional,
+        :param draw_points_in_line_chart: Highlight data points in a line chart [optional,
             only allowed if chart_type is line chart]
         :type draw_points_in_line_chart: bool
         :param compress_y_axis: Compress the y-axis to fit the values
@@ -149,60 +149,60 @@ class DataAPIWrapper:
         :type object_name: str
         :param object_location: The location in which the table is stored, defaults to
             :py:enum:mem:`~enums.ObjectStorage.ALL`
-        :type object_location: str, typing.Optional
+        :type object_location: str, optional
         :param updated_after: Time after which the table needs to have been updated to be
             returned, defaults to :attr:`None`
-        :type updated_after: datetime, typing.Optional
+        :type updated_after: datetime, optional
         :param start_year: DataAPIWrapper starting from this year will be selected for the chart ,
             defaults to :attr:`None`
-        :type start_year: str, typing.Optional
+        :type start_year: str, optional
         :param end_year: DataAPIWrapper after this year will be excluded for the chart, defaults to
             :attr:`None`
-        :type end_year: str, typing.Optional
+        :type end_year: str, optional
         :param region_code: Code of the regional classifier which shall be used to limit the
             regional component of the data, defaults to :attr:`None`
-        :type region_code: str, typing.Optional
+        :type region_code: str, optional
         :param region_key: The official municipality key (AGS) specifying from which
             municipalities the data shall be taken from, defaults to :attr:`None`
-        :type region_key: str, typing.Optional
+        :type region_key: str, optional
         :param classifying_code_1: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_1: str, typing.Optional
+        :type classifying_code_1: str, optional
         :param classifying_key_1: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_1: str, typing.Optional
+        :type classifying_key_1: str, optional
         :param classifying_code_2: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_2: str, typing.Optional
+        :type classifying_code_2: str, optional
         :param classifying_key_2: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_2: str, typing.Optional
+        :type classifying_key_2: str, optional
         :param classifying_code_3: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_3: str, typing.Optional
+        :type classifying_code_3: str, optional
         :param classifying_key_3: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_3: str, typing.Optional
+        :type classifying_key_3: str, optional
         :param chart_type: The type of chart which shall be downloaded, defaults to
             :attr:`~enums.ChartType.LINE_CHART`
-        :type chart_type: enums.ChartType, typing.Optional
+        :type chart_type: enums.ChartType, optional
         :param image_size: The size of the image which shall be downloaded, defaults to
             :attr:`~enums.ImageSize.LEVEL3`
-        :type image_size: enums.ImageSize, typing.Optional
+        :type image_size: enums.ImageSize, optional
         :param draw_points_in_line_chart: Highlight the data points in a line chart,
             only allowed if chart_type is :attr:`enums.ChartType.LINE_CHART`
-        :type draw_points_in_line_chart: bool, typing.Optional
+        :type draw_points_in_line_chart: bool, optional
         :param compress_y_axis: Compress the y-axis to fit the values
-        :type compress_y_axis: bool, typing.Optional
+        :type compress_y_axis: bool, optional
         :param show_top_values_first:
             When using :attr:`enums.ChartType.PIE_CHART` as chart_type:
                 Display the top five (5) values as single slices and group all other slices into
                 one other slice.
             When using any other :class:`enums.ChartType`:
                 Display the top four (4) values instead of the first four (4) values
-        :type show_top_values_first: bool, typing.Optional
+        :type show_top_values_first: bool, optional
         :param time_slices: The number of time slices into which the data shall be accumulated
-        :type time_slices: int, typing.Optional
+        :type time_slices: int, optional
         :return: The path to the image or the file downloaded from the server.
         :rtype: dict
         """
@@ -283,63 +283,63 @@ class DataAPIWrapper:
         :param object_name: The identifier of the timeseries
         :type object_name: str
         :param contents: The names of the values which shall be in the chart
-        :type contents: list[str], typing.Optional
+        :type contents: list[str], optional
         :param object_location: The location in which the table is stored,
             defaults to :py:enum:mem:`~enums.ObjectStorage.ALL`
-        :type object_location: enums.ObjectStorage, typing.Optional
+        :type object_location: enums.ObjectStorage, optional
         :param updated_after: Time after which the table needs to have been updated to be
             returned, defaults to :attr:`None`
-        :type updated_after: datetime, typing.Optional
+        :type updated_after: datetime, optional
         :param start_year: DataAPIWrapper starting from this year will be selected for the chart ,
             defaults to :attr:`None`
-        :type start_year: str, typing.Optional
+        :type start_year: str, optional
         :param end_year: DataAPIWrapper after this year will be excluded for the chart, defaults to
             :attr:`None`
-        :type end_year: str, typing.Optional
+        :type end_year: str, optional
         :param region_code: Code of the regional classifier which shall be used to limit the
             regional component of the data, defaults to :attr:`None`
-        :type region_code: str, typing.Optional
+        :type region_code: str, optional
         :param region_key: The official municipality key (AGS) specifying from which
             municipalities the data shall be taken from, defaults to :attr:`None`
-        :type region_key: str, typing.Optional
+        :type region_key: str, optional
         :param classifying_code_1: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_1: str, typing.Optional
+        :type classifying_code_1: str, optional
         :param classifying_key_1: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_1: str, typing.Optional
+        :type classifying_key_1: str, optional
         :param classifying_code_2: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_2: str, typing.Optional
+        :type classifying_code_2: str, optional
         :param classifying_key_2: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_2: str, typing.Optional
+        :type classifying_key_2: str, optional
         :param classifying_code_3: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_3: str, typing.Optional
+        :type classifying_code_3: str, optional
         :param classifying_key_3: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_3: str, typing.Optional
+        :type classifying_key_3: str, optional
         :param chart_type: The type of chart which shall be downloaded, defaults to
             :py:enum:mem:`~enums.ChartType.LINE_CHART`
-        :type chart_type: enums.ChartType, typing.Optional
+        :type chart_type: enums.ChartType, optional
         :param image_size: The size of the image which shall be downloaded, defaults to
             :py:enum:mem:`~enums.ImageSize.LEVEL_3`
-        :type image_size: enums.ImageSize, typing.Optional
+        :type image_size: enums.ImageSize, optional
         :param draw_points_in_line_chart: Highlight the data points in a line chart,
             only allowed if chart_type is :attr:`enums.ChartType.LINE_CHART`
-        :type draw_points_in_line_chart: bool, typing.Optional
+        :type draw_points_in_line_chart: bool, optional
         :param compress_y_axis: Compress the y-axis to fit the values
-        :type compress_y_axis: bool, typing.Optional
+        :type compress_y_axis: bool, optional
         :param show_top_values_first:
             When using :py:enum:mem:`~enums.ChartType.PIE_CHART` as chart_type:
                 Display the top five (5) values as single slices and group all other slices into
                 one other slice.
             When using any other :enum:`~enums.ChartType`:
                 Display the top four (4) values instead of the first four (4) values
-        :type show_top_values_first: bool, typing.Optional
+        :type show_top_values_first: bool, optional
         :param time_slices: The number of time slices into which the data shall be accumulated
-        :type time_slices: int, typing.Optional
+        :type time_slices: int, optional
         :return: The path to the image or the file downloaded from the server.
         :rtype: dict
         """
@@ -418,51 +418,51 @@ class DataAPIWrapper:
         :param object_name: The identifier of the data cube
         :type object_name: str
         :param contents: The names of the values which shall be in the chart
-        :type contents: list[str], typing.Optional
+        :type contents: list[str], optional
         :param object_location: The location in which the table is stored, defaults to
             :py:enum:mem:`~enums.GENESISObjectLocation.ALL`
-        :type object_location: str, typing.Optional
+        :type object_location: str, optional
         :param updated_after: Time after which the table needs to have been updated to be
             returned, defaults to :attr:`None`
-        :type updated_after: datetime, typing.Optional
+        :type updated_after: datetime, optional
         :param start_year: DataAPIWrapper starting from this year will be selected for the chart ,
             defaults to :attr:`None`
-        :type start_year: str, typing.Optional
+        :type start_year: str, optional
         :param end_year: DataAPIWrapper after this year will be excluded for the chart, defaults to
             :attr:`None`
-        :type end_year: str, typing.Optional
+        :type end_year: str, optional
         :param region_code: Code of the regional classifier which shall be used to limit the
             regional component of the data, defaults to :attr:`None`
-        :type region_code: str, typing.Optional
+        :type region_code: str, optional
         :param region_key: The official municipality key (AGS) specifying from which
             municipalities the data shall be taken from, defaults to :attr:`None`
-        :type region_key: str, typing.Optional
+        :type region_key: str, optional
         :param classifying_code_1: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_1: str, typing.Optional
+        :type classifying_code_1: str, optional
         :param classifying_key_1: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_1: str, typing.Optional
+        :type classifying_key_1: str, optional
         :param classifying_code_2: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_2: str, typing.Optional
+        :type classifying_code_2: str, optional
         :param classifying_key_2: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_2: str, typing.Optional
+        :type classifying_key_2: str, optional
         :param classifying_code_3: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_3: str, typing.Optional
+        :type classifying_code_3: str, optional
         :param classifying_key_3: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_3: str, typing.Optional
+        :type classifying_key_3: str, optional
         :param values: Should values be returned, defaults to `True`
-        :type values: bool, typing.Optional
+        :type values: bool, optional
         :param metadata: Should metadata be returned, defaults to `True`
-        :type metadata: bool, typing.Optional
+        :type metadata: bool, optional
         :param additional_metadata: Should additional metadata be returned, defaults to `False`
-        :type additional_metadata: bool, typing.Optional
+        :type additional_metadata: bool, optional
         :param time_slices: The number of time slices into which the data shall be accumulated
-        :type time_slices: int, typing.Optional
+        :type time_slices: int, optional
         :return: The csv embedded in the response body
         :rtype: dict
         """
@@ -531,53 +531,53 @@ class DataAPIWrapper:
         :param object_name: The identifier of the data cube
         :type object_name: str
         :param contents: The names of the values which shall be in the chart
-        :type contents: list[str], typing.Optional
+        :type contents: list[str], optional
         :param object_location: The location in which the table is stored,
             defaults to :py:enum:mem:`~enums.ObjectStorage.ALL`
-        :type object_location: enums.ObjectStorage, typing.Optional
+        :type object_location: enums.ObjectStorage, optional
         :param updated_after: Time after which the table needs to have been
             updated to be returned, defaults to :attr:`None`
-        :type updated_after: datetime, typing.Optional
+        :type updated_after: datetime, optional
         :param start_year: DataAPIWrapper starting from this year will be selected for the
             chart, defaults to :attr:`None`
-        :type start_year: str, typing.Optional
+        :type start_year: str, optional
         :param end_year: DataAPIWrapper after this year will be excluded for the chart,
             defaults to :attr:`None`
-        :type end_year: str, typing.Optional
+        :type end_year: str, optional
         :param region_code: Code of the regional classifier which shall be used
             to limit the regional component of the data, defaults to :attr:`None`
-        :type region_code: str, typing.Optional
+        :type region_code: str, optional
         :param region_key: The official municipality key (AGS) specifying from which
             municipalities the data shall be taken from, defaults to :attr:`None`
-        :type region_key: str, typing.Optional
+        :type region_key: str, optional
         :param classifying_code_1: Code of the classificator which shall be used
             to limit the data selection further, defaults to :attr:`None`
-        :type classifying_code_1: str, typing.Optional
+        :type classifying_code_1: str, optional
         :param classifying_key_1: Code of the classificator value which shall be
             used to limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_1: str, typing.Optional
+        :type classifying_key_1: str, optional
         :param classifying_code_2: Code of the classificator which shall be used
             to limit the data selection further, defaults to :attr:`None`
-        :type classifying_code_2: str, typing.Optional
+        :type classifying_code_2: str, optional
         :param classifying_key_2: Code of the classificator value which shall be
             used to limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_2: str, typing.Optional
+        :type classifying_key_2: str, optional
         :param classifying_code_3: Code of the classificator which shall be used
             to limit the data selection further, defaults to :attr:`None`
-        :type classifying_code_3: str, typing.Optional
+        :type classifying_code_3: str, optional
         :param classifying_key_3: Code of the classificator value which shall be
             used to limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_3: str, typing.Optional
+        :type classifying_key_3: str, optional
         :param values: Should values be returned, defaults to `True`
-        :type values: bool, typing.Optional
+        :type values: bool, optional
         :param metadata: Should metadata be returned, defaults to `True`
-        :type metadata: bool, typing.Optional
+        :type metadata: bool, optional
         :param additional_metadata: Should additional metadata be returned,
             defaults to `False`
-        :type additional_metadata: bool, typing.Optional
+        :type additional_metadata: bool, optional
         :param time_slices: The number of time slices into which the data shall
             be accumulated
-        :type time_slices: int, typing.Optional
+        :type time_slices: int, optional
         :return: The csv embedded in the response body
         :rtype: dict
         """
@@ -629,17 +629,17 @@ class DataAPIWrapper:
         :type object_name: str
         :param object_location: The location in which the table is stored,
             defaults to :py:enum:mem:`~enums.ObjectStorage.ALL`
-        :type object_location: enums.ObjectStorage, typing.Optional
+        :type object_location: enums.ObjectStorage, optional
         :param number_of_distinction_classes: The number of distinction classes to be
             generated, defaults to 5
-        :type number_of_distinction_classes: int, typing.Optional
+        :type number_of_distinction_classes: int, optional
         :param classify_by_same_value_range: If this is set to `True`, the distinction classes
             have the same size. If this is set to `False` the distinction classes have
             different sizes, but the same amount of values in them. Defaults to `True`
-        :type classify_by_same_value_range: bool, typing.Optional
+        :type classify_by_same_value_range: bool, optional
         :param image_size: The size of the image which shall be downloaded, defaults to
             :py:enum:mem:`~enums.ImageSize.LEVEL_3`
-        :type image_size: enums.ImageSize, typing.Optional
+        :type image_size: enums.ImageSize, optional
         :return: The path to the image or the file downloaded from the server.
         :rtype: dict
         """
@@ -692,47 +692,47 @@ class DataAPIWrapper:
         :type object_name: str
         :param object_location: The location in which the table is stored, defaults to
             :py:enum:mem:`~enums.ObjectStorage.ALL`
-        :type object_location: str, typing.Optional
+        :type object_location: str, optional
         :param start_year: DataAPIWrapper starting from this year will be selected for the chart ,
             defaults to :attr:`None`
-        :type start_year: str, typing.Optional
+        :type start_year: str, optional
         :param end_year: DataAPIWrapper after this year will be excluded for the chart, defaults to
             :attr:`None`
-        :type end_year: str, typing.Optional
+        :type end_year: str, optional
         :param region_code: Code of the regional classifier which shall be used to limit the
             regional component of the data, defaults to :attr:`None`
-        :type region_code: str, typing.Optional
+        :type region_code: str, optional
         :param region_key: The official municipality key (AGS) specifying from which
             municipalities the data shall be taken from, defaults to :attr:`None`
-        :type region_key: str, typing.Optional
+        :type region_key: str, optional
         :param classifying_code_1: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_1: str, typing.Optional
+        :type classifying_code_1: str, optional
         :param classifying_key_1: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_1: str, typing.Optional
+        :type classifying_key_1: str, optional
         :param classifying_code_2: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_2: str, typing.Optional
+        :type classifying_code_2: str, optional
         :param classifying_key_2: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_2: str, typing.Optional
+        :type classifying_key_2: str, optional
         :param classifying_code_3: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_3: str, typing.Optional
+        :type classifying_code_3: str, optional
         :param classifying_key_3: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_3: str, typing.Optional
+        :type classifying_key_3: str, optional
         :param number_of_distinction_classes: The number of distinction classes to be
             generated, defaults to 5
-        :type number_of_distinction_classes: int, typing.Optional
+        :type number_of_distinction_classes: int, optional
         :param classify_by_same_value_range: If this is set to `True`, the distinction classes
             have the same size. If this is set to `False` the distinction classes have
             different sizes, but the same amount of values in them. Defaults to `True`
-        :type classify_by_same_value_range: bool, typing.Optional
+        :type classify_by_same_value_range: bool, optional
         :param image_size: The size of the image which shall be downloaded, defaults to
             :py:enum:mem:`~enums.ImageSize.LEVEL_3`
-        :type image_size: enums.ImageSize, typing.Optional
+        :type image_size: enums.ImageSize, optional
         :return: The path to the image or the file downloaded from the server.
         :rtype: dict
         """
@@ -796,50 +796,50 @@ class DataAPIWrapper:
         :type object_name: str
         :param object_location: The location in which the table is stored, defaults to
             :py:enum:mem:`~enums.ObjectStorage.ALL`
-        :type object_location: str, typing.Optional
+        :type object_location: str, optional
         :param updated_after: Time after which the table needs to have been updated to be
             returned, defaults to :attr:`None`
-        :type updated_after: datetime, typing.Optional
+        :type updated_after: datetime, optional
         :param start_year: Data starting from this year will be selected for the chart ,
             defaults to :attr:`None`
-        :type start_year: str, typing.Optional
+        :type start_year: str, optional
         :param end_year: Data after this year will be excluded for the chart, defaults to
             :attr:`None`
-        :type end_year: str, typing.Optional
+        :type end_year: str, optional
         :param region_code: Code of the regional classifier which shall be used to limit the
             regional component of the data, defaults to :attr:`None`
-        :type region_code: str, typing.Optional
+        :type region_code: str, optional
         :param region_key: The official municipality key (AGS) specifying from which
             municipalities the data shall be taken from, defaults to :attr:`None`
-        :type region_key: str, typing.Optional
+        :type region_key: str, optional
         :param classifying_code_1: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_1: str, typing.Optional
+        :type classifying_code_1: str, optional
         :param classifying_key_1: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_1: str, typing.Optional
+        :type classifying_key_1: str, optional
         :param classifying_code_2: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_2: str, typing.Optional
+        :type classifying_code_2: str, optional
         :param classifying_key_2: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_2: str, typing.Optional
+        :type classifying_key_2: str, optional
         :param classifying_code_3: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_3: str, typing.Optional
+        :type classifying_code_3: str, optional
         :param classifying_key_3: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_3: str, typing.Optional
+        :type classifying_key_3: str, optional
         :param number_of_distinction_classes: The number of distinction classes to be
             generated, defaults to 5
-        :type number_of_distinction_classes: int, typing.Optional
+        :type number_of_distinction_classes: int, optional
         :param classify_by_same_value_range: If this is set to `True`, the distinction classes
             have the same size. If this is set to `False` the distinction classes have
             different sizes, but the same amount of values in them. Defaults to `True`
-        :type classify_by_same_value_range: bool, typing.Optional
+        :type classify_by_same_value_range: bool, optional
         :param image_size: The size of the image which shall be downloaded, defaults to
             :py:enum:mem:`~enums.ImageSize.LEVEL_3`
-        :type image_size: enums.ImageSize, typing.Optional
+        :type image_size: enums.ImageSize, optional
         :return: The path to the image or the file downloaded from the server.
         :rtype: dict
         """
@@ -887,9 +887,9 @@ class DataAPIWrapper:
         :type object_name: str
         :param object_location: The location in which the table is stored, defaults to
             :py:enum:mem:`~enums.ObjectStorage.ALL`
-        :type object_location: str, typing.Optional
+        :type object_location: str, optional
         :param remove_empty_rows: Remove empty rows from the embedded CSV-file
-        :type remove_empty_rows: bool, typing.Optional
+        :type remove_empty_rows: bool, optional
         :return: Dictionary containing the response
         :rtype: dict
         """
@@ -935,40 +935,40 @@ class DataAPIWrapper:
         :type object_name: str
         :param object_location: The location in which the table is stored, defaults to
             :py:enum:mem:`~enums.ObjectStorage.ALL`
-        :type object_location: str, typing.Optional
+        :type object_location: str, optional
         :param updated_after: Time after which the table needs to have been updated to be
             returned, defaults to :attr:`None`
-        :type updated_after: datetime, typing.Optional
+        :type updated_after: datetime, optional
         :param start_year: DataAPIWrapper starting from this year will be selected for the chart ,
             defaults to :attr:`None`
-        :type start_year: str, typing.Optional
+        :type start_year: str, optional
         :param end_year: DataAPIWrapper after this year will be excluded for the chart, defaults to
             :attr:`None`
-        :type end_year: str, typing.Optional
+        :type end_year: str, optional
         :param region_code: Code of the regional classifier which shall be used to limit the
             regional component of the data, defaults to :attr:`None`
-        :type region_code: str, typing.Optional
+        :type region_code: str, optional
         :param region_key: The official municipality key (AGS) specifying from which
             municipalities the data shall be taken from, defaults to :attr:`None`
-        :type region_key: str, typing.Optional
+        :type region_key: str, optional
         :param classifying_code_1: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_1: str, typing.Optional
+        :type classifying_code_1: str, optional
         :param classifying_key_1: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_1: str, typing.Optional
+        :type classifying_key_1: str, optional
         :param classifying_code_2: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_2: str, typing.Optional
+        :type classifying_code_2: str, optional
         :param classifying_key_2: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_2: str, typing.Optional
+        :type classifying_key_2: str, optional
         :param classifying_code_3: Code of the classificator which shall be used to limit the
             data selection further, defaults to :attr:`None`
-        :type classifying_code_3: str, typing.Optional
+        :type classifying_code_3: str, optional
         :param classifying_key_3: Code of the classificator value which shall be used to
             limit the data selection further, defaults to :attr:`None`
-        :type classifying_key_3: str, typing.Optional
+        :type classifying_key_3: str, optional
         :param generate_job: Generate a Job if the table cannot be pulled directly, defaults
             to ``False``
         :type generate_job: bool
@@ -1005,5 +1005,112 @@ class DataAPIWrapper:
         }
         # Build the query path
         query_path = self._service_path + "/table"
+        # Get the response
+        return await tools.get_database_response(query_path, query_parameters)
+
+    async def tablefile(
+        self,
+        object_name: str,
+        # Selection Specifier
+        object_location: enums.ObjectStorage = enums.ObjectStorage.ALL,
+        updated_after: typing.Optional[datetime.datetime] = None,
+        start_year: typing.Optional[str] = None,
+        end_year: typing.Optional[str] = None,
+        region_code: typing.Optional[str] = None,
+        region_key: typing.Optional[str] = None,
+        # DataAPIWrapper Classifiers
+        classifying_code_1: typing.Optional[str] = None,
+        classifying_key_1: typing.Optional[typing.Union[str, list[str]]] = None,
+        classifying_code_2: typing.Optional[str] = None,
+        classifying_key_2: typing.Optional[typing.Union[str, list[str]]] = None,
+        classifying_code_3: typing.Optional[str] = None,
+        classifying_key_3: typing.Optional[typing.Union[str, list[str]]] = None,
+        # Output Selection
+        generate_job: bool = False,
+        remove_emtpy_rows: bool = False,
+        switch_rows_and_columns: bool = False,
+        file_format: enums.FileFormat = enums.FileFormat.CSV,
+    ):
+        """
+        Download a table as file
+
+        :param object_name: The identifier of the table [required, 1-15 characters]
+        :type object_name: str
+        :param object_location: The location in which the table is stored, defaults to
+            :py:enum:mem:`~enums.ObjectStorage.ALL`
+        :type object_location: str, optional
+        :param updated_after: Time after which the table needs to have been updated to be
+            returned, defaults to :attr:`None`
+        :type updated_after: datetime, optional
+        :param start_year: DataAPIWrapper starting from this year will be selected for the chart ,
+            defaults to :attr:`None`
+        :type start_year: str, optional
+        :param end_year: DataAPIWrapper after this year will be excluded for the chart, defaults to
+            :attr:`None`
+        :type end_year: str, optional
+        :param region_code: Code of the regional classifier which shall be used to limit the
+            regional component of the data, defaults to :attr:`None`
+        :type region_code: str, optional
+        :param region_key: The official municipality key (AGS) specifying from which
+            municipalities the data shall be taken from, defaults to :attr:`None`
+        :type region_key: str, optional
+        :param classifying_code_1: Code of the classificator which shall be used to limit the
+            data selection further, defaults to :attr:`None`
+        :type classifying_code_1: str, optional
+        :param classifying_key_1: Code of the classificator value which shall be used to
+            limit the data selection further, defaults to :attr:`None`
+        :type classifying_key_1: str, optional
+        :param classifying_code_2: Code of the classificator which shall be used to limit the
+            data selection further, defaults to :attr:`None`
+        :type classifying_code_2: str, optional
+        :param classifying_key_2: Code of the classificator value which shall be used to
+            limit the data selection further, defaults to :attr:`None`
+        :type classifying_key_2: str, optional
+        :param classifying_code_3: Code of the classificator which shall be used to limit the
+            data selection further, defaults to :attr:`None`
+        :type classifying_code_3: str, optional
+        :param classifying_key_3: Code of the classificator value which shall be used to
+            limit the data selection further, defaults to :attr:`None`
+        :type classifying_key_3: str, optional
+        :param generate_job: Generate a Job if the table cannot be pulled directly, defaults
+            to ``False``
+        :type generate_job: bool
+        :param remove_emtpy_rows: Remove all empty data rows from the response, defaults to
+            ``False``
+        :type remove_emtpy_rows: bool
+        :param switch_rows_and_columns: Switch the rows and columns in the response,
+            defaults to ``False``
+        :type switch_rows_and_columns: bool
+        :param file_format: The file format which shall be returned, defaults to
+            :py:enum:mem:`~enums.FileType.CSV`
+        :type file_format: enums.FileType
+        :return: The specified table data embedded in the response data
+        :rtype: dict
+        """
+        if not object_name:
+            raise ValueError("The object_name is a required parameter")
+        if not (1 <= len(object_name.strip()) <= 15):
+            raise ValueError("The object_name may only contain between 1 and 15 characters")
+        # Build the query parameters
+        query_parameters = self._base_parameter | {
+            "name": object_name,
+            "area": object_location.value,
+            "compress": str(remove_emtpy_rows),
+            "transpose": str(switch_rows_and_columns),
+            "startyear": start_year,
+            "endyear": end_year,
+            "regionalvariable": region_code,
+            "regionalkey": region_key,
+            "classifyingvariable1": classifying_code_1,
+            "classifyingkey1": classifying_key_1,
+            "classifyingvariable2": classifying_code_2,
+            "classifyingkey2": classifying_key_2,
+            "classifyingvariable3": classifying_code_3,
+            "classifyingkey3": classifying_key_3,
+            "job": str(generate_job),
+            "format": file_format.value,
+        }
+        # Build the query path
+        query_path = self._service_path + "/tablefile"
         # Get the response
         return await tools.get_database_response(query_path, query_parameters)
