@@ -66,54 +66,7 @@ async def is_host_available(host: str, port: int, timeout: int) -> bool:
     return False
 
 
-async def get_raw_json_response(
-    path: str,
-    parameters: Optional[dict],
-) -> dict:
-    """Request a resource from the GENESIS API from the specified path
-
-    :param path: The path that shall be queried
-    :param parameters: The optional parameters for this request
-    :return:
-    """
-    for key, value in dict(parameters).items():
-        if value is None:
-            del parameters[key]
-    async with aiohttp.ClientSession() as http_session:
-        _url = "https://www-genesis.destatis.de/genesisWS/rest/2020" + path
-        async with http_session.get(_url, params=parameters) as response:
-            # Check if the response is a 200 response
-            if response.status == 200:
-                data = await response.json()
-                return data
-            elif response.status == 401:
-                raise GENESISPermissionError
-            elif response.status == 500:
-                raise GENESISInternalServerError
-
-
-async def get_parsed_response(
-    path: str, parameters: Optional[dict], r: ResponseType
-) -> type(ResponseType):
-    """Request a resource from the GENESIS API from the specified path
-
-    :param path: The path that shall be queried
-    :param parameters: The optional parameters for this request
-    :param r: The PydanticModel into which the response is parsed
-    :return:
-    """
-    try:
-        return r.parse_obj(await get_raw_json_response(path, parameters))
-    except ValidationError as error:
-        print(error)
-        logger.error(
-            "Error during parsing the response received from the database. "
-            "Printing response into terminal..."
-        )
-        print(await get_raw_json_response(path, parameters))
-
-
-async def download_file_from_database(
+async def get_database_response(
     query_path: str, query_parameters: Optional[dict]
 ) -> Union[dict, PathLike]:
     """Download an image from the database

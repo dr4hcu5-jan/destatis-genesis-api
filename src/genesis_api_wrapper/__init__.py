@@ -67,11 +67,11 @@ class AsyncGENESISWrapper:
             username, password, language
         )
         """Methods in the `Hello World` part of the official API documentation"""
-        self.find: AsyncGENESISWrapper.Find = self.Find(username, password, language)
+        self.find: AsyncGENESISWrapper.Find = self.Find(username, password)
         """Methods in the `Find` part of the official API documentation"""
-        self.catalogue: AsyncGENESISWrapper.Catalogue = self.Catalogue(username, password, language)
+        self.catalogue: AsyncGENESISWrapper.Catalogue = self.Catalogue(username, password)
         """Methods in the `Catalogue` part of the official API documentation"""
-        self.data: AsyncGENESISWrapper.Data = self.Data(username, password, language)
+        self.data: AsyncGENESISWrapper.Data = self.Data(username, password)
         """Methods in the `Data` part of the official API documentation"""
 
     class HelloWorld:
@@ -117,7 +117,7 @@ class AsyncGENESISWrapper:
                 has been executed
             :rtype: WhoAmIResponse
             """
-            return await tools.get_parsed_response(
+            return await tools.get_database_response(
                 "/helloworld/whoami", None, HelloWorld.WhoAmIResponse
             )
 
@@ -127,7 +127,7 @@ class AsyncGENESISWrapper:
             :return: The response from the server containing the success or failure of the reqeust
             :rtype: LoginCheckResponse
             """
-            return await tools.get_parsed_response(
+            return await tools.get_database_response(
                 "/helloworld/logincheck", self._base_parameter, HelloWorld.LoginCheckResponse
             )
 
@@ -184,7 +184,7 @@ class AsyncGENESISWrapper:
                 "category": category.value,
                 "pagelength": str(results_per_category),
             }
-            return await tools.get_parsed_response("/find/find", _params, Find.FindResult)
+            return await tools.get_database_response("/find/find", _params, Find.FindResult)
 
     class Catalogue:
         """Methods for listing objects"""
@@ -223,7 +223,7 @@ class AsyncGENESISWrapper:
 
         async def cubes(
             self, selection: str, object_area: GENESISArea = GENESISArea.ALL, results: int = 100
-        ) -> Catalogue.CubeResponse:
+        ) -> dict:
             """Get a list of data cubes matching the selector (PREMIUM ACCOUNTS ONLY)
 
             :param selection: The code of the data cube. You may use a star (*) to allow wild
@@ -239,7 +239,7 @@ class AsyncGENESISWrapper:
                 "pagelength": str(results),
             }
             _url = self._service_url + "/cubes"
-            return await tools.get_parsed_response(_url, _parameters, Catalogue.CubeResponse)
+            return await tools.get_database_response(_url, _parameters, Catalogue.CubeResponse)
 
         async def cubes2statistic(
             self,
@@ -247,7 +247,7 @@ class AsyncGENESISWrapper:
             cube_code: constr(min_length=1, max_length=10),
             object_area: GENESISArea = GENESISArea.ALL,
             results: int = 100,
-        ) -> Catalogue.CubeResponse:
+        ) -> dict:
             """Get a list of data cubes of a statistic matching the selector (PREMIUM ACCOUNTS ONLY)
 
             :param statistic_name: The name of the statistic that shall be used
@@ -265,7 +265,7 @@ class AsyncGENESISWrapper:
                 "pagelength": str(results),
             }
             _url = self._service_url + "/cubes2statistic"
-            return await tools.get_parsed_response(_url, _parameters, Catalogue.CubeResponse)
+            return await tools.get_database_response(_url, _parameters, Catalogue.CubeResponse)
 
         async def cubes2variable(
             self,
@@ -273,7 +273,7 @@ class AsyncGENESISWrapper:
             cube_code: constr(min_length=1, max_length=10),
             object_area: GENESISArea = GENESISArea.ALL,
             results: int = 100,
-        ) -> Catalogue.CubeResponse:
+        ) -> dict:
             """Get a list of data cubes related to the specified variable
 
             :param variable_name: The name of the variable, (max. 6 character)
@@ -291,7 +291,7 @@ class AsyncGENESISWrapper:
                 "pagelength": results,
             }
             _url = self._service_url + "/cubes2variable"
-            return await tools.get_parsed_response(_url, _parameters, Catalogue.CubeResponse)
+            return await tools.get_database_response(_url, _parameters)
 
         async def jobs(
             self,
@@ -300,7 +300,7 @@ class AsyncGENESISWrapper:
             sort_by: GENESISJobCriteria,
             job_type: GENESISJobType = GENESISJobType.ALL,
             results: int = 100,
-        ) -> Catalogue.JobResponse:
+        ) -> dict:
             """Get a list of jobs which were created
 
             :param selector: Filter for the jobs to be displayed. (1-50 characters, stars (*)
@@ -324,7 +324,7 @@ class AsyncGENESISWrapper:
                 "type": job_type.value,
             }
             _url = self._service_url + "/jobs"
-            return await tools.get_parsed_response(_url, _params, Catalogue.JobResponse)
+            return await tools.get_database_response(_url, _params)
 
         async def modified_data(
             self,
@@ -332,7 +332,7 @@ class AsyncGENESISWrapper:
             object_type: GENESISObjectType = GENESISObjectType.ALL,
             updated_after: Optional[date] = None,
             results: int = 100,
-        ) -> Catalogue.ModifiedDataResponse:
+        ) -> dict:
             """Get a list of modified objects
 
             DUE TO AN ERROR IN THE DATABASE THE `results` PARAMETER IS BEING IGNORED
@@ -362,13 +362,13 @@ class AsyncGENESISWrapper:
                 "pagelength": results,
             }
             _url = self._service_url + "/modifieddata"
-            return await tools.get_parsed_response(_url, _param, Catalogue.ModifiedDataResponse)
+            return await tools.get_database_response(_url, _param)
 
-        async def quality_signs(self) -> Catalogue.QualitySignsResponse:
+        async def quality_signs(self) -> dict:
             """Get a list of the quality signs used in the GENESIS database"""
             _url = self._service_url + "/qualitysigns"
-            return await tools.get_parsed_response(
-                _url, self._base_parameter, Catalogue.QualitySignsResponse
+            return await tools.get_database_response(
+                _url, self._base_parameter, dict
             )
 
         async def results(
@@ -376,7 +376,7 @@ class AsyncGENESISWrapper:
             selector: str = None,
             result_count: int = 100,
             search_area: GENESISArea = GENESISArea.ALL,
-        ) -> Catalogue.ResultTableResponse:
+        ) -> dict:
             """Get a list of result tables
 
             :param search_area: The area in which the objects are saved
@@ -393,7 +393,7 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/results"
-            return await tools.get_parsed_response(_url, _param, Catalogue.ResultTableResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def statistics(
             self,
@@ -401,7 +401,7 @@ class AsyncGENESISWrapper:
             search_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
             sort_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
             result_count: int = 100,
-        ) -> Catalogue.StatisticsResponse:
+        ) -> dict:
             """Get a list of statistics matching the supplied parameters
 
             :param selector: The filter which is applied to the field selected by `search_by`
@@ -415,7 +415,7 @@ class AsyncGENESISWrapper:
             :param result_count: The number of results that shall be returned
             :type result_count: int
             :return: The response from the database
-            :rtype: Catalogue.StatisticsResponse
+            :rtype: dict
             """
             # Check if the selector matches the required constraints
             if (selector is not None) and not (1 <= len(selector.strip()) <= 15):
@@ -427,7 +427,7 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/statistics"
-            return await tools.get_parsed_response(_url, _param, Catalogue.StatisticsResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def statistics2variable(
             self,
@@ -473,7 +473,7 @@ class AsyncGENESISWrapper:
                 "area": object_area.value,
             }
             _url = self._service_url + "/statistics2variable"
-            return await tools.get_parsed_response(_url, _param, Catalogue.StatisticsResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def tables(
             self,
@@ -481,7 +481,7 @@ class AsyncGENESISWrapper:
             object_area: GENESISArea = GENESISArea.ALL,
             sort_by: GENESISTableCriteria = GENESISTableCriteria.CODE,
             result_count: int = 100,
-        ) -> Catalogue.TableResponse:
+        ) -> dict:
             """Get a list of tables matching the selector from the selected object area
 
             :param table_selector: The code of the table [required, stars (*) allowed for wildcards]
@@ -502,7 +502,7 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/tables"
-            return await tools.get_parsed_response(_url, _param, Catalogue.TableResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def tables2statistics(
             self,
@@ -510,7 +510,7 @@ class AsyncGENESISWrapper:
             table_selector: str = None,
             object_area: GENESISArea = GENESISArea.ALL,
             result_count: int = 100,
-        ) -> Catalogue.TableResponse:
+        ) -> dict:
             """Get a list of tables matching the table selector which are assigned to the
 
             :param statistics_name: Name of the statistic [required, 1-15 characters]
@@ -534,7 +534,7 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/tables2statistic"
-            return await tools.get_parsed_response(_url, _param, Catalogue.TableResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def tables2variable(
             self,
@@ -542,7 +542,7 @@ class AsyncGENESISWrapper:
             table_selector: str = None,
             object_area: GENESISArea = GENESISArea.ALL,
             result_count: int = 100,
-        ) -> Catalogue.TableResponse:
+        ) -> dict:
             """Get a list of tables matching the table selector which are assigned to the
 
             :param variable_name: Name of the statistic [required, 1-15 characters]
@@ -566,7 +566,7 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/tables2variable"
-            return await tools.get_parsed_response(_url, _param, Catalogue.TableResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def terms(self, term_selector: str, result_count: int = 100):
             """Get a list of terms according to the selector
@@ -581,14 +581,14 @@ class AsyncGENESISWrapper:
                 raise ValueError("The length of the selector needs to be between 1 and 15")
             _param = self._base_parameter | {"selection": term_selector, "pagelength": result_count}
             _url = self._service_url + "/terms"
-            return await tools.get_parsed_response(_url, _param, Catalogue.TermResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def timeseries(
             self,
             timeseries_selector: str,
             object_location: GENESISArea = GENESISArea.ALL,
             result_count: int = 100,
-        ) -> Catalogue.TimeseriesResponse:
+        ) -> dict:
             """Get a list of timeseries according to the selector and the location of the object
 
             :param timeseries_selector: The selector for the timeseries [required, wildcards
@@ -610,7 +610,7 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/timeseries"
-            return await tools.get_parsed_response(_url, _param, Catalogue.TimeseriesResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def timeseries2statistic(
             self,
@@ -644,7 +644,7 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             url = self._service_url + "/timeseries2statistic"
-            return await tools.get_parsed_response(url, param, Catalogue.TimeseriesResponse)
+            return await tools.get_database_response(url, param)
 
         async def timeseries2variable(
             self,
@@ -652,7 +652,7 @@ class AsyncGENESISWrapper:
             timeseries_selector: Optional[str] = None,
             object_location: GENESISArea = GENESISArea.ALL,
             result_count: int = 100,
-        ) -> Catalogue.TimeseriesResponse:
+        ) -> dict:
             """Get a list of timeseries which are related to the specified variable
 
             :param variable_name: The code of the variable [required]
@@ -680,8 +680,8 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/timeseries2variable"
-            return await tools.get_parsed_response(
-                _url, _query_parameter, Catalogue.TimeseriesResponse
+            return await tools.get_database_response(
+                _url, _query_parameter, dict
             )
 
         async def values(
@@ -691,7 +691,7 @@ class AsyncGENESISWrapper:
             search_by: GENESISValueCriteria = GENESISValueCriteria.CODE,
             sort_by: GENESISValueCriteria = GENESISValueCriteria.CODE,
             result_count: int = 100,
-        ) -> Catalogue.ValueResponse:
+        ) -> dict:
             """Get a list of values specified by the filter
 
             :param value_filter: The filter for the value identifications [optional, wildcards
@@ -727,7 +727,7 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/values"
-            return await tools.get_parsed_response(_url, params, Catalogue.ValueResponse)
+            return await tools.get_database_response(_url, params)
 
         async def values2variable(
             self,
@@ -737,7 +737,7 @@ class AsyncGENESISWrapper:
             search_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
             sort_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
             result_count: int = 100,
-        ) -> Catalogue.ValueResponse:
+        ) -> dict:
             """Get a list of characteristic values for the supplied variable
 
             :param variable_name: The code of the variable
@@ -782,7 +782,7 @@ class AsyncGENESISWrapper:
             # Build the url for the call
             _url = self._service_url + "/values2variable"
             # Make the call and await the response
-            return await tools.get_parsed_response(_url, _param, Catalogue.ValueResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def variables(
             self,
@@ -792,7 +792,7 @@ class AsyncGENESISWrapper:
             sort_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
             variable_type: GENESISVariableType = GENESISVariableType.ALL,
             result_count: int = 100,
-        ) -> Catalogue.VariableResponse:
+        ) -> dict:
             """Get a list of variables matching the filter and object location
 
             :param variable_filter: Identification Code of the variable [required, wildcards
@@ -824,7 +824,7 @@ class AsyncGENESISWrapper:
             # Build the url
             _url = self._service_url + "/variables"
             # Return the parsed result
-            return await tools.get_parsed_response(_url, _param, Catalogue.VariableResponse)
+            return await tools.get_database_response(_url, _param)
 
         async def variables2statistic(
             self,
@@ -835,7 +835,7 @@ class AsyncGENESISWrapper:
             sort_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
             variable_type: GENESISVariableType = GENESISVariableType.ALL,
             result_count: int = 100,
-        ) -> Catalogue.VariableResponse:
+        ) -> dict:
             """Get a list of variables related to the supplied statistic
 
             :param statistic_name: The identification of the statistic [required]
@@ -872,7 +872,7 @@ class AsyncGENESISWrapper:
             }
             # Build the query path
             _path = self._service_url + "/variables2statistic"
-            return await tools.get_parsed_response(_path, _param, Catalogue.VariableResponse)
+            return await tools.get_database_response(_path, _param)
 
     class Data:
         def __init__(
@@ -982,7 +982,7 @@ class AsyncGENESISWrapper:
             # Build the query path
             query_path = self._service_path + "/chart2result"
             # Download the image
-            return await tools.download_file_from_database(query_path, query_parameter)
+            return await tools.get_database_response(query_path, query_parameter)
 
         async def chart2table(
             self,
@@ -1116,7 +1116,7 @@ class AsyncGENESISWrapper:
             # Build the query path
             query_path = self._service_path + "/chart2table"
             # Download the image
-            return await tools.download_file_from_database(query_path, query_parameter)
+            return await tools.get_database_response(query_path, query_parameter)
 
         async def chart2timeseries(
             self,
@@ -1254,7 +1254,7 @@ class AsyncGENESISWrapper:
             # Build the query path
             query_path = self._service_path + "/chart2timeseries"
             # Download the image
-            return await tools.download_file_from_database(query_path, query_parameter)
+            return await tools.get_database_response(query_path, query_parameter)
 
         async def cube(
             self,
@@ -1367,7 +1367,7 @@ class AsyncGENESISWrapper:
             # Build the query path
             query_path = self._service_path + "/cube"
             # Download the file
-            return await tools.download_file_from_database(query_path, query_parameters)
+            return await tools.get_database_response(query_path, query_parameters)
 
         async def cube_file(
             self,
@@ -1482,7 +1482,7 @@ class AsyncGENESISWrapper:
             # Build the query path
             query_path = self._service_path + "/cubefile"
             # Download the file
-            return await tools.download_file_from_database(query_path, query_parameters)
+            return await tools.get_database_response(query_path, query_parameters)
 
         async def map2result(
             self,
@@ -1531,7 +1531,7 @@ class AsyncGENESISWrapper:
             # Build the query path
             query_path = self._service_path + "/map2result"
             # Download the file
-            return await tools.download_file_from_database(query_path, query_parameters)
+            return await tools.get_database_response(query_path, query_parameters)
         
         async def map2table(
                 self,
@@ -1638,7 +1638,7 @@ class AsyncGENESISWrapper:
             # Build the query path
             query_path = self._service_path + "/map2table"
             # Download the file
-            return await tools.download_file_from_database(query_path, query_parameters)
+            return await tools.get_database_response(query_path, query_parameters)
 
         async def map2timeseries(
                 self,
@@ -1745,4 +1745,38 @@ class AsyncGENESISWrapper:
             # Build the query path
             query_path = self._service_path + "/map2timeseries"
             # Download the file
-            return await tools.download_file_from_database(query_path, query_parameters)
+            return await tools.get_database_response(query_path, query_parameters)
+        
+        async def result(
+                self,
+                object_name: str,
+                object_location: GENESISArea = GENESISArea.ALL,
+                remove_empty_rows: bool = False
+        ):
+            """
+            Get the contents of the result table embedded in the response
+            
+            :param object_name: The identifier of the table [required, 1-15 characters]
+            :type object_name: str
+            :param object_location: The location in which the table is stored, defaults to
+                :py:enum:mem:`~enums.GENESISArea.ALL`
+            :type object_location: str, optional
+            :param remove_empty_rows: Remove empty rows from the embedded CSV-file
+            :type remove_empty_rows: bool, optional
+            :return: Dictionary containing the response
+            :rtype: dict
+            """
+            if not object_name:
+                raise ValueError("The object_name is a required parameter")
+            if not (1 <= len(object_name.strip()) <= 15):
+                raise ValueError("The object_name may only contain between 1 and 15 characters")
+            # Build query parameters
+            query_parameter = self._base_parameter | {
+                "name": object_name,
+                "area": object_location.value,
+                'compress': str(remove_empty_rows)
+            }
+            query_path = self._service_path + '/result'
+            return await tools.get_database_response(
+                query_path, query_parameter
+            )
