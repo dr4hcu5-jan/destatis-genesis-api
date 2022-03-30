@@ -1,8 +1,7 @@
-import typing
 import datetime
+import typing
 
-from . import enums
-from . import tools
+from . import enums, tools
 
 
 class CatalogueAPIWrapper:

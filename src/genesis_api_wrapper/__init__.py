@@ -1,7 +1,7 @@
 """Wrapper for the JSON API of the DESTATIS GENESIS database"""
 import logging
 
-from . import tools, enums, find, catalogue, data, hello_world
+from . import enums, find, catalogue, data, hello_world, metadata, profile
 
 # Create a logger for the whole module
 logger = logging.getLogger("genesis_api_wrapper")
@@ -46,12 +46,20 @@ class APIWrapper:
         self.hello_world: hello_world.HelloWorldAPIWrapper = hello_world.HelloWorldAPIWrapper(
             username, password, language
         )
-        """Methods in the `Hello World` part of the official API documentation"""
-        self.find: find.FindAPIWrapper = find.FindAPIWrapper(username, password)
-        """Methods in the `FindAPIWrapper` part of the official API documentation"""
+        """Methods in the class:`hello_world.Hello World` part of the official API documentation"""
+        self.find: find.FindAPIWrapper = find.FindAPIWrapper(username, password, language)
+        """Methods in the :class`find.FindAPIWrapper` part of the official API documentation"""
         self.catalogue: catalogue.CatalogueAPIWrapper = catalogue.CatalogueAPIWrapper(
-            username, password
+            username, password, language
         )
-        """Methods in the `Catalogue` part of the official API documentation"""
-        self.data: data.DataAPIWrapper = data.DataAPIWrapper(username, password)
-        """Methods in the `DataAPIWrapper` part of the official API documentation"""
+        """Methods in the :class:`catalogue.CatalogueAPIWrapper` part of the official API
+        documentation"""
+        self.data: data.DataAPIWrapper = data.DataAPIWrapper(username, password, language)
+        """Methods in the :class:`data.DataAPIWrapper` part of the official API documentation"""
+        self.metadata: metadata.MetadataAPIWrapper = metadata.MetadataAPIWrapper(
+            username, password, language
+        )
+        """Methods in the :class:`metadata.MetadataAPIWrapper`"""
+        self.profile: profile.ProfileAPIWrapper = profile.ProfileAPIWrapper(
+            username, password, language
+        )

@@ -1,12 +1,9 @@
-import typing
-
 from . import enums, tools
 
 
 class MetadataAPIWrapper:
-    
     def __init__(
-            self, username: str, password: str, language: enums.Language = enums.Language.GERMAN
+        self, username: str, password: str, language: enums.Language = enums.Language.GERMAN
     ):
         """Create a new HelloWorldAPIWrapper method wrapper
 
@@ -36,15 +33,13 @@ class MetadataAPIWrapper:
             "password": self._password,
             "language": self._language.value,
         }
-        
+
     async def cube(
-            self,
-            object_name: str,
-            storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
+        self, object_name: str, storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
     ) -> dict:
         """
         Get metadata about a data cube
-        
+
         :param object_name: The object's identification code
         :type object_name: str
         :param storage_location: The storage location of the object, defaults to
@@ -59,18 +54,16 @@ class MetadataAPIWrapper:
             raise ValueError("The object_name may only contain between 1 and 15 characters")
         # Build the query parameter
         query_parameter = self._base_parameter | {
-            'name': object_name,
-            'area': storage_location.value
+            "name": object_name,
+            "area": storage_location.value,
         }
         # Build the query path
-        query_path = self._service_url + '/cube'
+        query_path = self._service_url + "/cube"
         # Get the response
         return await tools.get_database_response(query_path, query_parameter)
 
     async def statistic(
-            self,
-            object_name: str,
-            storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
+        self, object_name: str, storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
     ) -> dict:
         """
         Get metadata about a statistic
@@ -89,18 +82,16 @@ class MetadataAPIWrapper:
             raise ValueError("The object_name may only contain between 1 and 15 characters")
         # Build the query parameter
         query_parameter = self._base_parameter | {
-            'name': object_name,
-            'area': storage_location.value
+            "name": object_name,
+            "area": storage_location.value,
         }
         # Build the query path
-        query_path = self._service_url + '/statistic'
+        query_path = self._service_url + "/statistic"
         # Get the response
         return await tools.get_database_response(query_path, query_parameter)
 
     async def table(
-            self,
-            object_name: str,
-            storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
+        self, object_name: str, storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
     ) -> dict:
         """
         Get metadata about a table
@@ -119,18 +110,16 @@ class MetadataAPIWrapper:
             raise ValueError("The object_name may only contain between 1 and 15 characters")
         # Build the query parameter
         query_parameter = self._base_parameter | {
-            'name': object_name,
-            'area': storage_location.value
+            "name": object_name,
+            "area": storage_location.value,
         }
         # Build the query path
-        query_path = self._service_url + '/table'
+        query_path = self._service_url + "/table"
         # Get the response
         return await tools.get_database_response(query_path, query_parameter)
-    
+
     async def timeseries(
-            self,
-            object_name: str,
-            storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
+        self, object_name: str, storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
     ) -> dict:
         """
         Get metadata about a table
@@ -149,18 +138,16 @@ class MetadataAPIWrapper:
             raise ValueError("The object_name may only contain between 1 and 15 characters")
         # Build the query parameter
         query_parameter = self._base_parameter | {
-            'name': object_name,
-            'area': storage_location.value
+            "name": object_name,
+            "area": storage_location.value,
         }
         # Build the query path
-        query_path = self._service_url + '/timeseries'
+        query_path = self._service_url + "/timeseries"
         # Get the response
         return await tools.get_database_response(query_path, query_parameter)
-    
+
     async def value(
-            self,
-            object_name: str,
-            storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
+        self, object_name: str, storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
     ) -> dict:
         """
         Get metadata about a table
@@ -179,18 +166,16 @@ class MetadataAPIWrapper:
             raise ValueError("The object_name may only contain between 1 and 15 characters")
         # Build the query parameter
         query_parameter = self._base_parameter | {
-            'name': object_name,
-            'area': storage_location.value
+            "name": object_name,
+            "area": storage_location.value,
         }
         # Build the query path
-        query_path = self._service_url + '/value'
+        query_path = self._service_url + "/value"
         # Get the response
         return await tools.get_database_response(query_path, query_parameter)
-    
+
     async def variable(
-            self,
-            object_name: str,
-            storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
+        self, object_name: str, storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
     ) -> dict:
         """
         Get metadata about a table
@@ -209,10 +194,10 @@ class MetadataAPIWrapper:
             raise ValueError("The object_name may only contain between 1 and 15 characters")
         # Build the query parameter
         query_parameter = self._base_parameter | {
-            'name': object_name,
-            'area': storage_location.value
+            "name": object_name,
+            "area": storage_location.value,
         }
         # Build the query path
-        query_path = self._service_url + '/variable'
+        query_path = self._service_url + "/variable"
         # Get the response
         return await tools.get_database_response(query_path, query_parameter)

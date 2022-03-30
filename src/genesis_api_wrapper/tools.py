@@ -3,11 +3,11 @@ import asyncio
 import logging
 import mimetypes
 import secrets
-import time
 import tempfile
+import time
 from os import PathLike
 from pathlib import Path
-from typing import TypeVar, Union, Type, Optional
+from typing import Union, Optional
 
 import aiohttp
 

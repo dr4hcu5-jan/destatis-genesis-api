@@ -1,5 +1,4 @@
-from . import enums
-from . import tools
+from . import enums, tools
 
 
 class HelloWorldAPIWrapper:

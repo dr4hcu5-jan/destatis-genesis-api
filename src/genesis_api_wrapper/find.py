@@ -1,5 +1,4 @@
-from . import tools
-from . import enums
+from . import tools, enums
 
 
 class FindAPIWrapper:

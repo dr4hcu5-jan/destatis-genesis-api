@@ -1,12 +1,9 @@
-import typing
-
 from . import enums, tools
 
 
 class ProfileAPIWrapper:
-    
     def __init__(
-            self, username: str, password: str, language: enums.Language = enums.Language.GERMAN
+        self, username: str, password: str, language: enums.Language = enums.Language.GERMAN
     ):
         """Create a new HelloWorldAPIWrapper method wrapper
 
@@ -36,36 +33,33 @@ class ProfileAPIWrapper:
             "password": self._password,
             "language": self._language.value,
         }
-        
+
     async def password(self, new_password: str):
         """
         Change the password of the current user.
-        
+
         After invoking this function you need to recreate your wrapper
-        
+
         :param new_password: The new password
         :type new_password: str
         :return: The response from the server
         :rtype: dict
         """
         if not (10 <= len(new_password) <= 20):
-            raise ValueError('The new password has the following length constraints: min. 10 '
-                             'chars, max. 20 chars')
-        query_parameter = self._base_parameter | {
-            'new': new_password,
-            'repeat': new_password
-        }
-        query_path = self._service_url + '/password'
+            raise ValueError(
+                "The new password has the following length constraints: min. 10 "
+                "chars, max. 20 chars"
+            )
+        query_parameter = self._base_parameter | {"new": new_password, "repeat": new_password}
+        query_path = self._service_url + "/password"
         return await tools.get_database_response(query_path, query_parameter)
-    
+
     def remove_result(
-            self,
-            object_name: str,
-            storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
+        self, object_name: str, storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL
     ):
         """
         Remove a result table from the specified area
-        
+
         :param object_name: The object's identification code
         :type object_name: str
         :param storage_location: The storage location of the object, defaults to
@@ -79,8 +73,8 @@ class ProfileAPIWrapper:
         if not (1 <= len(object_name.strip()) <= 15):
             raise ValueError("The object_name may only contain between 1 and 15 characters")
         query_parameters = self._base_parameter | {
-            'name': object_name,
-            'area': storage_location.value
+            "name": object_name,
+            "area": storage_location.value,
         }
-        query_path = self._service_url + 'removeResult'
+        query_path = self._service_url + "removeResult"
         return await tools.get_database_response(query_path, query_parameters)
