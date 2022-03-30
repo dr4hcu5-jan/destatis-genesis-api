@@ -7,19 +7,18 @@ from pydantic import SecretStr
 
 from . import tools
 from .enums import (
-    GENESISLanguage,
-    GENESISCategory,
-    GENESISJobType,
-    GENESISJobCriteria,
-    GENESISObjectType,
-    GENESISStatisticCriteria,
-    GENESISArea,
-    GENESISTableCriteria,
-    GENESISValueCriteria,
-    GENESISVariableCriteria,
-    GENESISVariableType,
-    GENESISChartType,
-    GENESISImageSize,
+    Language,
+    ObjectType,
+    JobType,
+    JobCriteria,
+    StatisticCriteria,
+    ObjectStorage,
+    TableCriteria,
+    GenericCriteria,
+    GenericCriteria,
+    VariableType,
+    ChartType,
+    ImageSize,
 )
 from .responses import *
 
@@ -33,9 +32,7 @@ class AsyncGENESISWrapper:
     An asynchronous Wrapper for the GENESIS API
     """
 
-    def __init__(
-        self, username: str, password: str, language: GENESISLanguage = GENESISLanguage.GERMAN
-    ):
+    def __init__(self, username: str, password: str, language: Language = Language.GERMAN):
         """Create a new GENESIS database wrapper
 
         :param username: The username which was assigned during the creation of an account(
@@ -45,7 +42,7 @@ class AsyncGENESISWrapper:
         :type password: SecretStr
         :param language: The language which should be used in the response bodies, defaults to
             German
-        :type language: GENESISLanguage
+        :type language: Language
         """
         # Check if the username consists of 10 characters
         if len(username) != 10:
@@ -77,9 +74,7 @@ class AsyncGENESISWrapper:
     class HelloWorld:
         """All methods from the HelloWorld section of the API documentation"""
 
-        def __init__(
-            self, username: str, password: str, language: GENESISLanguage = GENESISLanguage.GERMAN
-        ):
+        def __init__(self, username: str, password: str, language: Language = Language.GERMAN):
             """Create a new HelloWorld method wrapper
 
             :param username: The username which was assigned during the creation of an account (
@@ -89,7 +84,7 @@ class AsyncGENESISWrapper:
             :type password: SecretStr
             :param language: The language which should be used in the response bodies, defaults to
                 German
-            :type language: GENESISLanguage
+            :type language: Language
             """
             # Check if the username consists of 10 characters
             if len(username) != 10:
@@ -110,33 +105,27 @@ class AsyncGENESISWrapper:
             }
 
         @staticmethod
-        async def who_am_i() -> HelloWorld.WhoAmIResponse:
+        async def who_am_i() -> dict:
             """Get information about the client data transmitted to the GENESIS database
 
             :return: A Response containing the IP Address and the User-Agent for the request that
                 has been executed
             :rtype: WhoAmIResponse
             """
-            return await tools.get_database_response(
-                "/helloworld/whoami", None, HelloWorld.WhoAmIResponse
-            )
+            return await tools.get_database_response("/helloworld/whoami", None)
 
-        async def login_check(self) -> HelloWorld.LoginCheckResponse:
+        async def login_check(self) -> dict:
             """Check the login data which were supplied during the creation of the wrapper
 
             :return: The response from the server containing the success or failure of the reqeust
             :rtype: LoginCheckResponse
             """
-            return await tools.get_database_response(
-                "/helloworld/logincheck", self._base_parameter, HelloWorld.LoginCheckResponse
-            )
+            return await tools.get_database_response("/helloworld/logincheck", self._base_parameter)
 
     class Find:
         """Methods for searching for objects"""
 
-        def __init__(
-            self, username: str, password: str, language: GENESISLanguage = GENESISLanguage.GERMAN
-        ):
+        def __init__(self, username: str, password: str, language: Language = Language.GERMAN):
             """Create a new Find section method wrapper
 
             :param username: The username which was assigned during the creation of an account (
@@ -146,7 +135,7 @@ class AsyncGENESISWrapper:
             :type password: SecretStr
             :param language: The language which should be used in the response bodies, defaults to
                 German
-            :type language: GENESISLanguage
+            :type language: Language
             """
             # Check if the username consists of 10 characters
             if len(username) != 10:
@@ -169,9 +158,9 @@ class AsyncGENESISWrapper:
         async def find(
             self,
             search_term: str,
-            category: GENESISCategory = GENESISCategory.ALL,
+            category: ObjectType = ObjectType.ALL,
             results_per_category: int = 100,
-        ) -> Find.FindResult:
+        ) -> dict:
             """Get a list of objects in the specified category which match the search term
 
             :param search_term: Term for which the search is executed
@@ -184,14 +173,12 @@ class AsyncGENESISWrapper:
                 "category": category.value,
                 "pagelength": str(results_per_category),
             }
-            return await tools.get_database_response("/find/find", _params, Find.FindResult)
+            return await tools.get_database_response("/find/find", _params)
 
     class Catalogue:
         """Methods for listing objects"""
 
-        def __init__(
-            self, username: str, password: str, language: GENESISLanguage = GENESISLanguage.GERMAN
-        ):
+        def __init__(self, username: str, password: str, language: Language = Language.GERMAN):
             """Create a new Find section method wrapper
 
             :param username: The username which was assigned during the creation of an account (
@@ -201,7 +188,7 @@ class AsyncGENESISWrapper:
             :type password: SecretStr
             :param language: The language which should be used in the response bodies, defaults to
                 German
-            :type language: GENESISLanguage
+            :type language: Language
             """
             # Check if the username consists of 10 characters
             if len(username) != 10:
@@ -222,7 +209,7 @@ class AsyncGENESISWrapper:
             }
 
         async def cubes(
-            self, selection: str, object_area: GENESISArea = GENESISArea.ALL, results: int = 100
+            self, selection: str, object_area: ObjectStorage = ObjectStorage.ALL, results: int = 100
         ) -> dict:
             """Get a list of data cubes matching the selector (PREMIUM ACCOUNTS ONLY)
 
@@ -239,13 +226,13 @@ class AsyncGENESISWrapper:
                 "pagelength": str(results),
             }
             _url = self._service_url + "/cubes"
-            return await tools.get_database_response(_url, _parameters, Catalogue.CubeResponse)
+            return await tools.get_database_response(_url, _parameters)
 
         async def cubes2statistic(
             self,
             statistic_name: constr(min_length=1, max_length=6),
             cube_code: constr(min_length=1, max_length=10),
-            object_area: GENESISArea = GENESISArea.ALL,
+            object_area: ObjectStorage = ObjectStorage.ALL,
             results: int = 100,
         ) -> dict:
             """Get a list of data cubes of a statistic matching the selector (PREMIUM ACCOUNTS ONLY)
@@ -265,13 +252,13 @@ class AsyncGENESISWrapper:
                 "pagelength": str(results),
             }
             _url = self._service_url + "/cubes2statistic"
-            return await tools.get_database_response(_url, _parameters, Catalogue.CubeResponse)
+            return await tools.get_database_response(_url, _parameters)
 
         async def cubes2variable(
             self,
             variable_name: constr(min_length=1, max_length=6),
             cube_code: constr(min_length=1, max_length=10),
-            object_area: GENESISArea = GENESISArea.ALL,
+            object_area: ObjectStorage = ObjectStorage.ALL,
             results: int = 100,
         ) -> dict:
             """Get a list of data cubes related to the specified variable
@@ -296,9 +283,9 @@ class AsyncGENESISWrapper:
         async def jobs(
             self,
             selector: str,
-            search_by: GENESISJobCriteria,
-            sort_by: GENESISJobCriteria,
-            job_type: GENESISJobType = GENESISJobType.ALL,
+            search_by: JobCriteria,
+            sort_by: JobCriteria,
+            job_type: JobType = JobType.ALL,
             results: int = 100,
         ) -> dict:
             """Get a list of jobs which were created
@@ -329,7 +316,7 @@ class AsyncGENESISWrapper:
         async def modified_data(
             self,
             selector: Optional[str] = None,
-            object_type: GENESISObjectType = GENESISObjectType.ALL,
+            object_type: ObjectType = ObjectType.ALL,
             updated_after: Optional[date] = None,
             results: int = 100,
         ) -> dict:
@@ -357,7 +344,7 @@ class AsyncGENESISWrapper:
             # Build the query parameters
             _param = self._base_parameter | {
                 "selection": "" if selector is None else selector,
-                "type": GENESISObjectType.ALL.value if object_type is None else object_type.value,
+                "type": ObjectType.ALL.value if object_type is None else object_type.value,
                 "date": updated_after.strftime("%d.%m.%Y") if updated_after is not None else None,
                 "pagelength": results,
             }
@@ -367,15 +354,13 @@ class AsyncGENESISWrapper:
         async def quality_signs(self) -> dict:
             """Get a list of the quality signs used in the GENESIS database"""
             _url = self._service_url + "/qualitysigns"
-            return await tools.get_database_response(
-                _url, self._base_parameter, dict
-            )
+            return await tools.get_database_response(_url, self._base_parameter)
 
         async def results(
             self,
             selector: str = None,
             result_count: int = 100,
-            search_area: GENESISArea = GENESISArea.ALL,
+            search_area: ObjectStorage = ObjectStorage.ALL,
         ) -> dict:
             """Get a list of result tables
 
@@ -398,8 +383,8 @@ class AsyncGENESISWrapper:
         async def statistics(
             self,
             selector: str = None,
-            search_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
-            sort_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
+            search_by: StatisticCriteria = StatisticCriteria.CODE,
+            sort_by: StatisticCriteria = StatisticCriteria.CODE,
             result_count: int = 100,
         ) -> dict:
             """Get a list of statistics matching the supplied parameters
@@ -408,10 +393,10 @@ class AsyncGENESISWrapper:
             :type selector: str
             :param search_by: The field on which the selector shall be applied to, defaults to
                 `GENESISStatisticCriteria.Code`
-            :type search_by: GENESISStatisticCriteria
+            :type search_by: StatisticCriteria
             :param sort_by: Sort the results by the field, defaults to
                 `GENESISStatisticCriteria.Code`
-            :type sort_by: GENESISStatisticCriteria
+            :type sort_by: StatisticCriteria
             :param result_count: The number of results that shall be returned
             :type result_count: int
             :return: The response from the database
@@ -433,9 +418,9 @@ class AsyncGENESISWrapper:
             self,
             variable_name: str,
             statistic_selector: str = None,
-            search_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
-            sort_by: GENESISStatisticCriteria = GENESISStatisticCriteria.CODE,
-            object_area: GENESISArea = GENESISArea.ALL,
+            search_by: StatisticCriteria = StatisticCriteria.CODE,
+            sort_by: StatisticCriteria = StatisticCriteria.CODE,
+            object_area: ObjectStorage = ObjectStorage.ALL,
             result_count: int = 100,
         ):
             """Get a list of statistics which are referenced by the selected variable
@@ -447,12 +432,12 @@ class AsyncGENESISWrapper:
             :type statistic_selector: str
             :param search_by: The field on which the code shall be applied, [optional, defaults
                 to `GENESISStatisticCriteria.CODE`]
-            :type search_by: GENESISStatisticCriteria
+            :type search_by: StatisticCriteria
             :param sort_by: The field by which the results are to be sorted, [optional, defaults
                 to `GENESISStatisticCriteria.CODE`]
-            :type sort_by: GENESISStatisticCriteria
+            :type sort_by: StatisticCriteria
             :param object_area: The area in which the object is stored
-            :type object_area: GENESISArea
+            :type object_area: ObjectStorage
             :param result_count: The number of results which are returned by the request
             :type result_count: int
             :return: The response returned by the server
@@ -478,8 +463,8 @@ class AsyncGENESISWrapper:
         async def tables(
             self,
             table_selector: str,
-            object_area: GENESISArea = GENESISArea.ALL,
-            sort_by: GENESISTableCriteria = GENESISTableCriteria.CODE,
+            object_area: ObjectStorage = ObjectStorage.ALL,
+            sort_by: TableCriteria = TableCriteria.CODE,
             result_count: int = 100,
         ) -> dict:
             """Get a list of tables matching the selector from the selected object area
@@ -508,7 +493,7 @@ class AsyncGENESISWrapper:
             self,
             statistics_name: str,
             table_selector: str = None,
-            object_area: GENESISArea = GENESISArea.ALL,
+            object_area: ObjectStorage = ObjectStorage.ALL,
             result_count: int = 100,
         ) -> dict:
             """Get a list of tables matching the table selector which are assigned to the
@@ -540,7 +525,7 @@ class AsyncGENESISWrapper:
             self,
             variable_name: str,
             table_selector: str = None,
-            object_area: GENESISArea = GENESISArea.ALL,
+            object_area: ObjectStorage = ObjectStorage.ALL,
             result_count: int = 100,
         ) -> dict:
             """Get a list of tables matching the table selector which are assigned to the
@@ -586,7 +571,7 @@ class AsyncGENESISWrapper:
         async def timeseries(
             self,
             timeseries_selector: str,
-            object_location: GENESISArea = GENESISArea.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
             result_count: int = 100,
         ) -> dict:
             """Get a list of timeseries according to the selector and the location of the object
@@ -594,7 +579,7 @@ class AsyncGENESISWrapper:
             :param timeseries_selector: The selector for the timeseries [required, wildcards
                 allowed]
             :param object_location: The area in which the object is stored [default:
-                ``GENESISArea.ALL``]
+                ``ObjectStorage.ALL``]
             :param result_count: The number of results that shall be returned
             :return: The list of found timeseries
             """
@@ -616,7 +601,7 @@ class AsyncGENESISWrapper:
             self,
             statistic_name: str,
             timeseries_selector: Optional[str] = None,
-            object_location: GENESISArea = GENESISArea.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
             result_count: int = 100,
         ):
             """Get a list of timeseries which are related to the selected statistic
@@ -650,7 +635,7 @@ class AsyncGENESISWrapper:
             self,
             variable_name: str,
             timeseries_selector: Optional[str] = None,
-            object_location: GENESISArea = GENESISArea.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
             result_count: int = 100,
         ) -> dict:
             """Get a list of timeseries which are related to the specified variable
@@ -659,7 +644,7 @@ class AsyncGENESISWrapper:
             :param timeseries_selector: A filter for the returned timeseries [optional, wildcards
                 allowed]
             :param object_location: The storage location in which the search shall be executed [
-                optional, defaults to ``GENESISArea.ALL``]
+                optional, defaults to ``ObjectStorage.ALL``]
             :param result_count: The number of results that shall be returned
             :return: A parsed response containing the list of timeseries, if any were found
             """
@@ -680,16 +665,14 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/timeseries2variable"
-            return await tools.get_database_response(
-                _url, _query_parameter, dict
-            )
+            return await tools.get_database_response(_url, _query_parameter, dict)
 
         async def values(
             self,
             value_filter: str,
-            object_location: GENESISArea = GENESISArea.ALL,
-            search_by: GENESISValueCriteria = GENESISValueCriteria.CODE,
-            sort_by: GENESISValueCriteria = GENESISValueCriteria.CODE,
+            object_location: ObjectStorage = ObjectStorage.ALL,
+            search_by: GenericCriteria = GenericCriteria.CODE,
+            sort_by: GenericCriteria = GenericCriteria.CODE,
             result_count: int = 100,
         ) -> dict:
             """Get a list of values specified by the filter
@@ -697,11 +680,11 @@ class AsyncGENESISWrapper:
             :param value_filter: The filter for the value identifications [optional, wildcards
                 allowed]
             :param object_location: The storage location which shall be used during the search [
-                optional, defaults to ``GENESISValueCriteria.CODE``]
+                optional, defaults to ``GenericCriteria.CODE``]
             :param search_by: The criteria which is used in combination to the value_filter [
-                optional, defaults to ``GENESISValueCriteria.CODE``]
+                optional, defaults to ``GenericCriteria.CODE``]
             :param sort_by: The criteria by which the results are sorted [optional, defaults to
-                ``GENESISValueCriteria.CODE``]
+                ``GenericCriteria.CODE``]
             :param result_count: The number of results returned
             :return: A parsed response containing the list of values
             """
@@ -733,9 +716,9 @@ class AsyncGENESISWrapper:
             self,
             variable_name: str,
             value_filter: Optional[str] = None,
-            object_location: GENESISArea = GENESISArea.ALL,
-            search_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
-            sort_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
+            object_location: ObjectStorage = ObjectStorage.ALL,
+            search_by: GenericCriteria = GenericCriteria.CODE,
+            sort_by: GenericCriteria = GenericCriteria.CODE,
             result_count: int = 100,
         ) -> dict:
             """Get a list of characteristic values for the supplied variable
@@ -787,10 +770,10 @@ class AsyncGENESISWrapper:
         async def variables(
             self,
             variable_filter: str,
-            object_location: GENESISArea = GENESISArea.ALL,
-            search_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
-            sort_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
-            variable_type: GENESISVariableType = GENESISVariableType.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
+            search_by: GenericCriteria = GenericCriteria.CODE,
+            sort_by: GenericCriteria = GenericCriteria.CODE,
+            variable_type: VariableType = VariableType.ALL,
             result_count: int = 100,
         ) -> dict:
             """Get a list of variables matching the filter and object location
@@ -830,10 +813,10 @@ class AsyncGENESISWrapper:
             self,
             statistic_name: str,
             variable_filter: Optional[str] = None,
-            object_location: GENESISArea = GENESISArea.ALL,
-            search_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
-            sort_by: GENESISVariableCriteria = GENESISVariableCriteria.CODE,
-            variable_type: GENESISVariableType = GENESISVariableType.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
+            search_by: GenericCriteria = GenericCriteria.CODE,
+            sort_by: GenericCriteria = GenericCriteria.CODE,
+            variable_type: VariableType = VariableType.ALL,
             result_count: int = 100,
         ) -> dict:
             """Get a list of variables related to the supplied statistic
@@ -875,9 +858,7 @@ class AsyncGENESISWrapper:
             return await tools.get_database_response(_path, _param)
 
     class Data:
-        def __init__(
-            self, username: str, password: str, language: GENESISLanguage = GENESISLanguage.GERMAN
-        ):
+        def __init__(self, username: str, password: str, language: Language = Language.GERMAN):
             """Create a new part wrapper for the methods listed in the Data (2.5) section
 
             :param username: The username which is used to access the database
@@ -916,13 +897,13 @@ class AsyncGENESISWrapper:
             # Selection Specifiers
             object_name: str,
             # Chart Settings
-            chart_type: GENESISChartType.LINE_CHART,
-            image_size: GENESISImageSize = GENESISImageSize.LEVEL_3,
+            chart_type: ChartType.LINE_CHART,
+            image_size: ImageSize = ImageSize.LEVEL_3,
             draw_points_in_line_chart: bool = False,
             compress_y_axis: bool = False,
             show_top_values_first: bool = False,
             # Object Storage Settings
-            object_location: GENESISArea = GENESISArea.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
         ) -> Union[dict, PathLike]:
             """Download a graph for a result table
 
@@ -931,14 +912,14 @@ class AsyncGENESISWrapper:
 
             :param object_location: The location in which the object is stored, defaults
                 to :py:enum:mem:`~enums.GENESISArea`
-            :type object_location: GENESISArea
+            :type object_location: ObjectStorage
             :param object_name: The identifier of the result table [required]
             :type object_name: str
             :param chart_type: The type of chart which shall be downloaded [required]
-            :type chart_type: GENESISChartType
+            :type chart_type: ChartType
             :param image_size: The size of the image which shall be downloaded [optional,
                 default 1024x768 pixels]
-            :type image_size: GENESISImageSize
+            :type image_size: ImageSize
             :param draw_points_in_line_chart: Highlight data points in a line chart [optional,
                 only allowed if chart_type is line chart]
             :type draw_points_in_line_chart: bool
@@ -963,10 +944,10 @@ class AsyncGENESISWrapper:
             if chart_type is None:
                 raise ValueError("The chart_type is a required parameter")
             # Check that draw_points_in_line_chart is only working if the chart type is line chart
-            if draw_points_in_line_chart and chart_type != GENESISChartType.LINE_CHART:
+            if draw_points_in_line_chart and chart_type != ChartType.LINE_CHART:
                 raise ValueError(
                     "The parameter draw_points_in_line_chart is only supported for "
-                    "GENESISChartType.LINE_CHART"
+                    "ChartType.LINE_CHART"
                 )
             # Build the query parameters
             query_parameter = self._base_parameter | {
@@ -988,7 +969,7 @@ class AsyncGENESISWrapper:
             self,
             object_name: str,
             # Selection Specifier
-            object_location: GENESISArea = GENESISArea.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
             updated_after: Optional[datetime] = None,
             start_year: Optional[str] = None,
             end_year: Optional[str] = None,
@@ -1002,8 +983,8 @@ class AsyncGENESISWrapper:
             classifying_code_3: Optional[str] = None,
             classifying_key_3: Optional[Union[str, list[str]]] = None,
             # Chart settings:
-            chart_type: GENESISChartType = GENESISChartType.LINE_CHART,
-            image_size: GENESISImageSize = GENESISImageSize.LEVEL_3,
+            chart_type: ChartType = ChartType.LINE_CHART,
+            image_size: ImageSize = ImageSize.LEVEL_3,
             draw_points_in_line_chart: bool = False,
             compress_y_axis: bool = False,
             show_top_values_first: bool = False,
@@ -1017,7 +998,7 @@ class AsyncGENESISWrapper:
             :param object_name: The identifier of the table [required, 1-15 characters]
             :type object_name: str
             :param object_location: The location in which the table is stored, defaults to
-                :py:enum:mem:`~enums.GENESISArea.ALL`
+                :py:enum:mem:`~enums.ObjectStorage.ALL`
             :type object_location: str, optional
             :param updated_after: Time after which the table needs to have been updated to be
                 returned, defaults to :attr:`None`
@@ -1053,21 +1034,21 @@ class AsyncGENESISWrapper:
                 limit the data selection further, defaults to :attr:`None`
             :type classifying_key_3: str, optional
             :param chart_type: The type of chart which shall be downloaded, defaults to
-                :attr:`~enums.GENESISChartType.LINE_CHART`
-            :type chart_type: GENESISChartType, optional
+                :attr:`~enums.ChartType.LINE_CHART`
+            :type chart_type: ChartType, optional
             :param image_size: The size of the image which shall be downloaded, defaults to
-                :attr:`~enums.GENESISImageSize.LEVEL3`
-            :type image_size: GENESISImageSize, optional
+                :attr:`~enums.ImageSize.LEVEL3`
+            :type image_size: ImageSize, optional
             :param draw_points_in_line_chart: Highlight the data points in a line chart,
-                only allowed if chart_type is :attr:`enums.GENESISChartType.LINE_CHART`
+                only allowed if chart_type is :attr:`enums.ChartType.LINE_CHART`
             :type draw_points_in_line_chart: bool, optional
             :param compress_y_axis: Compress the y-axis to fit the values
             :type compress_y_axis: bool, optional
             :param show_top_values_first:
-                When using :attr:`enums.GENESISChartType.PIE_CHART` as chart_type:
+                When using :attr:`enums.ChartType.PIE_CHART` as chart_type:
                     Display the top five (5) values as single slices and group all other slices into
                     one other slice.
-                When using any other :class:`enums.GENESISChartType`:
+                When using any other :class:`enums.ChartType`:
                     Display the top four (4) values instead of the first four (4) values
             :type show_top_values_first: bool, optional
             :param time_slices: The number of time slices into which the data shall be accumulated
@@ -1081,10 +1062,10 @@ class AsyncGENESISWrapper:
             if not (1 <= len(object_name.strip()) <= 15):
                 raise ValueError("The object_name may only contain between 1 and 15 characters")
             # Check if any illegal parameter combination was set
-            if draw_points_in_line_chart and chart_type is not GENESISChartType.LINE_CHART:
+            if draw_points_in_line_chart and chart_type is not ChartType.LINE_CHART:
                 raise ValueError(
                     "The parameter draw_points_in_line_chart is only supported for "
-                    "GENESISChartType.LINE_CHART"
+                    "ChartType.LINE_CHART"
                 )
             # Convert the times to string
             _time_string = (
@@ -1123,7 +1104,7 @@ class AsyncGENESISWrapper:
             object_name: str,
             # Selection Specifier
             contents: Optional[list[str]] = None,
-            object_location: GENESISArea = GENESISArea.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
             updated_after: Optional[datetime] = None,
             start_year: Optional[str] = None,
             end_year: Optional[str] = None,
@@ -1137,8 +1118,8 @@ class AsyncGENESISWrapper:
             classifying_code_3: Optional[str] = None,
             classifying_key_3: Optional[Union[str, list[str]]] = None,
             # Chart settings:
-            chart_type: GENESISChartType = GENESISChartType.LINE_CHART,
-            image_size: GENESISImageSize = GENESISImageSize.LEVEL_3,
+            chart_type: ChartType = ChartType.LINE_CHART,
+            image_size: ImageSize = ImageSize.LEVEL_3,
             draw_points_in_line_chart: bool = False,
             compress_y_axis: bool = False,
             show_top_values_first: bool = False,
@@ -1154,8 +1135,8 @@ class AsyncGENESISWrapper:
             :param contents: The names of the values which shall be in the chart
             :type contents: list[str], optional
             :param object_location: The location in which the table is stored,
-                defaults to :py:enum:mem:`~enums.GENESISArea.ALL`
-            :type object_location: GENESISArea, optional
+                defaults to :py:enum:mem:`~enums.ObjectStorage.ALL`
+            :type object_location: ObjectStorage, optional
             :param updated_after: Time after which the table needs to have been updated to be
                 returned, defaults to :attr:`None`
             :type updated_after: datetime, optional
@@ -1190,21 +1171,21 @@ class AsyncGENESISWrapper:
                 limit the data selection further, defaults to :attr:`None`
             :type classifying_key_3: str, optional
             :param chart_type: The type of chart which shall be downloaded, defaults to
-                :py:enum:mem:`~enums.GENESISChartType.LINE_CHART`
-            :type chart_type: GENESISChartType, optional
+                :py:enum:mem:`~enums.ChartType.LINE_CHART`
+            :type chart_type: ChartType, optional
             :param image_size: The size of the image which shall be downloaded, defaults to
-                :py:enum:mem:`~enums.GENESISImageSize.LEVEL_3`
-            :type image_size: GENESISImageSize, optional
+                :py:enum:mem:`~enums.ImageSize.LEVEL_3`
+            :type image_size: ImageSize, optional
             :param draw_points_in_line_chart: Highlight the data points in a line chart,
-                only allowed if chart_type is :attr:`enums.GENESISChartType.LINE_CHART`
+                only allowed if chart_type is :attr:`enums.ChartType.LINE_CHART`
             :type draw_points_in_line_chart: bool, optional
             :param compress_y_axis: Compress the y-axis to fit the values
             :type compress_y_axis: bool, optional
             :param show_top_values_first:
-                When using :py:enum:mem:`~enums.GENESISChartType.PIE_CHART` as chart_type:
+                When using :py:enum:mem:`~enums.ChartType.PIE_CHART` as chart_type:
                     Display the top five (5) values as single slices and group all other slices into
                     one other slice.
-                When using any other :enum:`~enums.GENESISChartType`:
+                When using any other :enum:`~enums.ChartType`:
                     Display the top four (4) values instead of the first four (4) values
             :type show_top_values_first: bool, optional
             :param time_slices: The number of time slices into which the data shall be accumulated
@@ -1218,10 +1199,10 @@ class AsyncGENESISWrapper:
             if not (1 <= len(object_name.strip()) <= 15):
                 raise ValueError("The object_name may only contain between 1 and 15 characters")
             # Check if any illegal parameter combination was set
-            if draw_points_in_line_chart and chart_type is not GENESISChartType.LINE_CHART:
+            if draw_points_in_line_chart and chart_type is not ChartType.LINE_CHART:
                 raise ValueError(
                     "The parameter draw_points_in_line_chart is only supported for "
-                    "GENESISChartType.LINE_CHART"
+                    "ChartType.LINE_CHART"
                 )
             # Convert the times to string
             _time_string = (
@@ -1261,7 +1242,7 @@ class AsyncGENESISWrapper:
             object_name: str,
             # Selection Specifier
             contents: Optional[list[str]] = None,
-            object_location: GENESISArea = GENESISArea.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
             updated_after: Optional[datetime] = None,
             start_year: Optional[str] = None,
             end_year: Optional[str] = None,
@@ -1374,7 +1355,7 @@ class AsyncGENESISWrapper:
             object_name: str,
             # Selection Specifier
             contents: Optional[list[str]] = None,
-            object_location: GENESISArea = GENESISArea.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
             updated_after: Optional[datetime] = None,
             start_year: Optional[str] = None,
             end_year: Optional[str] = None,
@@ -1402,8 +1383,8 @@ class AsyncGENESISWrapper:
             :param contents: The names of the values which shall be in the chart
             :type contents: list[str], optional
             :param object_location: The location in which the table is stored,
-                defaults to :py:enum:mem:`~enums.GENESISArea.ALL`
-            :type object_location: GENESISArea, optional
+                defaults to :py:enum:mem:`~enums.ObjectStorage.ALL`
+            :type object_location: ObjectStorage, optional
             :param updated_after: Time after which the table needs to have been
                 updated to be returned, defaults to :attr:`None`
             :type updated_after: datetime, optional
@@ -1487,18 +1468,18 @@ class AsyncGENESISWrapper:
         async def map2result(
             self,
             object_name: str,
-            object_location: GENESISArea = GENESISArea.ALL,
+            object_location: ObjectStorage = ObjectStorage.ALL,
             number_of_distinction_classes: Optional[int] = 5,
             classify_by_same_value_range: Optional[bool] = True,
-            image_size: GENESISImageSize = GENESISImageSize.LEVEL_3,
+            image_size: ImageSize = ImageSize.LEVEL_3,
         ):
             """Download a map displaying the values of the specified result table
 
             :param object_name: The identifier of the data cube
             :type object_name: str
             :param object_location: The location in which the table is stored,
-                defaults to :py:enum:mem:`~enums.GENESISArea.ALL`
-            :type object_location: GENESISArea, optional
+                defaults to :py:enum:mem:`~enums.ObjectStorage.ALL`
+            :type object_location: ObjectStorage, optional
             :param number_of_distinction_classes: The number of distinction classes to be
                 generated, defaults to 5
             :type number_of_distinction_classes: int, optional
@@ -1507,8 +1488,8 @@ class AsyncGENESISWrapper:
                 different sizes, but the same amount of values in them. Defaults to `True`
             :type classify_by_same_value_range: bool, optional
             :param image_size: The size of the image which shall be downloaded, defaults to
-                :py:enum:mem:`~enums.GENESISImageSize.LEVEL_3`
-            :type image_size: GENESISImageSize, optional
+                :py:enum:mem:`~enums.ImageSize.LEVEL_3`
+            :type image_size: ImageSize, optional
             :return: The path to the image or the file downloaded from the server.
             :rtype: Union[os.PathLike, dict]
             """
@@ -1532,40 +1513,36 @@ class AsyncGENESISWrapper:
             query_path = self._service_path + "/map2result"
             # Download the file
             return await tools.get_database_response(query_path, query_parameters)
-        
+
         async def map2table(
-                self,
-                object_name: str,
-                # Selection Specifier
-                object_location: GENESISArea = GENESISArea.ALL,
-                updated_after: Optional[datetime] = None,
-                start_year: Optional[str] = None,
-                end_year: Optional[str] = None,
-                region_code: Optional[str] = None,
-                region_key: Optional[str] = None,
-                # Data Classifiers
-                classifying_code_1: Optional[str] = None,
-                classifying_key_1: Optional[Union[str, list[str]]] = None,
-                classifying_code_2: Optional[str] = None,
-                classifying_key_2: Optional[Union[str, list[str]]] = None,
-                classifying_code_3: Optional[str] = None,
-                classifying_key_3: Optional[Union[str, list[str]]] = None,
-                # Map Settings
-                number_of_distinction_classes: Optional[int] = 5,
-                classify_by_same_value_range: Optional[bool] = True,
-                image_size: GENESISImageSize = GENESISImageSize.LEVEL_3
+            self,
+            object_name: str,
+            # Selection Specifier
+            object_location: ObjectStorage = ObjectStorage.ALL,
+            start_year: Optional[str] = None,
+            end_year: Optional[str] = None,
+            region_code: Optional[str] = None,
+            region_key: Optional[str] = None,
+            # Data Classifiers
+            classifying_code_1: Optional[str] = None,
+            classifying_key_1: Optional[Union[str, list[str]]] = None,
+            classifying_code_2: Optional[str] = None,
+            classifying_key_2: Optional[Union[str, list[str]]] = None,
+            classifying_code_3: Optional[str] = None,
+            classifying_key_3: Optional[Union[str, list[str]]] = None,
+            # Map Settings
+            number_of_distinction_classes: Optional[int] = 5,
+            classify_by_same_value_range: Optional[bool] = True,
+            image_size: ImageSize = ImageSize.LEVEL_3,
         ):
             """
             Download a map visualizing the selected data from the table
-            
+
             :param object_name: The identifier of the table [required, 1-15 characters]
             :type object_name: str
             :param object_location: The location in which the table is stored, defaults to
-                :py:enum:mem:`~enums.GENESISArea.ALL`
+                :py:enum:mem:`~enums.ObjectStorage.ALL`
             :type object_location: str, optional
-            :param updated_after: Time after which the table needs to have been updated to be
-                returned, defaults to :attr:`None`
-            :type updated_after: datetime, optional
             :param start_year: Data starting from this year will be selected for the chart ,
                 defaults to :attr:`None`
             :type start_year: str, optional
@@ -1604,8 +1581,8 @@ class AsyncGENESISWrapper:
                 different sizes, but the same amount of values in them. Defaults to `True`
             :type classify_by_same_value_range: bool, optional
             :param image_size: The size of the image which shall be downloaded, defaults to
-                :py:enum:mem:`~enums.GENESISImageSize.LEVEL_3`
-            :type image_size: GENESISImageSize, optional
+                :py:enum:mem:`~enums.ImageSize.LEVEL_3`
+            :type image_size: ImageSize, optional
             :return: The path to the image or the file downloaded from the server.
             :rtype: Union[os.PathLike, dict]
             """
@@ -1623,16 +1600,16 @@ class AsyncGENESISWrapper:
                 "classes": number_of_distinction_classes,
                 "classification": int(classify_by_same_value_range),
                 "zoom": image_size.value,
-                "startyear":            start_year,
-                "endyear":              end_year,
-                "regionalvariable":     region_code,
-                "regionalkey":          region_key,
+                "startyear": start_year,
+                "endyear": end_year,
+                "regionalvariable": region_code,
+                "regionalkey": region_key,
                 "classifyingvariable1": classifying_code_1,
-                "classifyingkey1":      classifying_key_1,
+                "classifyingkey1": classifying_key_1,
                 "classifyingvariable2": classifying_code_2,
-                "classifyingkey2":      classifying_key_2,
+                "classifyingkey2": classifying_key_2,
                 "classifyingvariable3": classifying_code_3,
-                "classifyingkey3":      classifying_key_3,
+                "classifyingkey3": classifying_key_3,
                 "format": "png",
             }
             # Build the query path
@@ -1641,26 +1618,26 @@ class AsyncGENESISWrapper:
             return await tools.get_database_response(query_path, query_parameters)
 
         async def map2timeseries(
-                self,
-                object_name: str,
-                # Selection Specifier
-                object_location: GENESISArea = GENESISArea.ALL,
-                updated_after: Optional[datetime] = None,
-                start_year: Optional[str] = None,
-                end_year: Optional[str] = None,
-                region_code: Optional[str] = None,
-                region_key: Optional[str] = None,
-                # Data Classifiers
-                classifying_code_1: Optional[str] = None,
-                classifying_key_1: Optional[Union[str, list[str]]] = None,
-                classifying_code_2: Optional[str] = None,
-                classifying_key_2: Optional[Union[str, list[str]]] = None,
-                classifying_code_3: Optional[str] = None,
-                classifying_key_3: Optional[Union[str, list[str]]] = None,
-                # Map Settings
-                number_of_distinction_classes: Optional[int] = 5,
-                classify_by_same_value_range: Optional[bool] = True,
-                image_size: GENESISImageSize = GENESISImageSize.LEVEL_3
+            self,
+            object_name: str,
+            # Selection Specifier
+            object_location: ObjectStorage = ObjectStorage.ALL,
+            updated_after: Optional[datetime] = None,
+            start_year: Optional[str] = None,
+            end_year: Optional[str] = None,
+            region_code: Optional[str] = None,
+            region_key: Optional[str] = None,
+            # Data Classifiers
+            classifying_code_1: Optional[str] = None,
+            classifying_key_1: Optional[Union[str, list[str]]] = None,
+            classifying_code_2: Optional[str] = None,
+            classifying_key_2: Optional[Union[str, list[str]]] = None,
+            classifying_code_3: Optional[str] = None,
+            classifying_key_3: Optional[Union[str, list[str]]] = None,
+            # Map Settings
+            number_of_distinction_classes: Optional[int] = 5,
+            classify_by_same_value_range: Optional[bool] = True,
+            image_size: ImageSize = ImageSize.LEVEL_3,
         ):
             """
             Download a map visualizing the selected data from the table
@@ -1668,7 +1645,7 @@ class AsyncGENESISWrapper:
             :param object_name: The identifier of the table [required, 1-15 characters]
             :type object_name: str
             :param object_location: The location in which the table is stored, defaults to
-                :py:enum:mem:`~enums.GENESISArea.ALL`
+                :py:enum:mem:`~enums.ObjectStorage.ALL`
             :type object_location: str, optional
             :param updated_after: Time after which the table needs to have been updated to be
                 returned, defaults to :attr:`None`
@@ -1711,8 +1688,8 @@ class AsyncGENESISWrapper:
                 different sizes, but the same amount of values in them. Defaults to `True`
             :type classify_by_same_value_range: bool, optional
             :param image_size: The size of the image which shall be downloaded, defaults to
-                :py:enum:mem:`~enums.GENESISImageSize.LEVEL_3`
-            :type image_size: GENESISImageSize, optional
+                :py:enum:mem:`~enums.ImageSize.LEVEL_3`
+            :type image_size: ImageSize, optional
             :return: The path to the image or the file downloaded from the server.
             :rtype: Union[os.PathLike, dict]
             """
@@ -1724,42 +1701,42 @@ class AsyncGENESISWrapper:
                 raise ValueError("The number of distinction classes need to be between 2 and 5")
             # Build the query parameters
             query_parameters = self._base_parameter | {
-                "name":                 object_name,
-                "area":                 object_location.value,
-                "mapType":              0,
-                "classes":              number_of_distinction_classes,
-                "classification":       int(classify_by_same_value_range),
-                "zoom":                 image_size.value,
-                "startyear":            start_year,
-                "endyear":              end_year,
-                "regionalvariable":     region_code,
-                "regionalkey":          region_key,
+                "name": object_name,
+                "area": object_location.value,
+                "mapType": 0,
+                "classes": number_of_distinction_classes,
+                "classification": int(classify_by_same_value_range),
+                "zoom": image_size.value,
+                "startyear": start_year,
+                "endyear": end_year,
+                "regionalvariable": region_code,
+                "regionalkey": region_key,
                 "classifyingvariable1": classifying_code_1,
-                "classifyingkey1":      classifying_key_1,
+                "classifyingkey1": classifying_key_1,
                 "classifyingvariable2": classifying_code_2,
-                "classifyingkey2":      classifying_key_2,
+                "classifyingkey2": classifying_key_2,
                 "classifyingvariable3": classifying_code_3,
-                "classifyingkey3":      classifying_key_3,
-                "format":               "png",
+                "classifyingkey3": classifying_key_3,
+                "format": "png",
             }
             # Build the query path
             query_path = self._service_path + "/map2timeseries"
             # Download the file
             return await tools.get_database_response(query_path, query_parameters)
-        
+
         async def result(
-                self,
-                object_name: str,
-                object_location: GENESISArea = GENESISArea.ALL,
-                remove_empty_rows: bool = False
+            self,
+            object_name: str,
+            object_location: ObjectStorage = ObjectStorage.ALL,
+            remove_empty_rows: bool = False,
         ):
             """
             Get the contents of the result table embedded in the response
-            
+
             :param object_name: The identifier of the table [required, 1-15 characters]
             :type object_name: str
             :param object_location: The location in which the table is stored, defaults to
-                :py:enum:mem:`~enums.GENESISArea.ALL`
+                :py:enum:mem:`~enums.ObjectStorage.ALL`
             :type object_location: str, optional
             :param remove_empty_rows: Remove empty rows from the embedded CSV-file
             :type remove_empty_rows: bool, optional
@@ -1774,9 +1751,109 @@ class AsyncGENESISWrapper:
             query_parameter = self._base_parameter | {
                 "name": object_name,
                 "area": object_location.value,
-                'compress': str(remove_empty_rows)
+                "compress": str(remove_empty_rows),
             }
-            query_path = self._service_path + '/result'
-            return await tools.get_database_response(
-                query_path, query_parameter
-            )
+            query_path = self._service_path + "/result"
+            return await tools.get_database_response(query_path, query_parameter)
+
+        async def table(
+            self,
+            object_name: str,
+            # Selection Specifier
+            object_location: ObjectStorage = ObjectStorage.ALL,
+            updated_after: Optional[datetime] = None,
+            start_year: Optional[str] = None,
+            end_year: Optional[str] = None,
+            region_code: Optional[str] = None,
+            region_key: Optional[str] = None,
+            # Data Classifiers
+            classifying_code_1: Optional[str] = None,
+            classifying_key_1: Optional[Union[str, list[str]]] = None,
+            classifying_code_2: Optional[str] = None,
+            classifying_key_2: Optional[Union[str, list[str]]] = None,
+            classifying_code_3: Optional[str] = None,
+            classifying_key_3: Optional[Union[str, list[str]]] = None,
+            # Output Selection
+            generate_job: bool = False,
+            remove_emtpy_rows: bool = False,
+            switch_rows_and_columns: bool = False,
+        ):
+            """
+            Download a table by embedding it into the JSON Response
+
+            :param object_name: The identifier of the table [required, 1-15 characters]
+            :type object_name: str
+            :param object_location: The location in which the table is stored, defaults to
+                :py:enum:mem:`~enums.ObjectStorage.ALL`
+            :type object_location: str, optional
+            :param updated_after: Time after which the table needs to have been updated to be
+                returned, defaults to :attr:`None`
+            :type updated_after: datetime, optional
+            :param start_year: Data starting from this year will be selected for the chart ,
+                defaults to :attr:`None`
+            :type start_year: str, optional
+            :param end_year: Data after this year will be excluded for the chart, defaults to
+                :attr:`None`
+            :type end_year: str, optional
+            :param region_code: Code of the regional classifier which shall be used to limit the
+                regional component of the data, defaults to :attr:`None`
+            :type region_code: str, optional
+            :param region_key: The official municipality key (AGS) specifying from which
+                municipalities the data shall be taken from, defaults to :attr:`None`
+            :type region_key: str, optional
+            :param classifying_code_1: Code of the classificator which shall be used to limit the
+                data selection further, defaults to :attr:`None`
+            :type classifying_code_1: str, optional
+            :param classifying_key_1: Code of the classificator value which shall be used to
+                limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_1: str, optional
+            :param classifying_code_2: Code of the classificator which shall be used to limit the
+                data selection further, defaults to :attr:`None`
+            :type classifying_code_2: str, optional
+            :param classifying_key_2: Code of the classificator value which shall be used to
+                limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_2: str, optional
+            :param classifying_code_3: Code of the classificator which shall be used to limit the
+                data selection further, defaults to :attr:`None`
+            :type classifying_code_3: str, optional
+            :param classifying_key_3: Code of the classificator value which shall be used to
+                limit the data selection further, defaults to :attr:`None`
+            :type classifying_key_3: str, optional
+            :param generate_job: Generate a Job if the table cannot be pulled directly, defaults
+                to ``False``
+            :type generate_job: bool
+            :param remove_emtpy_rows: Remove all empty data rows from the response, defaults to
+                ``False``
+            :type remove_emtpy_rows: bool
+            :param switch_rows_and_columns: Switch the rows and columns in the response,
+                defaults to ``False``
+            :type switch_rows_and_columns: bool
+            :return: The specified table data embedded in the response data
+            :rtype: dict
+            """
+            if not object_name:
+                raise ValueError("The object_name is a required parameter")
+            if not (1 <= len(object_name.strip()) <= 15):
+                raise ValueError("The object_name may only contain between 1 and 15 characters")
+            # Build the query parameters
+            query_parameters = self._base_parameter | {
+                "name": object_name,
+                "area": object_location.value,
+                "compress": str(remove_emtpy_rows),
+                "transpose": str(switch_rows_and_columns),
+                "startyear": start_year,
+                "endyear": end_year,
+                "regionalvariable": region_code,
+                "regionalkey": region_key,
+                "classifyingvariable1": classifying_code_1,
+                "classifyingkey1": classifying_key_1,
+                "classifyingvariable2": classifying_code_2,
+                "classifyingkey2": classifying_key_2,
+                "classifyingvariable3": classifying_code_3,
+                "classifyingkey3": classifying_key_3,
+                "job": str(generate_job),
+            }
+            # Build the query path
+            query_path = self._service_path + "/table"
+            # Get the response
+            return await tools.get_database_response(query_path, query_parameters)

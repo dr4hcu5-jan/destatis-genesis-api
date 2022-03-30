@@ -19,25 +19,6 @@ logger = logging.getLogger("DESTATIS-GENESIS")
 
 TEMP_DIR = tempfile.mkdtemp(suffix="genesis-wrapper")
 
-ResponseType = Type[
-    Union[
-        HelloWorld.WhoAmIResponse,
-        HelloWorld.LoginCheckResponse,
-        Find.FindResult,
-        Catalogue.CubeResponse,
-        Catalogue.JobResponse,
-        Catalogue.ModifiedDataResponse,
-        Catalogue.QualitySignsResponse,
-        Catalogue.ResultTableResponse,
-        Catalogue.StatisticsResponse,
-        Catalogue.TableResponse,
-        Catalogue.TermResponse,
-        Catalogue.TimeseriesResponse,
-        Catalogue.ValueResponse,
-        Catalogue.VariableResponse,
-    ]
-]
-
 
 async def is_host_available(host: str, port: int, timeout: int) -> bool:
     """Check if the specified host is reachable on the specified port

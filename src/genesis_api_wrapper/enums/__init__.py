@@ -2,14 +2,14 @@
 from enum import Enum, IntEnum
 
 
-class GENESISLanguage(str, Enum):
+class Language(str, Enum):
     """The languages supported by the GENESIS API"""
 
     GERMAN = "de"
     ENGLISH = "en"
 
 
-class GENESISCategory(str, Enum):
+class ObjectType(str, Enum):
     """Categories which are available during the search"""
 
     TABLES = "tables"
@@ -17,10 +17,11 @@ class GENESISCategory(str, Enum):
     DATA_CUBES = "cubes"
     VARIABLES = "variables"
     TIME_SERIES = "time_series"
+    STATISTICS_UPDATE = "StatistikUpdates"
     ALL = "all"
 
 
-class GENESISJobType(str, Enum):
+class JobType(str, Enum):
     """
     The different types of jobs that are available on the GENESIS database
     """
@@ -33,7 +34,7 @@ class GENESISJobType(str, Enum):
     CLEANUP_DATA_CUBES = "Datenquader bereinigen"
 
 
-class GENESISJobCriteria(str, Enum):
+class JobCriteria(str, Enum):
     """
     Criteria for searching and sorting jobs
     """
@@ -44,18 +45,7 @@ class GENESISJobCriteria(str, Enum):
     TIME = "Zeitpunkt"
 
 
-class GENESISObjectType(str, Enum):
-    """
-    Types of objects that are available in the database
-    """
-
-    ALL = "Alle"
-    TABLE = "Tabellen"
-    STATISTIC = "Statistiken"
-    STATISTIC_UPDATE = "StatistikUpdates"
-
-
-class GENESISStatisticCriteria(str, Enum):
+class StatisticCriteria(str, Enum):
     """
     Criteria for searching and sorting jobs
     """
@@ -64,7 +54,7 @@ class GENESISStatisticCriteria(str, Enum):
     CONTENT = "Inhalt"
 
 
-class GENESISArea(str, Enum):
+class ObjectStorage(str, Enum):
     """
     Locations of objects
     """
@@ -76,7 +66,7 @@ class GENESISArea(str, Enum):
     ALL = "Alle"
 
 
-class GENESISTableCriteria(str, Enum):
+class TableCriteria(str, Enum):
     """
     Criteria for searching and sorting jobs
     """
@@ -85,17 +75,12 @@ class GENESISTableCriteria(str, Enum):
     TOP = "Top"
 
 
-class GENESISValueCriteria(str, Enum):
+class GenericCriteria(str, Enum):
     CODE = "Code"
     CONTENT = "Inhalt"
 
 
-class GENESISVariableCriteria(str, Enum):
-    CODE = "Code"
-    CONTENT = "Inhalt"
-
-
-class GENESISVariableType(str, Enum):
+class VariableType(str, Enum):
     ALL = "Alle"
     CLASSIFYING = "klassifizierend"
     TOTAL = "insgesamt"
@@ -106,7 +91,7 @@ class GENESISVariableType(str, Enum):
     TIME_IDENTIFYING = "zeitidentifizierend"
 
 
-class GENESISChartType(IntEnum):
+class ChartType(IntEnum):
     """The different chart types supported by the database"""
 
     LINE_CHART = 0
@@ -115,7 +100,7 @@ class GENESISChartType(IntEnum):
     POINT_CLOUD = 3
 
 
-class GENESISImageSize(IntEnum):
+class ImageSize(IntEnum):
     """The different image size levels"""
 
     LEVEL_0 = 0

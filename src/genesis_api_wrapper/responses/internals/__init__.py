@@ -1,7 +1,7 @@
 """A package containing all 2nd and lower level response models"""
 from pydantic import Field, Extra
 
-from ...enums import GENESISLanguage
+from ...enums import Language
 from ...models import BaseModel
 
 
@@ -14,7 +14,7 @@ class ServiceIdent(BaseModel):
     """
     Name of the Service
     
-    This field represents the called service from the database    
+    This field represents the called service from the database
     """
 
     method: str = Field(default=..., alias="Method", title="Method of Service")
@@ -37,7 +37,7 @@ class Status(BaseModel):
     """
     GENESIS Internal status code of the request
     
-    Identification of an error which may have occurred. If no error occurred the field is set to zero (0) 
+    Identification of an error which may have occurred. If no error occurred the field is set to zero (0)
     """
 
     content: str = Field(default=..., alias="Content", title="Content")
@@ -60,7 +60,7 @@ class RequestParameter(BaseModel):
     Parameters used by the called service to process the request
     """
 
-    language: GENESISLanguage = Field(default=..., alias="language")
+    language: Language = Field(default=..., alias="language")
     """
     Search language
     
