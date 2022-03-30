@@ -1,9 +1,8 @@
 """Wrapper for the JSON API of the DESTATIS GENESIS database"""
+import datetime
 import logging
 from os import PathLike
-from typing import Union
-
-from pydantic import SecretStr
+from typing import Union, Optional
 
 from . import tools
 from .enums import (
@@ -20,7 +19,6 @@ from .enums import (
     ChartType,
     ImageSize,
 )
-from .responses import *
 
 # Create a logger for the whole module
 logger = logging.getLogger("genesis_api_wrapper")
@@ -53,11 +51,11 @@ class AsyncGENESISWrapper:
         # Since all values passed the check save the username and password to the wrapper,
         # but keep them private
         self.__username = username
-        self.__password = SecretStr(password)
+        self.__password = password
         self.__language = language
         self.__base_parameter = {
             "username": self.__username,
-            "password": self.__password.get_secret_value(),
+            "password": self.__password,
             "language": self.__language.value,
         }
         self.hello_world: AsyncGENESISWrapper.HelloWorld = self.HelloWorld(
@@ -95,12 +93,12 @@ class AsyncGENESISWrapper:
             # Since all values passed the check save the username and password to the wrapper,
             # but keep them private
             self._username = username
-            self._password = SecretStr(password)
+            self._password = password
             self._language = language
             self._service_url = "/catalogue"
             self._base_parameter = {
                 "username": self._username,
-                "password": self._password.get_secret_value(),
+                "password": self._password,
                 "language": self._language.value,
             }
 
@@ -112,7 +110,7 @@ class AsyncGENESISWrapper:
                 has been executed
             :rtype: WhoAmIResponse
             """
-            return await tools.get_database_response("/helloworld/whoami", None)
+            return await tools.get_database_response("/helloworld/whoami", {})
 
         async def login_check(self) -> dict:
             """Check the login data which were supplied during the creation of the wrapper
@@ -146,12 +144,12 @@ class AsyncGENESISWrapper:
             # Since all values passed the check save the username and password to the wrapper,
             # but keep them private
             self._username = username
-            self._password = SecretStr(password)
+            self._password = password
             self._language = language
             self._service_url = "/catalogue"
             self._base_parameter = {
                 "username": self._username,
-                "password": self._password.get_secret_value(),
+                "password": self._password,
                 "language": self._language.value,
             }
 
@@ -199,12 +197,12 @@ class AsyncGENESISWrapper:
             # Since all values passed the check save the username and password to the wrapper,
             # but keep them private
             self._username = username
-            self._password = SecretStr(password)
+            self._password = password
             self._language = language
             self._service_url = "/catalogue"
             self._base_parameter = {
                 "username": self._username,
-                "password": self._password.get_secret_value(),
+                "password": self._password,
                 "language": self._language.value,
             }
 
@@ -230,8 +228,8 @@ class AsyncGENESISWrapper:
 
         async def cubes2statistic(
             self,
-            statistic_name: constr(min_length=1, max_length=6),
-            cube_code: constr(min_length=1, max_length=10),
+            statistic_name: str,
+            cube_code: str,
             object_area: ObjectStorage = ObjectStorage.ALL,
             results: int = 100,
         ) -> dict:
@@ -256,8 +254,8 @@ class AsyncGENESISWrapper:
 
         async def cubes2variable(
             self,
-            variable_name: constr(min_length=1, max_length=6),
-            cube_code: constr(min_length=1, max_length=10),
+            variable_name: str,
+            cube_code: str,
             object_area: ObjectStorage = ObjectStorage.ALL,
             results: int = 100,
         ) -> dict:
@@ -317,7 +315,7 @@ class AsyncGENESISWrapper:
             self,
             selector: Optional[str] = None,
             object_type: ObjectType = ObjectType.ALL,
-            updated_after: Optional[date] = None,
+            updated_after: Optional[datetime.date] = None,
             results: int = 100,
         ) -> dict:
             """Get a list of modified objects
@@ -337,7 +335,7 @@ class AsyncGENESISWrapper:
             # Check the parameters for consistency
             if (selector is not None) and (not (1 <= len(selector.strip()) <= 15)):
                 raise ValueError("The selector's length needs to be between 1 and 15 (inclusive)")
-            if (updated_after is not None) and not (updated_after < date.today()):
+            if (updated_after is not None) and not (updated_after < datetime.date.today()):
                 raise ValueError("The specified date may not be today or in the future")
             if not (0 < results <= 2500):
                 raise ValueError("The number of results need to be between 1 and 2500")
@@ -665,7 +663,7 @@ class AsyncGENESISWrapper:
                 "pagelength": result_count,
             }
             _url = self._service_url + "/timeseries2variable"
-            return await tools.get_database_response(_url, _query_parameter, dict)
+            return await tools.get_database_response(_url, _query_parameter)
 
         async def values(
             self,
