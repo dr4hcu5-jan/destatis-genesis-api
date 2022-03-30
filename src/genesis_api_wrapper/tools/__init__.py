@@ -7,13 +7,11 @@ import time
 import tempfile
 from os import PathLike
 from pathlib import Path
-from typing import TypeVar, Union, Type
+from typing import TypeVar, Union, Type, Optional
 
 import aiohttp
-from pydantic import ValidationError
 
 from ..exceptions import GENESISPermissionError, GENESISInternalServerError
-from ..responses import *
 
 logger = logging.getLogger("DESTATIS-GENESIS")
 
