@@ -7,23 +7,38 @@ class MetadataAPIWrapper:
     ):
         """Create a new HelloWorldAPIWrapper method wrapper
 
-        :param username: The username which was assigned during the creation of an account (
-            length: 10 characters)
+        :param username: The username which will be used for authenticating at the database. Due
+            to constraints of the database the username needs to be exactly 10 characters long and
+            may not contain any whitespaces
         :type username: str
-        :param password: The password for the username (length: 10-20 characters)
+        :param password: The password which will be used for authenticating at the database. Due
+            to constraints of the database the password needs to be at least 10 characters long,
+            may not exceed 20 characters and may not contain any whitespaces
         :type password: str
-        :param language: The language which should be used in the response bodies, defaults to
-            German
-        :type language: Language
+        :param language: The language in which the responses are returned by the database.
+            :py:enum:mem:`~enums.Language.GERMAN` has the most compatibility with the database
+            since most of the tables are on German. Therefore, this parameter defaults to
+            :py:enum:mem:`~enums.Language.GERMAN`
+        :type language: enums.Language
+        :raise ValueError: The username or the password did not match the constraints stated in
+            their description.
         """
-        # Check if the username consists of 10 characters
+        if " " in username:
+            raise ValueError("The username may not contain any whitespaces")
         if len(username) != 10:
-            raise ValueError("The username is not 10 characters long.")
-        # Check if the password's length is between 10 and 20 characters
-        if not (10 <= len(password) <= 20):
-            raise ValueError("The password is not between 10 and 20 characters long")
-        # Since all values passed the check save the username and password to the wrapper,
-        # but keep them private
+            raise ValueError("The username may only be 10 characters long")
+        if " " in password:
+            raise ValueError("The password may not contain any whitespaces")
+        if len(password) < 10:
+            raise ValueError(
+                f"The password may not be shorter than 10 characters. Current "
+                f"length: {len(password)}"
+            )
+        if len(password) > 20:
+            raise ValueError(
+                f"The password may not be longer that 20 characters. Current "
+                f"length: {len(password)}"
+            )
         self._username = username
         self._password = password
         self._language = language
@@ -43,7 +58,7 @@ class MetadataAPIWrapper:
         :param object_name: The object's identification code
         :type object_name: str
         :param storage_location: The storage location of the object, defaults to
-        :py:enum:mem:`enums.ObjectStorage.ALL`
+            :py:enum:mem:`enums.ObjectStorage.ALL`
         :type storage_location: enums.ObjectStorage
         :return: The response from the database
         :rtype: dict
@@ -71,7 +86,7 @@ class MetadataAPIWrapper:
         :param object_name: The object's identification code
         :type object_name: str
         :param storage_location: The storage location of the object, defaults to
-        :py:enum:mem:`enums.ObjectStorage.ALL`
+            :py:enum:mem:`enums.ObjectStorage.ALL`
         :type storage_location: enums.ObjectStorage
         :return: The response from the database
         :rtype: dict
@@ -99,7 +114,7 @@ class MetadataAPIWrapper:
         :param object_name: The object's identification code
         :type object_name: str
         :param storage_location: The storage location of the object, defaults to
-        :py:enum:mem:`enums.ObjectStorage.ALL`
+            :py:enum:mem:`enums.ObjectStorage.ALL`
         :type storage_location: enums.ObjectStorage
         :return: The response from the database
         :rtype: dict
@@ -127,7 +142,7 @@ class MetadataAPIWrapper:
         :param object_name: The object's identification code
         :type object_name: str
         :param storage_location: The storage location of the object, defaults to
-        :py:enum:mem:`enums.ObjectStorage.ALL`
+            :py:enum:mem:`enums.ObjectStorage.ALL`
         :type storage_location: enums.ObjectStorage
         :return: The response from the database
         :rtype: dict
@@ -155,7 +170,7 @@ class MetadataAPIWrapper:
         :param object_name: The object's identification code
         :type object_name: str
         :param storage_location: The storage location of the object, defaults to
-        :py:enum:mem:`enums.ObjectStorage.ALL`
+            :py:enum:mem:`enums.ObjectStorage.ALL`
         :type storage_location: enums.ObjectStorage
         :return: The response from the database
         :rtype: dict
@@ -183,7 +198,7 @@ class MetadataAPIWrapper:
         :param object_name: The object's identification code
         :type object_name: str
         :param storage_location: The storage location of the object, defaults to
-        :py:enum:mem:`enums.ObjectStorage.ALL`
+            :py:enum:mem:`enums.ObjectStorage.ALL`
         :type storage_location: enums.ObjectStorage
         :return: The response from the database
         :rtype: dict

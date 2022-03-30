@@ -10,29 +10,38 @@ class DataAPIWrapper:
     ):
         """Create a new part wrapper for the methods listed in the DataAPIWrapper (2.5) section
 
-        :param username: The username which is used to access the database
-        :param password: The password which is used to access the database
-        :param language: The language used in responses by the database
+        :param username: The username which will be used for authenticating at the database. Due
+            to constraints of the database the username needs to be exactly 10 characters long and
+            may not contain any whitespaces
+        :type username: str
+        :param password: The password which will be used for authenticating at the database. Due
+            to constraints of the database the password needs to be at least 10 characters long,
+            may not exceed 20 characters and may not contain any whitespaces
+        :type password: str
+        :param language: The language in which the responses are returned by the database.
+            :py:enum:mem:`~enums.Language.GERMAN` has the most compatibility with the database
+            since most of the tables are on German. Therefore, this parameter defaults to
+            :py:enum:mem:`~enums.Language.GERMAN`
+        :type language: enums.Language
+        :raise ValueError: The username or the password did not match the constraints stated in
+            their description.
         """
-        # Check that the username is not None
-        if not username:
+        if " " in username:
+            raise ValueError("The username may not contain any whitespaces")
+        if len(username) != 10:
+            raise ValueError("The username may only be 10 characters long")
+        if " " in password:
+            raise ValueError("The password may not contain any whitespaces")
+        if len(password) < 10:
             raise ValueError(
-                "There was no username supplied during the creation of the " "section wrapper"
+                f"The password may not be shorter than 10 characters. Current "
+                f"length: {len(password)}"
             )
-        if not len(username) == 10:
-            raise ValueError("The username has not the required length of 10 characters")
-        # Check that a password is supplied
-        if not password:
+        if len(password) > 20:
             raise ValueError(
-                "There was no password supplied during the creation of the " "section wrapper"
+                f"The password may not be longer that 20 characters. Current "
+                f"length: {len(password)}"
             )
-        # Check that the password is between 10 and 20 characters long
-        if not 10 <= len(password) <= 20:
-            raise ValueError(
-                "The password has not the required length of at least 10 "
-                "characters and 20 characters"
-            )
-        # Save the service path
         self._service_path = "/data"
         # Create the base parameters
         self._base_parameter = {
