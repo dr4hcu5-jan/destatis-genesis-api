@@ -114,3 +114,14 @@ class ImageSize(IntEnum):
 
     LEVEL_3 = 3
     """Image resolution of: 1024x768 pixels (recommended size)"""
+
+
+class FileFormat(str, Enum):
+    """Formats for file downloads"""
+
+    CSV = "csv"
+    DATA_CSV = "datencsv"
+    GENML = "genml"
+    HTML = "html"
+    FFCSV = "ffcsv"
+    XLSX = "xlsx"

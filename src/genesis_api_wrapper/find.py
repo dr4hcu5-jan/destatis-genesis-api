@@ -14,10 +14,10 @@ class FindAPIWrapper:
             length: 10 characters)
         :type username: str
         :param password: The password for the username (length: 10-20 characters)
-        :type password: SecretStr
+        :type password: str
         :param language: The language which should be used in the response bodies, defaults to
             German
-        :type language: Language
+        :type language: enums.Language, optional
         """
         # Check if the username consists of 10 characters
         if len(username) != 10:

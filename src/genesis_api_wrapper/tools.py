@@ -11,9 +11,9 @@ from typing import TypeVar, Union, Type, Optional
 
 import aiohttp
 
-from ..exceptions import GENESISPermissionError, GENESISInternalServerError
+from . import exceptions
 
-logger = logging.getLogger("DESTATIS-GENESIS")
+logger = logging.getLogger("genesis_api_wrapper.tools")
 
 TEMP_DIR = tempfile.mkdtemp(suffix="genesis-wrapper")
 
@@ -76,9 +76,11 @@ async def get_database_response(
         async with session.get(url, params=query_parameters) as response:
             # Check if any error occurred during the request
             if response.status == 401:
-                raise GENESISPermissionError("This account is not allowed to access this service")
+                raise exceptions.GENESISPermissionError(
+                    "This account is not allowed to access " "this service"
+                )
             if 500 <= response.status <= 599:
-                raise GENESISInternalServerError(
+                raise exceptions.GENESISInternalServerError(
                     "An error occurred on the server side. Please " "try again"
                 )
             # Check if the content type indicates a json response
