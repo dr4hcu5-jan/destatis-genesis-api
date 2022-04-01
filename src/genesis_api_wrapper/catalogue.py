@@ -175,29 +175,71 @@ class CatalogueAPIWrapper:
 
     async def cubes2variable(
         self,
-        variable_name: str,
+        object_name: str,
         cube_code: str,
-        object_area: enums.ObjectStorage = enums.ObjectStorage.ALL,
-        results: int = 100,
+        storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL,
+        result_count: int = 100,
     ) -> dict:
-        """Get a list of data cubes related to the specified variable
-
-        :param variable_name: The name of the variable, (max. 6 character)
-        :param cube_code: The code of a cube which is related to the variable, stars (*) may be
-            used for wild carding
-        :param object_area: The area in which the object is stored
-        :param results: Number of results which are retrieved
-        :return: A list of the data cubes which are related to the variable
         """
-        # TODO: Add check of parameters
-        _parameters = self._base_parameter | {
-            "name": variable_name,
-            "selection": cube_code,
-            "area": object_area.value,
-            "pagelength": results,
+        **PREMIUM ACCESS REQUIRED**
+
+        List the datacubes matching the ``object_name``
+
+        :param object_name: The identifier code of the variable
+        :type object_name: str
+        :param cube_code: The identifier code of the cube. The usage of an asterisk
+            (``*``) is permitted as wildcard. This value acts as filter, only showing the
+            data cubes matching this code
+        :type cube_code: str, optional
+        :param storage_location: The storage location of the object, defaults to
+            :py:enum:mem:`~genesis_api_wrapper.enums.ObjectStorage.ALL`
+        :type storage_location: enums.ObjectStorage
+        :param result_count: The maximal amount of results which are returned by the
+        database,
+            defaults to 100
+        :type result_count: int
+        :return: The response from the database parsed into a dict. If the ``Content-Type``
+            header indicated a non-JSON response the response is stored in a temporary
+            file and
+            the file path will be returned
+        :rtype: dict, os.PathLike
+        :raises exceptions.GENESISPermissionError: The supplied account does not have the
+            permissions to access data cubes.
+        """
+        if " " in object_name:
+            raise ValueError("The object_name parameter may not contain whitespaces")
+        if "*" in object_name:
+            raise ValueError(
+                "The object_name parameter may not contain asterisks. Wildcards are "
+                "not permitted"
+            )
+        if len(object_name) == 0:
+            raise ValueError("The object_name parameter may not be empty")
+        if len(object_name) > 6:
+            raise ValueError("The object_name parameter may not exceed 6 characters")
+        if cube_code is not None and " " in cube_code:
+            raise ValueError("The cube_code parameter may not contain whitespaces")
+        if cube_code is not None and len(cube_code) == 0:
+            raise ValueError("The cube_code parameter may not be empty")
+        if cube_code is not None and len(cube_code) > 10:
+            raise ValueError("The cube_code parameter may not exceed 10 characters")
+        if type(storage_location) is not enums.ObjectStorage:
+            raise ValueError(
+                f"The storage_location parameter only accepts "
+                f"{repr(enums.ObjectStorage)} values"
+            )
+        if result_count < 1:
+            raise ValueError("The result_count parameter value may not be below 0")
+        if result_count > 2500:
+            raise ValueError("The result_count parameter value may not exceed 2500")
+        query_parameters = self._base_parameter | {
+            "name":       object_name,
+            "selection":  "" if cube_code is None else cube_code,
+            "area":       storage_location.value,
+            "pagelength": result_count,
         }
-        _url = self._service_url + "/cubes2variable"
-        return await tools.get_database_response(_url, _parameters)
+        query_path = self._service_url + "/cubes2variable"
+        return await tools.get_database_response(query_path, query_parameters)
 
     async def jobs(
         self,
