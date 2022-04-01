@@ -383,9 +383,15 @@ class CatalogueAPIWrapper:
         return await tools.get_database_response(query_path, query_parameters)
 
     async def quality_signs(self) -> dict:
-        """Get a list of the quality signs used in the GENESIS database"""
-        _url = self._service_url + "/qualitysigns"
-        return await tools.get_database_response(_url, self._base_parameter)
+        """
+        Get the list of quality signs from the database
+        
+        :return: The Response containing the quality signs present in the database
+        :rtype: dict
+        """
+        query_path = self._service_url + '/qualitysigns'
+        query_parameters = self._base_parameter
+        return await tools.get_database_response(query_path, query_parameters)
 
     async def results(
         self,
