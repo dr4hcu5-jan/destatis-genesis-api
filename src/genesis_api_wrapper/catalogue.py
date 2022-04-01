@@ -446,38 +446,73 @@ class CatalogueAPIWrapper:
         return await tools.get_database_response(query_path, query_parameters)
 
     async def statistics(
-        self,
-        selector: str = None,
-        search_by: enums.StatisticCriteria = enums.StatisticCriteria.CODE,
-        sort_by: enums.StatisticCriteria = enums.StatisticCriteria.CODE,
-        result_count: int = 100,
+            self,
+            object_name: str,
+            storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL,
+            search_by: enums.GenericCriteria = enums.GenericCriteria.CODE,
+            sort_by: enums.GenericCriteria = enums.GenericCriteria.CODE,
+            result_count: int = 100
     ) -> dict:
-        """Get a list of statistics matching the supplied parameters
-
-        :param selector: The filter which is applied to the field selected by `search_by`
-        :type selector: str
-        :param search_by: The field on which the selector shall be applied to, defaults to
-            `GENESISenums.StatisticCriteria.Code`
-        :type search_by: enums.StatisticCriteria
-        :param sort_by: Sort the results by the field, defaults to
-            `GENESISenums.StatisticCriteria.Code`
-        :type sort_by: enums.StatisticCriteria
-        :param result_count: The number of results that shall be returned
-        :type result_count: int
-        :return: The response from the database
-        :rtype: dict
         """
-        # Check if the selector matches the required constraints
-        if (selector is not None) and not (1 <= len(selector.strip()) <= 15):
-            raise ValueError("The selector's length needs to be between 1 and 15")
-        _param = self._base_parameter | {
-            "selection": "" if selector is None else selector,
-            "searchcriterion": search_by.value,
-            "sortcriterion": sort_by.value,
-            "pagelength": result_count,
+        Get a list of statistics matching the supplied code
+        
+        :param object_name: The identifier code of the data cubes. The usage of an asterisk
+            (``*``) is permitted as wildcard
+        :type object_name: str
+        :param storage_location: The storage location of the object, defaults to
+            :py:enum:mem:`~genesis_api_wrapper.enums.ObjectStorage.ALL`
+        :type storage_location: enums.ObjectStorage, optional
+        :param search_by: Criteria which shall be applied to the ``object_name``, defaults to
+            :py:enum:mem:`~genesis_api_wrapper.enums.GenericCriteria.CODE`
+        :type search_by: enums.GenericCriteria, optional
+        :param sort_by: Criteria by which the result shall be sorted, defaults to
+            :py:enum:mem:`~genesis_api_wrapper.enums.GenericCriteria.CODE`
+        :type sort_by: enums.GenericCriteria, optional
+        :param result_count: The number of results that the response shall contain at it's maximum
+        :type result_count: int
+        :return: The response from the database parsed into a dict. If the ``Content-Type``
+            header indicated a non-JSON response the response is stored in a temporary file and
+            the file path will be returned
+        :rtype: dict, os.PathLike
+        :raises exceptions.GENESISPermissionError: The supplied account does not have the
+            permissions to access data cubes.
+        :raises ValueError: One of the parameters does not contain a valid value. Please check
+            the message of the exception for further information
+        """
+        if " " in object_name:
+            raise ValueError("The object_name parameter may not contain whitespaces")
+        if len(object_name) == 0:
+            raise ValueError("The object_name parameter may not be empty")
+        if len(object_name) > 15:
+            raise ValueError("The object_name parameter may not exceed 15 characters")
+        if type(storage_location) is not enums.ObjectStorage:
+            raise ValueError(
+                f"The storage_location parameter only accepts "
+                f"{repr(enums.ObjectStorage)} values"
+            )
+        if type(search_by) is not enums.GenericCriteria:
+            raise ValueError(
+                f"The search_by parameter only accepts "
+                f"{repr(enums.GenericCriteria)} values"
+            )
+        if type(sort_by) is not enums.GenericCriteria:
+            raise ValueError(
+                f"The sort_by parameter only accepts "
+                f"{repr(enums.GenericCriteria)} values"
+            )
+        if result_count < 1:
+            raise ValueError("The result_count parameter value may not be below 0")
+        if result_count > 2500:
+            raise ValueError("The result_count parameter value may not exceed 2500")
+        # ==== Build query path and parameters ====
+        query_path = self._service_url + '/statistics'
+        query_parameters = self._base_parameter | {
+            'selection': object_name,
+            'searchcriterion': search_by.value,
+            'sortcriterion': sort_by.value,
+            'pagelength': result_count
         }
-        _url = self._service_url + "/statistics"
-        return await tools.get_database_response(_url, _param)
+        return await tools.get_database_response(query_path, query_parameters)
 
     async def statistics2variable(
         self,
