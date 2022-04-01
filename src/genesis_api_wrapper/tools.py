@@ -1,5 +1,6 @@
 """A collection of tools which are used and needed multiple times in this project"""
 import asyncio
+import datetime
 import logging
 import mimetypes
 import secrets
@@ -95,3 +96,15 @@ async def get_database_response(
                         file.write(_file_chunk)
                     file.close()
                 return Path(_file_path)
+
+
+def convert_date_to_string(date: datetime.date) -> str:
+    """
+    Convert the supplied date into a GENESIS compatible date string
+    
+    :param date: The date that shall be converted
+    :type date: datetime.date
+    :return: The converted date
+    :rtype: str
+    """
+    return date.strftime('%d.%m.%Y')
