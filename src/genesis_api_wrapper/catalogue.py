@@ -207,6 +207,8 @@ class CatalogueAPIWrapper:
         :rtype: dict, os.PathLike
         :raises exceptions.GENESISPermissionError: The supplied account does not have the
             permissions to access data cubes.
+        :raises ValueError: One of the parameters does not contain a valid value. Please check
+            the message of the exception for further information
         """
         if " " in object_name:
             raise ValueError("The object_name parameter may not contain whitespaces")
