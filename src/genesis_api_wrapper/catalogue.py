@@ -317,42 +317,70 @@ class CatalogueAPIWrapper:
         return await tools.get_database_response(query_path, query_parameter)
         
     async def modified_data(
-        self,
-        selector: typing.Optional[str] = None,
-        object_type: enums.ObjectType = enums.ObjectType.ALL,
-        updated_after: typing.Optional[datetime.date] = None,
-        results: int = 100,
+            self,
+            object_filter: str,
+            object_type: enums.ObjectType = enums.ObjectType.ALL,
+            updated_after: datetime.date = datetime.date.today() - datetime.timedelta(days=-7),
+            result_count: int = 100
     ) -> dict:
-        """Get a list of modified objects
-
-        DUE TO AN ERROR IN THE DATABASE THE `results` PARAMETER IS BEING IGNORED
-
-        :param selector: Filter for the objects to be displayed. (1-15 characters, stars (*)
-            allowed for wildcarding)
-        :type selector: str
-        :param object_type: The type of object that shall be returned
-        :type object_type: GENESISenums.ObjectType
-        :param updated_after: The date after which the objects needed to be changed to be
-            returned, defaults to one week (7 days)
-        :type updated_after: date
-        :param results: The number of results that should be returned
         """
-        # Check the parameters for consistency
-        if (selector is not None) and (not (1 <= len(selector.strip()) <= 15)):
-            raise ValueError("The selector's length needs to be between 1 and 15 (inclusive)")
-        if (updated_after is not None) and not (updated_after < datetime.date.today()):
-            raise ValueError("The specified date may not be today or in the future")
-        if not (0 < results <= 2500):
-            raise ValueError("The number of results need to be between 1 and 2500")
-        # Build the query parameters
-        _param = self._base_parameter | {
-            "selection": "" if selector is None else selector,
-            "type": enums.ObjectType.ALL.value if object_type is None else object_type.value,
-            "date": updated_after.strftime("%d.%m.%Y") if updated_after is not None else None,
-            "pagelength": results,
+        **Due to an error in the database the parameter** ``result_count`` **is ignored by the
+        database**
+        
+        Get a list of modified objects which were modified or uploaded after ``updated_after``.
+        The following objects are returned by this query:
+            - Tables
+            - Statistics
+            - Statistic updates
+        
+        :param object_filter: The identifier code of the object. The usage of an asterisk
+            (``*``) is permitted as wildcard. This value acts as filter, only showing the
+            jobs matching this code
+        :type object_filter: str
+        :param object_type: The type of object that shall be listed
+            Allowed types (enums):
+                - :py:enum:mem:`~genesis_api_wrapper.enums.ObjectType.ALL`
+                - :py:enum:mem:`~genesis_api_wrapper.enums.ObjectType.TABLES`
+                - :py:enum:mem:`~genesis_api_wrapper.enums.ObjectType.STATISTICS`
+                - :py:enum:mem:`~genesis_api_wrapper.enums.ObjectType.STATISTIC_UPDATE`
+                
+        :type object_type: enums.ObjectType
+        :param updated_after: The date after which the object needs to be modified or uploaded to
+            be returned by the database, defaults to 7 days before today
+        :type updated_after: datetime.date
+        :param result_count: The number of results that will be returned
+        :type result_count: int
+        """
+        if " " in object_filter:
+            raise ValueError("The object_filter parameter may not contain whitespaces")
+        if len(object_filter) == 0:
+            raise ValueError("The object_filter parameter may not be empty")
+        if len(object_filter) > 50:
+            raise ValueError("The object_filter parameter may not exceed 50 characters")
+        if type(object_type) is not enums.ObjectType:
+            raise ValueError(
+                f"The object_type parameter only accepts values from the following enumeration: "
+                f"{repr(enums.ObjectType)}"
+            )
+        if object_type not in [enums.ObjectType.ALL, enums.ObjectType.TABLES,
+                               enums.ObjectType.STATISTICS, enums.ObjectType.STATISTICS_UPDATE]:
+            raise ValueError(
+                f"The supplied object_type ({object_type}) is not allowed at this resource"
+            )
+        if updated_after > datetime.date.today():
+            raise ValueError(
+                f'The updated_after parameter is in the future'
+            )
+        # ==== Build the query data ====
+        query_path = self._service_url + '/modifieddata'
+        query_parameters = self._base_parameter | {
+            'selection': object_filter,
+            'type': object_type.value,
+            'date': tools.convert_date_to_string(updated_after),
+            'pagelength': result_count
         }
-        _url = self._service_url + "/modifieddata"
-        return await tools.get_database_response(_url, _param)
+        # ==== Return the query data ====
+        return await tools.get_database_response(query_path, query_parameters)
 
     async def quality_signs(self) -> dict:
         """Get a list of the quality signs used in the GENESIS database"""
