@@ -394,28 +394,56 @@ class CatalogueAPIWrapper:
         return await tools.get_database_response(query_path, query_parameters)
 
     async def results(
-        self,
-        selector: str = None,
-        result_count: int = 100,
-        search_area: enums.ObjectStorage = enums.ObjectStorage.ALL,
+            self,
+            object_name: str,
+            storage_location: enums.ObjectStorage = enums.ObjectStorage.ALL,
+            result_count: int = 100
     ) -> dict:
-        """Get a list of result tables
-
-        :param search_area: The area in which the objects are saved
-        :param selector: Filter for the result tables code, (1-15 characters, stars(*) allowed)
-        :type selector: str
-        :param result_count: The number of results which should be returned
-        :return: A List of information about the result tables
         """
-        if (selector is not None) and (not (1 <= len(selector.strip()) <= 15)):
-            raise ValueError("The selector's length needs to be between 1 and 15")
-        _param = self._base_parameter | {
-            "selection": "" if selector is None else selector,
-            "area": search_area.value,
-            "pagelength": result_count,
+        Get a list of result tables matching the ``object_name``
+
+        :param object_name: The identifier code of the result tables. The usage of an asterisk
+            (``*``) is permitted as wildcard
+        :type object_name: str
+        :param storage_location: The storage location of the object, defaults to
+            :py:enum:mem:`~genesis_api_wrapper.enums.ObjectStorage.ALL`
+        :type storage_location: enums.ObjectStorage, optional
+        :param result_count: The maximal amount of results which are returned by the database,
+            defaults to 100
+        :type result_count: int, optional
+        :return: The response from the database parsed into a dict. If the ``Content-Type``
+            header indicated a non-JSON response the response is stored in a temporary file and
+            the file path will be returned
+        :rtype: dict, os.PathLike
+        :raises exceptions.GENESISPermissionError: The supplied account does not have the
+            permissions to access data cubes.
+        :raises ValueError: One of the parameters does not contain a valid value. Please check
+            the message of the exception for further information
+        """
+        if " " in object_name:
+            raise ValueError("The object_name parameter may not contain whitespaces")
+        if len(object_name) == 0:
+            raise ValueError("The object_name parameter may not be empty")
+        if len(object_name) > 10:
+            raise ValueError("The object_name parameter may not exceed 10 characters")
+        if type(storage_location) is not enums.ObjectStorage:
+            raise ValueError(
+                f"The storage_location parameter only accepts "
+                f"{repr(enums.ObjectStorage)} values"
+            )
+        if result_count < 1:
+            raise ValueError("The result_count parameter value may not be below 0")
+        if result_count > 2500:
+            raise ValueError("The result_count parameter value may not exceed 2500")
+        # ==== Build the query path and parameters ====
+        query_path = self._service_url + '/results'
+        query_parameters = self._base_parameter | {
+            'selection': object_name,
+            'area': storage_location.value,
+            'pagelength': result_count
         }
-        _url = self._service_url + "/results"
-        return await tools.get_database_response(_url, _param)
+        # ==== Get the response ====
+        return await tools.get_database_response(query_path, query_parameters)
 
     async def statistics(
         self,
