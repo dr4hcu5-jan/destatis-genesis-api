@@ -246,38 +246,76 @@ class CatalogueAPIWrapper:
         return await tools.get_database_response(query_path, query_parameters)
 
     async def jobs(
-        self,
-        selector: str,
-        search_by: enums.JobCriteria,
-        sort_by: enums.JobCriteria,
-        job_type: enums.JobType = enums.JobType.ALL,
-        results: int = 100,
+            self,
+            object_name: str,
+            search_by: enums.JobCriteria,
+            sort_by: enums.JobCriteria,
+            job_type: enums.JobType = enums.JobType.ALL,
+            result_count: int = 100,
     ) -> dict:
-        """Get a list of jobs which were created
-
-        :param selector: Filter for the jobs to be displayed. (1-50 characters, stars (*)
-            allowed for wildcarding)
-        :param search_by: The criteria on which the selector is applied to
-        :param sort_by: The criteria by which the result shall be listed
-        :param job_type: The type of job which is to be returned
-        :param results: The number of results that shall be returned
-        :return:
         """
-        if not (1 <= len(selector.strip()) <= 50):
+        Get a list of the jobs that match the parameters
+        
+        :param object_name: The identifier code of the job. The usage of an asterisk
+            (``*``) is permitted as wildcard. This value acts as filter, only showing the
+            jobs matching this code
+        :type object_name: str
+        :param search_by: Criteria which shall be applied to the object_name
+        :type search_by: enums.JobCriteria
+        :param sort_by: Criteria by which the output shall be sorted
+        :type sort_by: enums.JobCriteria
+        :param job_type: The type of jobs which shall be returned, defaults to
+            :py:enum:mem:`~genesis_api_wrapper.enums.JobType.ALL`
+        :type job_type: enums.JobType
+        :param result_count: The maximal amount of results which are returned by the
+            database, defaults to 100
+        :type result_count: int
+        :rtype: dict, os.PathLike
+        :raises exceptions.GENESISPermissionError: The supplied account does not have the
+            permissions to this resource.
+        :raises ValueError: One of the parameters does not contain a valid value. Please check
+            the message of the exception for further information
+        """
+        if " " in object_name:
+            raise ValueError("The object_name parameter may not contain whitespaces")
+        if "*" in object_name:
             raise ValueError(
-                "The length of the selector needs to be between 1 and 50 (" "inclusive)"
+                "The object_name parameter may not contain asterisks. Wildcards are "
+                "not permitted"
             )
-        if None in [search_by, sort_by]:
-            raise ValueError("All parameter without a default value need to be set")
-        _params = self._base_parameter | {
-            "selection": selector,
-            "searchcriterion": search_by.value,
-            "sortcriterion": sort_by.value,
-            "type": job_type.value,
+        if len(object_name) == 0:
+            raise ValueError("The object_name parameter may not be empty")
+        if len(object_name) > 50:
+            raise ValueError("The object_name parameter may not exceed 50 characters")
+        if type(search_by) is not enums.JobCriteria:
+            raise ValueError(
+                f"The search_by parameter only accepts values from the following enumeration: "
+                f"{repr(enums.JobCriteria)}"
+            )
+        if type(sort_by) is not enums.JobCriteria:
+            raise ValueError(
+                f"The sort_by parameter only accepts values from the following enumeration: "
+                f"{repr(enums.JobCriteria)}"
+            )
+        if type(job_type) is not enums.JobType:
+            raise ValueError(
+                f"The job_type parameter only accepts values from the following enumeration: "
+                f"{repr(enums.JobType)}"
+            )
+        if result_count < 1:
+            raise ValueError("The result_count parameter value may not be below 0")
+        if result_count > 2500:
+            raise ValueError("The result_count parameter value may not exceed 2500")
+        query_parameter = self._base_parameter | {
+            'selection': object_name,
+            'searchcriterion': search_by.value,
+            'sortcriterion': sort_by.value,
+            'type': job_type.value,
+            'pagelength': result_count
         }
-        _url = self._service_url + "/jobs"
-        return await tools.get_database_response(_url, _params)
-
+        query_path = self._service_url + '/jobs'
+        return await tools.get_database_response(query_path, query_parameter)
+        
     async def modified_data(
         self,
         selector: typing.Optional[str] = None,
